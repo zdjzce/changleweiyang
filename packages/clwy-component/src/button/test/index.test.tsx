@@ -11,7 +11,6 @@ describe('person', () => {
   it('person is defined', () => {
     expect(person).toBeDefined()
 
-    cy.mount(<Button>213123123123</Button>)
   })
 
   it('is active', () => {

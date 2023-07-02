@@ -14,7 +14,8 @@
     "build": "vue-tsc && vite build",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "cypress": "npx cypress open"
   },
   "dependencies": {
     "@vitejs/plugin-vue-jsx": "^3.0.1",

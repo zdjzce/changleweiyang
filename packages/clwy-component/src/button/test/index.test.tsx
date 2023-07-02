@@ -1,5 +1,6 @@
-
 import { describe, expect, test } from 'vitest'
+import Button from '../index';
+import cy from 'cypress'
 
 const person = {
   isActive: true,
@@ -7,15 +8,17 @@ const person = {
 }
 
 describe('person', () => {
-  test('person is defined', () => {
+  it('person is defined', () => {
     expect(person).toBeDefined()
+
+    cy.mount(<Button>213123123123</Button>)
   })
 
-  test('is active', () => {
+  it('is active', () => {
     expect(person.isActive).toBeTruthy()
   })
 
-  test('age limit', () => {
+  it('age limit', () => {
     expect(person.age).toBeLessThanOrEqual(32)
   })
 })

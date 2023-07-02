@@ -12,19 +12,23 @@
   "type": "module",
   "scripts": {
     "build": "vue-tsc && vite build",
-    "test": "vitest-preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "@vue/test-utils": "^2.4.0",
     "vue": "^3.2.47"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
+    "@vitest/ui": "^0.32.2",
+    "cypress": "^12.16.0",
+    "jsdom": "^22.1.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
     "vitest": "^0.32.2",
-    "vitest-preview": "^0.0.1",
     "vue-tsc": "^1.4.2"
   }
 }

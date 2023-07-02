@@ -1,5 +1,5 @@
 {
-  "name": "@changleweiyang/workspace",
+  "name": "changleweiyang/workspace",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,18 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clwy:dev": "pnpm run --filter changleweiyang dev"
   },
+  "nano-staged": {
+    "*.md": "prettier --write",
+    "*.{ts,tsx,js,vue,less}": "prettier --write",
+    "*.{ts,tsx,js,vue}": "eslint --fix"
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.44.0",
+    "husky": "8.0.3",
+    "nano-staged": "^0.8.0",
+    "prettier": "^2.5.1"
+  }
 }

@@ -1,4 +1,3 @@
-**/*.svg
 lib/
 es/
 dist/
@@ -6,6 +5,8 @@ dist/
 .npmignore
 .prettierignore
 .DS_Store
-.huskyrc
+.husky
 *.png
+
+
 

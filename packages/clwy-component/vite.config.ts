@@ -1,9 +1,22 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-// https://vitejs.dev/config/
+import vueJsx from '@vitejs/plugin-vue-jsx'
+import path from 'path';
+
+const pathResolve = (pathStr: string) => {
+  return path.resolve(__dirname, pathStr);
+};
 
  export default defineConfig(({ command, mode, ssrBuild }) => {
   return {
-    plugins: [vue()],
+    plugins: [vue(), vueJsx()],
+    alias: {
+      '@': pathResolve('./src'),
+    },
+    test: {
+      css: true,
+      globals: true,
+      environment: 'jsdom',
+    }
   }
  })

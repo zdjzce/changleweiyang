@@ -15,11 +15,7 @@ const Button = defineComponent({
 
   render() {
     return (
-      <div>
-        {
-          this.slots?.default?.()
-        }
-      </div>
+      <button>asjdjasd</button>
     )
   }
 })

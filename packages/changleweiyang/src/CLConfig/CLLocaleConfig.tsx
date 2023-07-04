@@ -1,4 +1,13 @@
-import { defineComponent, PropType, provide, inject, computed, ComputedRef } from 'vue'
+import {
+  defineComponent,
+  PropType,
+  provide,
+  inject,
+  computed,
+  ComputedRef,
+  reactive,
+  ref,
+} from 'vue'
 import { type Locale, type ComponentLocaleName } from '@/locale'
 import defaultLocale from '@/locale/default'
 
@@ -10,19 +19,26 @@ export default defineComponent({
   },
 
   setup(props, { slots }) {
+    const state = reactive({
+      locale: props.locale,
+    })
+    provide('locale', state.locale)
 
-    provide('locale', props.locale)
+    const test = ref('test')
+    provide('test', test.value)
+
     return () => slots?.default?.()
   },
 })
 
-export const useLocale = (component: ComponentLocaleName) => {
-  const localeData = inject('locale') as Locale
-
+export type UseLocale = (
+  T: ComponentLocaleName,
+) => ComputedRef<Locale[Exclude<keyof Locale, 'locale'>]>
+export const useLocale: UseLocale = (component: ComponentLocaleName) => {
+  const localeData = inject('locale', {}) as Locale
   const locale = computed(() => {
-    return localeData ? localeData[component] : defaultLocale[component]
+    return localeData[component]
   })
 
   return locale
-
 }

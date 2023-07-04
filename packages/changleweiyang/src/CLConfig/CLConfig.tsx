@@ -16,7 +16,7 @@ const CLConfig = defineComponent({
 
     provide('configProvider', configProvider)
 
-    return () => <CLLocaleConfig>{slots?.default?.()}</CLLocaleConfig>
+    return () => <CLLocaleConfig locale={ props.locale }>{slots?.default?.()}</CLLocaleConfig>
   },
 })
 

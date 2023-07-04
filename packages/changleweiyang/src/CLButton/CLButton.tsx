@@ -15,7 +15,10 @@ const CLButton = defineComponent({
 
   render() {
     return (
-      <button>asjdjasd</button>
+      <button class="cl-button">
+        { this.slots?.default?.() }
+        
+      </button>
     )
   }
 })

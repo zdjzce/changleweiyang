@@ -12,11 +12,13 @@
   "type": "module",
   "scripts": {
     "build": "vue-tsc && vite build",
-    "cypress": "npx cypress open"
+    "cypress": "npx cypress open",
+    "cypress--component": "npx cypress run --config video=false --component"
   },
   "dependencies": {
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "@vue/test-utils": "^2.4.0",
+    "eslint-plugin-cypress": "^2.13.3",
     "vue": "^3.2.47"
   },
   "devDependencies": {

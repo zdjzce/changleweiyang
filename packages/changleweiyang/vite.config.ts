@@ -13,10 +13,5 @@ const pathResolve = (pathStr: string) => {
     alias: {
       '@': pathResolve('./src'),
     },
-    test: {
-      css: true,
-      globals: true,
-      environment: 'jsdom',
-    }
   }
  })

@@ -2,8 +2,8 @@ import { defineComponent, ref, onMounted } from 'vue';
 
 
 
-const Button = defineComponent({
-  name: 'Button',
+const CLButton = defineComponent({
+  name: 'CLButton',
   setup(props, { slots }) {
 
 
@@ -19,4 +19,4 @@ const Button = defineComponent({
     )
   }
 })
-export default Button
+export default CLButton

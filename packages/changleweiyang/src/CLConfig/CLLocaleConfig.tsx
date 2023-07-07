@@ -22,10 +22,8 @@ export default defineComponent({
     const state = reactive({
       locale: props.locale,
     })
+    console.log('state.locale:', state.locale)
     provide('locale', state.locale)
-
-    const test = ref('test')
-    provide('test', test.value)
 
     return () => slots?.default?.()
   },

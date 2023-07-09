@@ -1,6 +1,6 @@
 import { defineComponent, provide, reactive, PropType } from 'vue'
 import CLLocaleConfig from './CLLocaleConfig'
-import { type Locale } from '@/locale'
+import { type Locale } from '@/component/locale'
 
 const CLConfigProps = {
   locale: {

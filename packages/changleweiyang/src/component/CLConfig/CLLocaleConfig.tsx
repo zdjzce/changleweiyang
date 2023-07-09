@@ -8,8 +8,8 @@ import {
   reactive,
   ref,
 } from 'vue'
-import { type Locale, type ComponentLocaleName } from '@/locale'
-import defaultLocale from '@/locale/default'
+import { type Locale, type ComponentLocaleName } from '@/component/locale'
+import defaultLocale from '@/component/locale/default'
 
 export default defineComponent({
   name: 'CLLocaleConfig',
@@ -22,7 +22,6 @@ export default defineComponent({
     const state = reactive({
       locale: props.locale,
     })
-    console.log('state.locale:', state.locale)
     provide('locale', state.locale)
 
     return () => slots?.default?.()

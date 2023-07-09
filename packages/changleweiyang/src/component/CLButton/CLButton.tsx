@@ -1,5 +1,5 @@
 import { defineComponent, ref, Ref, inject } from 'vue';
-
+import style from './style/index.module.scss'
 
 
 const CLButton = defineComponent({
@@ -10,11 +10,11 @@ const CLButton = defineComponent({
   setup(props, { slots }) {
 
     return () => (
-      <button class="cl-button">
+      <button class="cl-button" style={style.CLButton}>
         { slots?.default?.() }
       </button>
     )
   },
 
-})
+})   
 export default CLButton

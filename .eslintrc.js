@@ -1,32 +1,32 @@
+// .eslintrc.js
 module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true
+  env: {
+    browser: true,
+    es2021: true
+  },
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    // 1. 接入 prettier 的规则
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true
     },
-    "extends": [
-        "standard-with-typescript",
-        "plugin:vue/vue3-essential"
-    ],
-    "overrides": [
-        {
-            "env": {
-                "node": true
-            },
-            "files": [
-                ".eslintrc.{js,cjs}"
-            ],
-            "parserOptions": {
-                "sourceType": "script"
-            }
-        }
-    ],
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "vue"
-    ],
-    "rules": {
-    }
-}
+    ecmaVersion: "latest",
+    sourceType: "module"
+  },
+  // 2. 加入 prettier 的 eslint 插件
+  plugins: ["vue", "@typescript-eslint", "prettier"],
+  rules: {
+    // 3. 注意要加上这一句，开启 prettier 自动修复的功能
+    "prettier/prettier": "error",
+    quotes: ["error", "single"],
+    semi: ["error", "always"],
+    "react/react-in-jsx-scope": "off"
+  }
+};

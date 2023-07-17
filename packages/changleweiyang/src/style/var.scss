@@ -1,1 +1,6 @@
-@use "./common/var.scss"
+// normal css properties
+@use "common/var.scss";
+// function, config, 
+@use "mixins/var.scss";
+
+:root {}

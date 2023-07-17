@@ -5,4 +5,4 @@ describe('CLButton.cy.tsx', () => {
     cy.mount(<CLButton>123</CLButton>)
     cy.get('button').should('have.class', 'cl-button')
   })
-}) 
+})

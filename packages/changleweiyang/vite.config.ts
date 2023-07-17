@@ -3,14 +3,13 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import path from 'path';
 
- export default defineConfig(({ command, mode, ssrBuild }) => {
+export default defineConfig(({ command, mode, ssrBuild }) => {
   return {
     plugins: [vue(), vueJsx()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
       },
-    }
+    },
   }
- })
- 
+})

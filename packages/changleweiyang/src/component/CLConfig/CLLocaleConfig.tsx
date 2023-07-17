@@ -15,7 +15,10 @@ export default defineComponent({
   name: 'CLLocaleConfig',
 
   props: {
-    locale: Object as PropType<Locale>,
+    locale: {
+      type: Object as PropType<Locale>,
+      default: () => defaultLocale,
+    },
   },
 
   setup(props, { slots }) {

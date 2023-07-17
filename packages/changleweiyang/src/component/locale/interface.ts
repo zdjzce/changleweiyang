@@ -2,11 +2,11 @@ export type Lang = 'zh' | 'en'
 
 // TODO remove
 export interface TestButtonLocal {
-  test: string;
+  test: string
 }
 
 export interface Locale {
-  locale: Lang,
+  locale: Lang
   // TODO remove
   Button: TestButtonLocal
 }

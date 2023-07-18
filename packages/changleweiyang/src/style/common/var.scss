@@ -2,3 +2,12 @@
 @use 'scss:math';
 
 // base/normal css properties 
+$colors: () !default;
+$colors: map.deep-merge(
+  (
+    "white": "#ffffff",
+    
+  ),
+  $colors
+  
+)

@@ -1,3 +1,3 @@
-import CLButton from './CLButton';
+import CLButton from './CLButton'
 
-export { CLButton };
+export { CLButton }

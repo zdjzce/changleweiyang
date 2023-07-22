@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      text-align: right;
+    }
+
+    button {
+      margin: 0;
+      padding: 0;
+      border: none;
+      outline: none;
+      width: 60px;
+      height: 32px;
+      border-radius: 6px;
+      position: relative;
+      color: white;
+      box-sizing: border-box;
+      margin-left: 20px;
+      margin-top: 20px;
+      mask: url(#myCanvas);
+    }
+
+    #myCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      mix-blend-mode: screen;
+      /* clip-path: inset(0px 0px 0px 0px); */
+    }
+  </style>
+</head>
+
+<body>
+  <button id="myButton" style="background-color: darkred;">
+    点击我
+    <canvas id="myCanvas"></canvas>
+  </button>
+
+
+  <!-- 按钮遮罩 -->
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const button = document.getElementById('myButton')
+
+    const ctx = canvas.getContext('2d');
+    const buttonHeight = button.clientHeight
+    const buttonWidth = button.clientWidth
+    
+    const buttonTop = button.offsetTop
+    const buttonLeft = button.offsetLeft
+    canvas.width = buttonWidth
+    canvas.height = buttonHeight
+
+    ctx.lineWidth = 1;
+    ctx.lineJoin = "bevel"
+    ctx.strokeStyle = 'transparent'
+    ctx.beginPath()
+    ctx.moveTo(0, 0)
+    ctx.lineTo(8, 0)
+    ctx.arcTo(0, buttonHeight, 50, buttonHeight, 10)
+    ctx.lineTo(0, buttonHeight)
+    ctx.lineTo(0, 0)
+    ctx.stroke()
+
+    ctx.save();
+    // 限制范围
+    ctx.clip();
+
+
+    // console.log('canvas.width:', canvas.width)
+    function drawInk () {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      const size = Math.random() * 5;
+      const opacity = Math.random();
+      const gray = Math.floor(Math.random() * 256);
+
+      ctx.fillStyle = `rgba(${gray}, ${gray}, ${gray}, ${opacity})`;
+      ctx.fillRect(x, y, size, size);
+    }
+
+
+    for (let i = 0; i < 500; i++) {
+      drawInk();
+    }
+
+    /* ctx.beginPath();
+    ctx.moveTo(80, 0)
+    ctx.lineTo(100, 0);
+    ctx.lineTo(100, 50);
+    ctx.arcTo(80, 50, 30, 50, 20);
+    ctx.lineTo(80, 0);
+    ctx.stroke(); */
+  </script>
+</body>
+
+</html>

@@ -12,19 +12,17 @@
     }
 
     svg {
-      width: 0px;
-      height: 0px;
+      width: 78px;
+      height: 32px;
       background-color: white;
     }
 
-    button {
+    .button {
       margin-top: 20px;
       margin-left: 20px;
       border: none;
       outline: none;
-      padding: 5px 6px;
-      /* width: 400px; */
-      /* height: 400px; */
+      padding: 10px 12px;
       width: 78px;
       height: 32px;
       border-radius: 6px;
@@ -38,25 +36,35 @@
 </head>
 
 <body>
+  <button class="button">
+    button
+  </button>
+
   <button>
-    test button
+    button
   </button>
   <svg id="clip-svg">
     <clipPath id="clip">
+      <path id="shape" d="M5 4 L73 4 L73 30 L4 30 L5 4" stroke="black" fill="black" />
       <!-- 要减去原本的padding -->
-      <path id="shape" d="M5 5 L73 5 L73 27 L5 27 L5 5" stroke="black" fill="white" />
     </clipPath>
   </svg>
 
   <script>
+    // 100次 dom操作  -> 一次dom操作
     function drawCirclesOnPath (path, numCircles) {
+      const circlesGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
       const svg = document.getElementById('clip');
       const pathLength = path.getTotalLength();
-      const maxRadius = 1;
-      const maxOffset = 2;
+      const maxRadius = 2.1;
+      const maxOffset = 1;
+      const maxCurveLength = 5
 
       for (let i = 0; i < numCircles; i++) {
         const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        const curve = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
         const t = i / (numCircles - 1);
         const pointOnPath = path.getPointAtLength(t * pathLength);
         const offsetX = (Math.random() - 0.5) * 2 * maxOffset;
@@ -68,12 +76,29 @@
         circle.setAttribute("r", radius);
         circle.setAttribute("fill", "black");
 
+        const curveLength = Math.random() * maxCurveLength; // 贝塞尔曲线的长度
+        const angle = Math.random() * 2 * Math.PI; // 贝塞尔曲线的方向
+        const endX = pointOnPath.x + curveLength * Math.cos(angle);
+        const endY = pointOnPath.y + curveLength * Math.sin(angle);
+        const controlX = (pointOnPath.x + endX) / 2;
+        const controlY = (pointOnPath.y + endY) / 2;
+
+        curve.setAttribute("d", `M${pointOnPath.x} ${pointOnPath.y} Q${controlX} ${controlY}, ${endX} ${endY}`);
+        curve.setAttribute("stroke", "black");
+        curve.setAttribute("fill", "none");
+        curve.setAttribute("stroke-width", Math.random() * 2);
+
         svg.appendChild(circle);
+        svg.appendChild(curve);
       }
+
     }
 
     const pathElement = document.getElementById('shape');
     drawCirclesOnPath(pathElement, 100);
+
+
+
   </script>
 </body>
 

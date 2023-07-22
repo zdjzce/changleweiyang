@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    svg {
+      width: 0px;
+      height: 0px;
+      background-color: white;
+    }
+
+    button {
+      margin-top: 20px;
+      margin-left: 20px;
+      border: none;
+      outline: none;
+      padding: 5px 6px;
+      /* width: 400px; */
+      /* height: 400px; */
+      width: 78px;
+      height: 32px;
+      border-radius: 6px;
+      color: white;
+      box-sizing: border-box;
+      background-color: black;
+      clip-path: url(#clip);
+      -webkit-clip-path: url(#clip);
+    }
+  </style>
+</head>
+
+<body>
+  <button>
+    test button
+  </button>
+  <svg id="clip-svg">
+    <clipPath id="clip">
+      <!-- 要减去原本的padding -->
+      <path id="shape" d="M5 5 L73 5 L73 27 L5 27 L5 5" stroke="black" fill="white" />
+    </clipPath>
+  </svg>
+
+  <script>
+    function drawCirclesOnPath (path, numCircles) {
+      const svg = document.getElementById('clip');
+      const pathLength = path.getTotalLength();
+      const maxRadius = 1;
+      const maxOffset = 2;
+
+      for (let i = 0; i < numCircles; i++) {
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        const t = i / (numCircles - 1);
+        const pointOnPath = path.getPointAtLength(t * pathLength);
+        const offsetX = (Math.random() - 0.5) * 2 * maxOffset;
+        const offsetY = (Math.random() - 0.5) * 2 * maxOffset;
+        const radius = Math.random() * maxRadius;
+
+        circle.setAttribute("cx", pointOnPath.x + offsetX);
+        circle.setAttribute("cy", pointOnPath.y + offsetY);
+        circle.setAttribute("r", radius);
+        circle.setAttribute("fill", "black");
+
+        svg.appendChild(circle);
+      }
+    }
+
+    const pathElement = document.getElementById('shape');
+    drawCirclesOnPath(pathElement, 100);
+  </script>
+</body>
+
+</html>

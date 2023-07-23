@@ -1,13 +1,33 @@
 @use 'scss:map';
 @use 'scss:math';
 
+@forward "../mixins/function.scss";
+
 // base/normal css properties 
 $colors: () !default;
 $colors: map.deep-merge(
   (
-    "white": "#ffffff",
-    
+    "white": #ffffff,
+    'base': #B2432D,
+    'success': #C1C3AA,
+    'warning': #DBC49A,
+    'error': #C04C1E,
   ),
   $colors
   
-)
+);
+
+
+$color-white: map.get($colors, 'white');
+$color-base: map.get($colors, 'base');
+$color-success: map.get($colors, 'success');
+$color-warning: map.get($colors, 'warning');
+$color-error: map.get($colors, 'error');
+
+
+$button:() !default;
+$button: map.merge(
+  (
+    'background': getCssVar('background', 'blank')
+  )
+);

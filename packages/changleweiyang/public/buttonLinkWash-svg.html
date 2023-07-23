@@ -17,7 +17,8 @@
       background-color: white;
     }
 
-    .button {
+    .button,
+    .button2 {
       margin-top: 20px;
       margin-left: 20px;
       border: none;
@@ -31,6 +32,12 @@
       background-color: black;
       clip-path: url(#clip);
       -webkit-clip-path: url(#clip);
+    }
+
+    .button2 {
+      display: block;
+      width: 300px;
+      height: 200px;
     }
   </style>
 </head>
@@ -48,16 +55,15 @@
     456
   </button>
 
-  <button class="button">
+  <div class="button2">
     567
-  </button>
+  </div>
 
-  <svg id="clip-svg">
-    <clipPath id="clip">
-      <path id="shape" stroke="black" fill="black" />
-      <!-- 要减去原本的padding -->
-    </clipPath>
-  </svg>
+  <!-- <svg id="clip-svg" width="400" height="300"> -->
+  <!-- <clipPath id="clip"> -->
+  <!-- <path id="shape" stroke="black" fill="black" /> -->
+  <!-- </clipPath> -->
+  <!-- </svg> -->
 
   <script>
     function createSvgPath (element) {
@@ -73,9 +79,60 @@
 
       return `M${startX} ${startY} L${endX} ${startY} L${endX} ${endY} L${startX} ${endY} L${startX} ${startY}`;
     }
-    // 100次 dom操作  -> 一次dom操作
+    // // 100次 dom操作  -> 一次dom操作
+    // function drawCirclesOnPath (path, numCircles) {
+    //   const circlesGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    //   const svg = document.getElementById('clip');
+    //   const pathLength = path.getTotalLength();
+    //   const maxRadius = 2.1;
+    //   const maxOffset = 0.5;
+    //   const maxCurveLength = 5
+
+    //   for (let i = 0; i < numCircles; i++) {
+    //     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    //     const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    //     const curve = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+    //     const t = i / (numCircles - 1);
+    //     const pointOnPath = path.getPointAtLength(t * pathLength);
+    //     const offsetX = (Math.random() - 0.5) * 2 * maxOffset;
+    //     const offsetY = (Math.random() - 0.5) * 2 * maxOffset;
+    //     const radius = Math.random() * maxRadius;
+
+    //     circle.setAttribute("cx", pointOnPath.x + offsetX);
+    //     circle.setAttribute("cy", pointOnPath.y + offsetY);
+    //     circle.setAttribute("r", radius);
+    //     circle.setAttribute("fill", "black");
+
+    //     const curveLength = Math.random() * maxCurveLength; // 贝塞尔曲线的长度
+    //     const angle = Math.random() * 2 * Math.PI; // 贝塞尔曲线的方向
+    //     const endX = pointOnPath.x + curveLength * Math.cos(angle);
+    //     const endY = pointOnPath.y + curveLength * Math.sin(angle);
+    //     const controlX = (pointOnPath.x + endX) / 2;
+    //     const controlY = (pointOnPath.y + endY) / 2;
+
+    //     curve.setAttribute("d", `M${pointOnPath.x} ${pointOnPath.y} Q${controlX} ${controlY}, ${endX} ${endY}`);
+    //     curve.setAttribute("stroke", "black");
+    //     curve.setAttribute("fill", "none");
+    //     curve.setAttribute("stroke-width", Math.random() * 2);
+
+    //     svg.appendChild(circle);
+    //     svg.appendChild(curve);
+    //   }
+
+    // }
+
+
+    // const button = document.querySelector('.button');
+    // const button2 = document.querySelector('.button2');
+    // // const pathElement = document.getElementById('shape');
+    // const pathElement = document.getElementById('shape');
+    // pathElement.setAttribute('d', createSvgPath(button));
+
+    // drawCirclesOnPath(pathElement, 100);
+
     function drawCirclesOnPath (path, numCircles) {
-      const circlesGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      const fragment = document.createDocumentFragment();
       const svg = document.getElementById('clip');
       const pathLength = path.getTotalLength();
       const maxRadius = 2.1;
@@ -110,23 +167,44 @@
         curve.setAttribute("fill", "none");
         curve.setAttribute("stroke-width", Math.random() * 2);
 
-        svg.appendChild(circle);
-        svg.appendChild(curve);
+        fragment.appendChild(circle);
+        fragment.appendChild(curve);
       }
 
+      svg.appendChild(fragment);
     }
 
 
+    function createSvgAndSetPath (element) {
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      const clipPath = document.createElementNS("http://www.w3.org/2000/svg", "clipPath");
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      const fragment = document.createDocumentFragment();
+
+      svg.setAttribute("width", "400");
+      svg.setAttribute("height", "300");
+      svg.setAttribute("id", "clip-svg");
+
+      clipPath.setAttribute("id", "clip")
+
+      path.setAttribute("id", "shape");
+      path.setAttribute("fill", "black");
+      path.setAttribute('d', createSvgPath(element));
+
+
+      clipPath.appendChild(path);
+      fragment.appendChild(clipPath);
+      svg.appendChild(fragment);
+
+      document.body.appendChild(svg);
+
+      return path;
+    }
+
+    // 使用示例
     const button = document.querySelector('.button');
-    const button2 = document.querySelector('.button2');
-    // const pathElement = document.getElementById('shape');
-    const pathElement = document.getElementById('shape');
-    pathElement.setAttribute('d', createSvgPath(button));
-
+    const pathElement = createSvgAndSetPath(button);
     drawCirclesOnPath(pathElement, 100);
-
-
-
   </script>
 </body>
 

@@ -23,7 +23,7 @@
       border: none;
       outline: none;
       padding: 10px 12px;
-      width: 78px;
+      width: 108px;
       height: 32px;
       border-radius: 6px;
       color: white;
@@ -40,24 +40,46 @@
     button
   </button>
 
-  <button>
-    button
+  <button class="button">
+    123
   </button>
+
+  <button class="button">
+    456
+  </button>
+
+  <button class="button">
+    567
+  </button>
+
   <svg id="clip-svg">
     <clipPath id="clip">
-      <path id="shape" d="M5 4 L73 4 L73 30 L4 30 L5 4" stroke="black" fill="black" />
+      <path id="shape" stroke="black" fill="black" />
       <!-- 要减去原本的padding -->
     </clipPath>
   </svg>
 
   <script>
+    function createSvgPath (element) {
+      const style = getComputedStyle(element);
+      const width = parseFloat(style.width);
+      const height = parseFloat(style.height);
+      const paddingTop = parseFloat(style.paddingTop);
+      const paddingLeft = parseFloat(style.paddingLeft);
+      const startX = paddingLeft / 2 - (paddingLeft / 4);
+      const startY = paddingTop / 2 - (paddingTop / 4);
+      const endX = width - paddingLeft / 2 + (paddingLeft / 4);
+      const endY = height - paddingTop / 2 + (paddingTop / 4);
+
+      return `M${startX} ${startY} L${endX} ${startY} L${endX} ${endY} L${startX} ${endY} L${startX} ${startY}`;
+    }
     // 100次 dom操作  -> 一次dom操作
     function drawCirclesOnPath (path, numCircles) {
       const circlesGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
       const svg = document.getElementById('clip');
       const pathLength = path.getTotalLength();
       const maxRadius = 2.1;
-      const maxOffset = 1;
+      const maxOffset = 0.5;
       const maxCurveLength = 5
 
       for (let i = 0; i < numCircles; i++) {
@@ -94,7 +116,13 @@
 
     }
 
+
+    const button = document.querySelector('.button');
+    const button2 = document.querySelector('.button2');
+    // const pathElement = document.getElementById('shape');
     const pathElement = document.getElementById('shape');
+    pathElement.setAttribute('d', createSvgPath(button));
+
     drawCirclesOnPath(pathElement, 100);
 
 

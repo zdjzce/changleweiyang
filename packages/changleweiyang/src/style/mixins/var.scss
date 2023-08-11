@@ -6,8 +6,8 @@
 
 @forward "config";
 @forward "function";
-// set css var  handler
 
+// set css var handler
 @mixin set-css-var($name, $value) {
   @if $value != null {
     #{joinVarName($name)}: #{$value};
@@ -15,7 +15,7 @@
 }
 
 
-// set all css var for component by map
+// set all css var by map
 @mixin set-map-css-var($name, $variables) {
   @each $attribute, $value in $variables {
     @if $attribute == 'default' {

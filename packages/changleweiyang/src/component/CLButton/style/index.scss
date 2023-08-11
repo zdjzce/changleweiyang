@@ -6,7 +6,7 @@ $button: map.merge(
   (
     // 'font-weight': getCssVar('font-weight-primary'),
     // 'border-color': getCssVar('border-color'),
-    'background': getCssVar('background', 'blank'),
+    // 'background': getCssVar('background', 'blank'),
     // 'text-color': getCssVar('text-color', 'regular'),
     // 'disabled-text-color': getCssVar('disabled-text-color'),
     // 'disabled-bg-color': getCssVar('fill-color', 'blank'),
@@ -26,6 +26,8 @@ $button: map.merge(
 
 // clwy-button
 $button-name: joinComponentVarName('button');
-.#{$button-name} {
 
+
+.#{$button-name} {
+  background-color: getCssVarName('background', 'default');
 }

@@ -1,5 +1,6 @@
 import { defineComponent, ref, Ref, inject } from 'vue'
 import style from './style/index.scss'
+import { Classes } from '@/service/Classes'
 
 const CLButton = defineComponent({
   name: 'CLButton',
@@ -7,10 +8,12 @@ const CLButton = defineComponent({
     type: String,
   },
   setup(props, { slots }) {
-    const a = [1, 2, 3]
+    const { defaultClass } = Classes.useClasses()
+    const className = defaultClass('button')
     return () => (
-      <button class='cl-button' style={style.CLButton}>
+      <button class={[className]} style={style.CLButton}>
         {slots?.default?.()}
+        {className}
       </button>
     )
   },

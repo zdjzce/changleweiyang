@@ -2,20 +2,25 @@
 
 // joinVarName(('button', 'text-color')) => '--clwy-button-text-color'
 @function joinVarName($list) {
-  $name: config.$namespace + '-';
+  $name: config.$modifier-separator + config.$namespace + config.$common-separator;
   @each $item in $list {
-    $name: $name + $item;
+    $name: $name + $item + config.$common-separator;
   }
 
   @return $name;
 }
 
-// getCssVarName(('button', 'text-color')) => '--clwy-button-text-color'
+// getCssVarName('button', 'text-color') => '--clwy-button-text-color'
 @function getCssVarName($args...) {
   @return joinVarName($args);
 }
 
-// getCssDefaultVarValue(('button', 'text-color'), red) => var(--clwy-button-text-color, red)
+// getCssVar('button', 'text-color') => 'var(--clwy-button-text-color)'
+@function getCssVar($args...) {
+  @return var(#{joinVarName($args)});
+}
+
+// getCssDefaultVarValue('button', 'text-color') => var(--clwy-button-text-color, red)
 @function getCssDefaultVarValue($varName, $default) {
   @return var(#{joinVarName($varName)}, #{$default});
 }

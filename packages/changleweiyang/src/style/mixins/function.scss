@@ -1,8 +1,8 @@
-@use 'config';
+@use 'config' as *;
 
 // joinVarName(('button', 'text-color')) => '--clwy-button-text-color'
 @function joinVarName($list) {
-  $name: '--' + config.$namespace + '-';
+  $name: config.$namespace + '-';
   @each $item in $list {
     $name: $name + $item;
   }
@@ -10,7 +10,7 @@
   @return $name;
 }
 
-// getCssVarName(('button', 'text-color')) => 'clwy-button-text-color'
+// getCssVarName(('button', 'text-color')) => '--clwy-button-text-color'
 @function getCssVarName($args...) {
   @return joinVarName($args);
 }
@@ -18,4 +18,11 @@
 // getCssDefaultVarValue(('button', 'text-color'), red) => var(--clwy-button-text-color, red)
 @function getCssDefaultVarValue($varName, $default) {
   @return var(#{joinVarName($varName)}, #{$default});
+}
+
+// joinComponentVarName('button') => clwy-button
+@function joinComponentVarName($component) {
+  $name: config.$namespace + config.$common-separator + $component !global;
+
+  @return $name;
 }

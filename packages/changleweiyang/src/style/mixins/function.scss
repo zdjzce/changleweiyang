@@ -2,9 +2,9 @@
 
 // joinVarName(('button', 'text-color')) => '--clwy-button-text-color'
 @function joinVarName($list) {
-  $name: config.$modifier-separator + config.$namespace + config.$common-separator;
+  $name: config$modifier-separator + $namespace + $common-separator;
   @each $item in $list {
-    $name: $name + $item + config.$common-separator;
+    $name: $name + $item + $common-separator;
   }
 
   @return $name;
@@ -27,7 +27,7 @@
 
 // joinComponentVarName('button') => clwy-button
 @function joinComponentVarName($component) {
-  $name: config.$namespace + config.$common-separator + $component !global;
+  $name: $namespace + $common-separator + $component !global;
 
   @return $name;
 }

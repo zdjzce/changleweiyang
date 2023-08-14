@@ -1,8 +1,9 @@
-// normal css properties
+@use "mixins/var.scss" as *;
+@use "common/var.scss" as *;
+
 @forward "common/var.scss";
-// function, config, 
 @forward "mixins/var.scss";
 
 :root {
-  @include set-map-css-var('background', $background);
+  @include set-map-css-var('background', $bg-color);
 }

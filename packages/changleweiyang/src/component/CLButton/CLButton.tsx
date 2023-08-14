@@ -18,4 +18,11 @@ const CLButton = defineComponent({
     )
   },
 })
+
+// clwy-button
+// $button-name: joinComponentVarName('button');
+
+// .#{$button-name} {
+//   background-color: getCssVarName('background', 'default');
+// }
 export default CLButton

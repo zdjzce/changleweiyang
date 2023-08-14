@@ -1,8 +1,6 @@
-@use 'scss:map';
-@use 'scss:math';
-
-@use '../mixins/function.scss';
-@forward "../mixins/function.scss";
+@use 'sass:map';
+@use 'sass:math';
+@use '../mixins/function.scss' as *;
 
 // base/normal css properties 
 $colors: () !default;
@@ -26,13 +24,13 @@ $color-warning: map.get($colors, 'warning');
 $color-error: map.get($colors, 'error');
 
 
-$background: () !default;
-$background: map.deep-merge(
+$bg-color: () !default;
+$bg-color: map.deep-merge(
   (
     'default': #F5F5F5,
     'success': #C1C3AA,
     'warning': #DBC49A,
     'error': #C04C1E,
   ),
-  $background
+  $bg-color
 );

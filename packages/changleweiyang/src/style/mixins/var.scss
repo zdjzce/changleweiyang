@@ -1,11 +1,8 @@
 @use '../common/var.scss' as *;
 @use 'config' as *;
 @use 'function' as *;
-
 @use "sass:map";
 
-@forward "config";
-@forward "function";
 
 // set css var handler
 @mixin set-css-var($name, $value) {

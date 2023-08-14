@@ -1,7 +1,7 @@
 import { Component, VueElement } from 'vue'
 import components from './component'
 
-type ComponentsKey = keyof typeof components
+type ComponentsKey = keyof typeof components;
 const plugin = {
   install(Vue) {
     for (const prop in components) {

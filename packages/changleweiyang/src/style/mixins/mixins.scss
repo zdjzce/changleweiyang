@@ -1,4 +1,42 @@
 @use '../common/var.scss' as *;
+@use 'config' as *;
+@use 'function' as *;
+@use "sass:map";
 
-@forward "config";
-@forward "function";
+
+// set css var handler
+@mixin set-css-var($name, $value) {
+  @if $value != null {
+    #{joinVarName($name)}: #{$value};
+  }
+}
+
+
+// set all css var by map
+@mixin set-map-css-var($name, $variables) {
+  @each $attribute, $value in $variables {
+    @if $attribute == 'default' {
+      #{getCssVarName($name)}: #{$value};
+    } @else {
+      #{getCssVarName($name, $attribute)}: #{$value};
+    }
+  }
+}
+
+@mixin set-css-color-rgb() {
+  $color: map.get($colors, $type, 'base');
+  @include set-css-var(
+    ('color', $type, 'rgb'),
+    #{red($color),
+    green($color),
+    blue($color)}
+  );
+}
+
+// @include set-css-var-global(('button', 'text-color'), ('color', $type))
+// --clwy-button-text-color: var(--clwy-color-#{$type});
+@mixin set-css-var-global($var, $gVar) {
+  $varName: joinVarName($var);
+  $gVarName: joinVarName($gVar);
+  #{$varName}: var(#{$gVarName});
+}

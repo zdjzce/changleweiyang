@@ -1,0 +1,7 @@
+$button-size: () !default;
+$button-size: map.merge(
+  (
+    'small': ''
+  ),
+  $button-size
+)

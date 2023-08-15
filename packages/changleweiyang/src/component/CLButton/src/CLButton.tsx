@@ -1,6 +1,6 @@
-import { defineComponent, ref, Ref, inject } from 'vue'
+import { defineComponent, ref, Ref, inject, computed } from 'vue'
 import style from './style/index.scss'
-import { Classes } from '@/service/Classes'
+import { useClasses } from '@/hooks/classes'
 
 const CLButton = defineComponent({
   name: 'CLButton',
@@ -8,13 +8,18 @@ const CLButton = defineComponent({
     type: String,
   },
   setup(props, { slots }) {
-    const { defaultClass } = Classes.useClasses()
+    const { defaultClass } = useClasses()
     const className = defaultClass('button')
+
+    const Tag = computed(() => {
+      return props?.tag === 'link' ? 'a' : 'button'
+    })
+
     return () => (
-      <button class={[className]} style={style.CLButton}>
+      <Tag.value class={[className]} style={style.CLButton}>
         {slots?.default?.()}
         {className}
-      </button>
+      </Tag.value>
     )
   },
 })

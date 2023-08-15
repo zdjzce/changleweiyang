@@ -1,3 +1,3 @@
-import CLButton from './CLButton'
+import CLButton from './src/CLButton'
 
 export { CLButton }

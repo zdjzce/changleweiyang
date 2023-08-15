@@ -1,3 +1,11 @@
 @use '@/style/base.scss' as *;
+@use '_variables.scss' as *;
 @use 'sass:map';
+
+$button-name: joinComponentVarName('button');
+
+.#{$button-name} {
+  
+  // @include set-map-css-var($button-color);
+}
 

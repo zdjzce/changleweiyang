@@ -16,7 +16,6 @@ $colors: map.deep-merge(
   
 );
 
-
 $color-white: map.get($colors, 'white');
 $color-default: map.get($colors, 'default');
 $color-success: map.get($colors, 'success');
@@ -27,10 +26,61 @@ $color-error: map.get($colors, 'error');
 $bg-color: () !default;
 $bg-color: map.deep-merge(
   (
-    'default': #F5F5F5,
-    'success': #C1C3AA,
-    'warning': #DBC49A,
-    'error': #C04C1E,
+    'primary': #B2432D,
+    'emphasized': #840202,
+    'dim': #DBC49A,
+    'disabled': #C1C3AA,
   ),
   $bg-color
 );
+
+
+$text-color: () !default;
+$text-color: map.deep-merge(
+  (
+    'primary': #ffffff,
+    'emphasized': #840202,
+    'dim': #DBC49A,
+    'disabled': #abac9e,
+  ),
+  $text-color
+);
+
+
+$border-radius: () !default;
+$border-radius: map.merge(
+  (
+    'base': 4px,
+    'small': 2px,
+    'round': 20px,
+    'circle': 100%,
+  ),
+  $border-radius
+);
+
+
+$font-size: () !default;
+$font-size: map.merge(
+  (
+    'large': 18px,
+    'medium': 16px,
+    'base': 14px,
+    'small': 13px,
+    'extra-small': 12px,
+  ),
+  $font-size
+);
+
+
+$common-size: () !default;
+$common-size: map.merge(
+  (
+    'large': 38px,
+    'default': 30px,
+    'small': 22px,
+  ),
+  $common-size
+);
+
+$font-weight: () !default;
+$border-color:() !default;

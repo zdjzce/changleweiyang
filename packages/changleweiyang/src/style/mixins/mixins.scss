@@ -40,3 +40,13 @@
   $gVarName: joinVarName($gVar);
   #{$varName}: var(#{$gVarName});
 }
+
+
+// when('disabled') -> &.is-disabled
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}

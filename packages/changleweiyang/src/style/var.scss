@@ -4,7 +4,7 @@
 @forward "common/var.scss";
 @forward "mixins/var.scss";
 
-// @include set-map-css-var('background', $bg-color);
 :root {
-  background-color: $color-warning;
+  @include set-map-css-var('background', $bg-color);
+  // background-color: $color-warning;
 }

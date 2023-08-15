@@ -1,4 +1,3 @@
-import { mount } from '@vue/test-utils'
 import { CLButton } from '@/CLButton'
 import CLLocaleConfig from '../CLLocaleConfig'
 import en from '@/component/locale/en'

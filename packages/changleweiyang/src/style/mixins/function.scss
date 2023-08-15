@@ -2,7 +2,7 @@
 
 // joinVarName(('button', 'text-color')) => '--clwy-button-text-color'
 @function joinVarName($list) {
-  $name: config$modifier-separator + $namespace + $common-separator;
+  $name: $modifier-separator + $namespace + $common-separator;
   @each $item in $list {
     $name: $name + $item + $common-separator;
   }

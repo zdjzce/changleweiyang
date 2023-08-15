@@ -1,7 +1,19 @@
-$button-size: () !default;
-$button-size: map.merge(
+$button-padding-x: () !default;
+$button-padding-x: map.merge(
   (
-    'small': ''
+    'large': 13px,
+    'default': 9px,
+    'small': 6px,
   ),
-  $button-size
+  $button-padding-x
+);
+
+$button-padding-y: () !default;
+$button-padding-y: map.merge(
+  (
+    'large': 20px,
+    'default': 16px,
+    'small': 12px,
+  ),
+  $button-padding-y
 )

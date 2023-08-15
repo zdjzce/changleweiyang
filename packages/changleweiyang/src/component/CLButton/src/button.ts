@@ -1,9 +1,15 @@
-import { PropType } from 'vue'
+import { PropType, type ExtractPropTypes } from 'vue'
+import { ButtonTag, ButtonType } from './instance'
 
-const props = {
+export const props = {
   type: {
-    type: String as PropType<>,
+    type: String as PropType<ButtonType>,
+    default: 'default',
+  },
+  tag: {
+    type: String as PropType<ButtonTag>,
+    default: 'button',
   },
 }
 
-export { props }
+export type ButtonProps = ExtractPropTypes<typeof props>

@@ -1,4 +1,4 @@
-import CLButton from '../CLButton'
+import CLButton from '../src/CLButton'
 
 describe('CLButton.cy.tsx', () => {
   it('playground', () => {

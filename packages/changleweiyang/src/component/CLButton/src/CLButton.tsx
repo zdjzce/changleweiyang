@@ -1,12 +1,11 @@
 import { defineComponent, ref, Ref, inject, computed } from 'vue'
-import style from './style/index.scss'
+import style from '../style/index.scss'
 import { useClasses } from '@/hooks/classes'
+import { props } from './button'
 
 const CLButton = defineComponent({
   name: 'CLButton',
-  props: {
-    type: String,
-  },
+  props,
   setup(props, { slots }) {
     const { defaultClass } = useClasses()
     const className = defaultClass('button')

@@ -21,9 +21,11 @@ $button-name: joinComponentVarName('button');
   white-space: nowrap;
   box-sizing: border-box;
   vertical-align: middle;
-  background-color: getCssVar('button-background') ;
-  color: getCssVar('button-text-color');
+  line-height: 1;
+  background-color: getCssVar('button', 'background');
+  color: getCssVar('button', 'text-color');
   padding: getCssVar('padding');
+  border-radius: getCssVar('button', 'border-radius');
 
   @include when('disabled') {}
 

@@ -7,10 +7,10 @@ $colors: () !default;
 $colors: map.deep-merge(
   (
     "white": #ffffff,
-    'default': #B2432D,
-    'success': #C1C3AA,
-    'warning': #DBC49A,
-    'error': #C04C1E,
+    'default': #4b4034,
+    'success': #767966,
+    'warning': #682516,
+    'error': #a92f1d,
   ),
   $colors
   
@@ -26,11 +26,10 @@ $color-error: map.get($colors, 'error');
 $bg-color: () !default;
 $bg-color: map.deep-merge(
   (
-    'default': #B2432D,
-    'primary': #B2432D,
-    'emphasized': #840202,
-    'dim': #DBC49A,
-    'disabled': #C1C3AA,
+    'default': #4b4034,
+    'emphasized': #682516,
+    'dim': #767966,
+    'disabled': #767966,
   ),
   $bg-color
 );
@@ -51,7 +50,7 @@ $text-color: map.deep-merge(
 $border-radius: () !default;
 $border-radius: map.merge(
   (
-    'base': 4px,
+    'default': 4px,
     'small': 2px,
     'round': 20px,
     'circle': 100%,

@@ -6,6 +6,7 @@ $button: map.merge(
   (
     'background': getCssVar('background'),
     'text-color': getCssVar('text-color'),
+    'border-radius': getCssVar('border-radius')
   ), 
   $button
 )

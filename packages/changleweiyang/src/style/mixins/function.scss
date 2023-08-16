@@ -21,7 +21,7 @@
 }
 
 // getCssDefaultVarValue('button', 'text-color') => var(--clwy-button-text-color, red)
-@function getCssDefaultVarValue($varName, $default) {
+@function getCssVarKey($varName, $default) {
   @return var(#{joinVarName($varName)}, #{$default});
 }
 

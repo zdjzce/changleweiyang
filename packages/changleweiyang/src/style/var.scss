@@ -6,5 +6,6 @@
 
 :root {
   @include set-map-css-var('background', $bg-color);
+  @include set-map-css-var('text-color', $text-color);
   // background-color: $color-warning;
 }

@@ -1,11 +1,34 @@
 @use '@/style/base.scss' as *;
-@use '_variables.scss' as *;
+@use 'variables.scss' as *;
 @use 'sass:map';
 
 $button-name: joinComponentVarName('button');
 
+// .clwy-button
 .#{$button-name} {
-    
+  outline: none;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+  vertical-align: middle;
+  background-color: getCssVar('background');
+  color: getCssVar('text-color', 'primary');
   // @include set-map-css-var($button-color);
+
+
+  @include when('disabled') {
+    
+  }
+
+  @include when('loading') {
+
+  }
+  
+  @include when('loading') {
+
+  }
 }
 

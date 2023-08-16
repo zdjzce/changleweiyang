@@ -17,16 +17,8 @@ const CLButton = defineComponent({
     return () => (
       <Tag.value class={[className]} style={style.CLButton}>
         {slots?.default?.()}
-        {className}
       </Tag.value>
     )
   },
 })
-
-// clwy-button
-// $button-name: joinComponentVarName('button');
-
-// .#{$button-name} {
-//   background-color: getCssVarName('background', 'default');
-// }
 export default CLButton

@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 $button-padding-x: () !default;
 $button-padding-x: map.merge(
   (

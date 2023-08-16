@@ -1,21 +1,21 @@
 @use 'sass:map';
 
-$button-padding-x: () !default;
-$button-padding-x: map.merge(
-  (
-    'large': 13px,
-    'default': 9px,
-    'small': 6px,
-  ),
-  $button-padding-x
-);
-
 $button-padding-y: () !default;
 $button-padding-y: map.merge(
+  (
+    'large': 12px,
+    'default': 8px,
+    'small': 6px,
+  ),
+  $button-padding-y
+);
+
+$button-padding-x: () !default;
+$button-padding-x: map.merge(
   (
     'large': 20px,
     'default': 16px,
     'small': 12px,
   ),
-  $button-padding-y
+  $button-padding-x
 )

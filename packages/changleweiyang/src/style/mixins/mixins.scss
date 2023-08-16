@@ -50,3 +50,8 @@
     }
   }
 }
+
+// @include set-variables() { content }
+@mixin set-variables() {
+  @content;
+}

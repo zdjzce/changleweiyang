@@ -5,11 +5,10 @@
 $button-name: joinComponentVarName('button');
 
 // .clwy-button
-.#{button-name} {
+.#{$button-name} {
   // mixins content
   @include set-variables() {
-    @include set-map-css-var('button-padding-x', $button-padding-x);
-    @include set-map-css-var('button-padding-y', $button-padding-y);
+    @include set-map-css-var('button', $button);
   }
 }
 
@@ -22,20 +21,13 @@ $button-name: joinComponentVarName('button');
   white-space: nowrap;
   box-sizing: border-box;
   vertical-align: middle;
-  background-color: getCssVar('background');
-  color: getCssVar('text-color', 'primary');
-  padding: getCssVar('button-padding-y') getCssVar('button-padding-x');
+  background-color: getCssVar('button-background') ;
+  color: getCssVar('button-text-color');
+  padding: getCssVar('padding');
 
-  @include when('disabled') {
-    
-  }
+  @include when('disabled') {}
 
-  @include when('loading') {
+  @include when('loading') {}
 
-  }
-
-  @include when('loading') {
-
-  }
+  @include when('loading') {}
 }
-

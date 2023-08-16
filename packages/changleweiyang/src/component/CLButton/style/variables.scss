@@ -1,21 +1,11 @@
 @use 'sass:map';
+@use '@/style/base.scss' as *;
 
-$button-padding-y: () !default;
-$button-padding-y: map.merge(
+$button: () !default;
+$button: map.merge(
   (
-    'large': 12px,
-    'default': 8px,
-    'small': 6px,
-  ),
-  $button-padding-y
-);
-
-$button-padding-x: () !default;
-$button-padding-x: map.merge(
-  (
-    'large': 20px,
-    'default': 16px,
-    'small': 12px,
-  ),
-  $button-padding-x
+    'background': getCssVar('background'),
+    'text-color': getCssVar('text-color'),
+  ), 
+  $button
 )

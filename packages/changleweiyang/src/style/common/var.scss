@@ -39,7 +39,7 @@ $bg-color: map.deep-merge(
 $text-color: () !default;
 $text-color: map.deep-merge(
   (
-    'primary': #ffffff,
+    'default': #ffffff,
     'emphasized': #840202,
     'dim': #DBC49A,
     'disabled': #abac9e,
@@ -81,6 +81,28 @@ $common-size: map.merge(
     'small': 22px,
   ),
   $common-size
+);
+
+$border-radius: () !default;
+$border-radius: map.merge(
+  (
+    'extra-small': 2px,
+    'small': 4px,
+    'large': 20px,
+    'circle': 100%,
+  ),
+  $border-radius
+);
+
+
+$padding: () !default;
+$padding: map.merge(
+  (
+    'large': 12px 20px,
+    'default': 8px 16px,
+    'small': 6px 12px,
+  ),
+  $padding
 );
 
 $font-weight: () !default;

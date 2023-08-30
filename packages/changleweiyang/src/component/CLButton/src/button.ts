@@ -1,5 +1,5 @@
 import { PropType, type ExtractPropTypes } from 'vue'
-import { ButtonTag, ButtonType } from './instance'
+import { ButtonTag, ButtonType, ButtonSize } from './instance'
 
 export const props = {
   type: {
@@ -9,6 +9,14 @@ export const props = {
   tag: {
     type: String as PropType<ButtonTag>,
     default: 'button',
+  },
+  size: {
+    type: String as PropType<ButtonSize>,
+    default: 'normal',
+  },
+  loading: {
+    type: Boolean,
+    default: false,
   },
 }
 

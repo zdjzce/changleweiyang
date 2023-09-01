@@ -4,19 +4,19 @@ import { ButtonTag, ButtonType, ButtonSize } from './instance'
 export const props = {
   type: {
     type: String as PropType<ButtonType>,
-    default: 'default',
+    default: () => 'default',
   },
   tag: {
     type: String as PropType<ButtonTag>,
-    default: 'button',
+    default: () => 'button',
   },
   size: {
     type: String as PropType<ButtonSize>,
-    default: 'normal',
+    default: () => 'normal',
   },
   loading: {
     type: Boolean,
-    default: false,
+    default: () => false,
   },
 }
 

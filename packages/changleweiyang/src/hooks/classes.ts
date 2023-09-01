@@ -1,6 +1,7 @@
 import { config } from '@/config/index'
 import { computed, ref, watch } from 'vue'
-const { defaultName, commonSeparator, clwySeparator, statePrefix } = config
+const { defaultName, commonSeparator, commonAttrSeparator, statePrefix } =
+  config
 
 const useClasses = (componentName: string, props?: any) => {
   const defaultClass = (name: string) => {
@@ -8,18 +9,15 @@ const useClasses = (componentName: string, props?: any) => {
   }
 
   const conditionClass = (type: string) => {
-    const compute = computed(() => {
-      return props[type] ? composeClass([componentName, type, props[type]]) : ''
-    })
+    return computed(() => {
+      const propsType = typeof props[type] === 'boolean'
 
-    watch(
-      compute,
-      (newComputed) => {
-        console.log('newComputed===', newComputed)
-      },
-      { immediate: true, deep: true },
-    )
-    return compute
+      if (props[type] && !propsType) {
+        return composeClass([componentName, props[type]])
+      } else {
+        return props[type] ? statePrefix + type : ''
+      }
+    })
   }
 
   return {
@@ -28,10 +26,10 @@ const useClasses = (componentName: string, props?: any) => {
   }
 }
 
-// ['button', 'type', 'default']  ->  clwy-button-type-default
+// ['button', 'default']  ->  clwy-button--default
 const composeClass = (names: string[]) => {
-  names.unshift(defaultName)
-  return names.join(commonSeparator)
+  names.unshift(defaultName + commonSeparator)
+  return names.slice(0, 1) + names.slice(1).join(commonAttrSeparator)
 }
 
 const generateClasses = (

@@ -5,7 +5,7 @@
 @forward "mixins/var.scss";
 
 :root {
-  @include set-map-css-var('background', $bg-color);
+  @include set-map-css-var('background', $background);
   @include set-map-css-var('text-color', $text-color);
   @include set-map-css-var('padding', $padding);
   @include set-map-css-var('border-radius', $border-radius);

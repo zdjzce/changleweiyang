@@ -9,6 +9,7 @@ $button-name: joinComponentVarName('button');
   // mixins content
   @include set-variables() {
     @include set-map-css-var('button', $button);
+    @include set-map-css-var('button', $colors)
   }
 }
 
@@ -22,8 +23,8 @@ $button-name: joinComponentVarName('button');
   box-sizing: border-box;
   vertical-align: middle;
   line-height: 1;
-  background-color: getCssVar('button', 'background');
-  color: getCssVar('button', 'text-color');
+  // background-color: getCssVar('button', 'background');
+  // color: getCssVar('button', 'text-color');
   padding: getCssVar('padding');
   border-radius: getCssVar('button', 'border-radius');
 
@@ -31,5 +32,25 @@ $button-name: joinComponentVarName('button');
 
   @include when('loading') {}
 
-  @include when('loading') {}
+}
+
+@mixin type-variables($type) {
+
+}
+// .clwy-button--error { background-color: var(--clwy-button-error); }
+@each $type in ('default', 'success', 'error', 'warning') {
+  .#{$button-name}--#{$type} {
+    background-color: getCssVar('button', $type);
+  }
+}
+
+@mixin types-theme($type) {
+  $button-type-theme: (
+    'default': (),
+    'success': (),
+    'error': (),
+    'warning': (),
+    'hover': (),
+    'disabled': ()
+  )
 }

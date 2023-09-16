@@ -12,6 +12,7 @@ $button-name: joinComponentVarName('button');
     @include set-map-css-var('button', $colors);
     @include set-map-css-var('button-size', $common-size);
     @include set-map-css-var('button-border-radius', $border-radius);
+    @include set-map-css-var('button-padding', $padding);
   }
 }
 
@@ -24,9 +25,9 @@ $button-name: joinComponentVarName('button');
   white-space: nowrap;
   box-sizing: border-box;
   vertical-align: middle;
-  line-height: 1;
   padding: getCssVar('padding');
   border-radius: getCssVar('button', 'border-radius');
+  background-color: getCssVar('button', 'background');
 
   @include when('disabled') {}
 
@@ -38,17 +39,17 @@ $button-name: joinComponentVarName('button');
 
 }
 // .clwy-button--error { background-color: var(--clwy-button-error); }
-@each $type in ('default', 'success', 'error', 'warning') {
+@each $type in ('success', 'error', 'warning') {
   .#{$button-name}--#{$type} {
     background-color: getCssVar('button', $type);
     color: getCssVar('button', 'text-color');
   }
 }
 
-// set size's height
-@each $size in ('small', 'default', 'large') {
+// set size's height  button-border-radius-small
+@each $size in ('small', 'large') {
   .#{$button-name}--#{$size} {
-    height: getCssVar('button', 'size', $size);
+    padding: getCssVar('button', 'padding', $size);
     border-radius: getCssVar('button', 'border-radius', $size);
   }
 }

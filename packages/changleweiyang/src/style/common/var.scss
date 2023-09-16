@@ -47,18 +47,6 @@ $text-color: map.deep-merge(
 );
 
 
-$border-radius: () !default;
-$border-radius: map.merge(
-  (
-    'default': 4px,
-    'small': 2px,
-    'round': 20px,
-    'circle': 100%,
-  ),
-  $border-radius
-);
-
-
 $font-size: () !default;
 $font-size: map.merge(
   (
@@ -86,8 +74,8 @@ $border-radius: () !default;
 $border-radius: map.merge(
   (
     'small': 4px,
-    'default': 12px,
-    'large': 20px,
+    'default': 8px,
+    'large': 12px,
     'circle': 100%,
   ),
   $border-radius
@@ -97,7 +85,7 @@ $border-radius: map.merge(
 $padding: () !default;
 $padding: map.merge(
   (
-    'large': 12px 20px,
+    'large': 10px 20px,
     'default': 8px 16px,
     'small': 6px 12px,
   ),

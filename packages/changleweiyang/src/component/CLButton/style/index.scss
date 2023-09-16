@@ -9,7 +9,9 @@ $button-name: joinComponentVarName('button');
   // mixins content
   @include set-variables() {
     @include set-map-css-var('button', $button);
-    @include set-map-css-var('button', $colors)
+    @include set-map-css-var('button', $colors);
+    @include set-map-css-var('button-size', $common-size);
+    @include set-map-css-var('button-border-radius', $border-radius);
   }
 }
 
@@ -23,8 +25,6 @@ $button-name: joinComponentVarName('button');
   box-sizing: border-box;
   vertical-align: middle;
   line-height: 1;
-  // background-color: getCssVar('button', 'background');
-  // color: getCssVar('button', 'text-color');
   padding: getCssVar('padding');
   border-radius: getCssVar('button', 'border-radius');
 
@@ -41,6 +41,15 @@ $button-name: joinComponentVarName('button');
 @each $type in ('default', 'success', 'error', 'warning') {
   .#{$button-name}--#{$type} {
     background-color: getCssVar('button', $type);
+    color: getCssVar('button', 'text-color');
+  }
+}
+
+// set size's height
+@each $size in ('small', 'default', 'large') {
+  .#{$button-name}--#{$size} {
+    height: getCssVar('button', 'size', $size);
+    border-radius: getCssVar('button', 'border-radius', $size);
   }
 }
 

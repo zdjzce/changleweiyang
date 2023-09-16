@@ -2,7 +2,7 @@
 @use 'sass:math';
 @use '../mixins/function.scss' as *;
 
-// base/normal css properties 
+// base css properties 
 $colors: () !default;
 $colors: map.deep-merge(
   (
@@ -63,7 +63,7 @@ $font-size: () !default;
 $font-size: map.merge(
   (
     'large': 18px,
-    'medium': 16px,
+    'default': 16px,
     'base': 14px,
     'small': 13px,
     'extra-small': 12px,
@@ -85,8 +85,8 @@ $common-size: map.merge(
 $border-radius: () !default;
 $border-radius: map.merge(
   (
-    'extra-small': 2px,
     'small': 4px,
+    'default': 12px,
     'large': 20px,
     'circle': 100%,
   ),

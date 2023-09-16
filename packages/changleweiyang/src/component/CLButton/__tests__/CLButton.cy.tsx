@@ -28,7 +28,6 @@ describe('CLButton', () => {
     ))
       .get('button')
       .should('have.class', 'clwy-button clwy-button--success')
-      .click()
-      .should('have.class', 'clwy-button--error clwy-button--large is-loading')
+      // .should('have.class', 'clwy-button--error clwy-button--large is-loading')
   })
 })

@@ -35,9 +35,6 @@ $button-name: joinComponentVarName('button');
 
 }
 
-@mixin type-variables($type) {
-
-}
 // .clwy-button--error { background-color: var(--clwy-button-error); }
 @each $type in ('success', 'error', 'warning') {
   .#{$button-name}--#{$type} {
@@ -56,10 +53,6 @@ $button-name: joinComponentVarName('button');
 
 @mixin types-theme($type) {
   $button-type-theme: (
-    'default': (),
-    'success': (),
-    'error': (),
-    'warning': (),
     'hover': (),
     'disabled': ()
   )

@@ -7,13 +7,12 @@ describe('CLButton', () => {
   it('default component class name', () => {
     const props = reactive({
       type: 'success',
-      size: 'small',
       loading: false,
     }) as ButtonProps
 
     const onClick = () => {
       props.type = 'error'
-      props.size = 'large'
+      props.size = 'small'
       props.loading = true
     }
 

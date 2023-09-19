@@ -12,7 +12,7 @@ export const props = {
   },
   size: {
     type: String as PropType<ButtonSize>,
-    default: () => 'normal',
+    default: () => 'default',
   },
   disabled: {
     type: Boolean,

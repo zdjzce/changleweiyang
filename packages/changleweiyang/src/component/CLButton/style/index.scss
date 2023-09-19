@@ -28,6 +28,7 @@ $button-name: joinComponentVarName('button');
   padding: getCssVar('padding');
   border-radius: getCssVar('button', 'border-radius');
   background-color: getCssVar('button', 'background');
+  color: getCssVar('button', 'text-color');
 
   @include when('disabled') {}
 
@@ -39,7 +40,6 @@ $button-name: joinComponentVarName('button');
 @each $type in ('success', 'error', 'warning') {
   .#{$button-name}--#{$type} {
     background-color: getCssVar('button', $type);
-    color: getCssVar('button', 'text-color');
   }
 }
 

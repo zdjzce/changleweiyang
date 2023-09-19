@@ -16,22 +16,30 @@
   ],
   "scripts": {
     "build": "rollup --config rollup.config.js",
-    "cypress": "npx cypress open",
-    "cypress--component": "npx cypress run --config video=false --component"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@storybook/addon-a11y": "^7.4.2",
     "sass": "^1.63.6",
+    "storybook": "^7.4.2",
     "vue": "^3.2.47"
   },
   "devDependencies": {
-    "rollup": "^3.28.0",
-    "typescript": "^5.0.2",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-typescript": "^11.1.2",
+    "@storybook/addon-essentials": "^7.4.2",
+    "@storybook/addon-interactions": "^7.4.2",
+    "@storybook/addon-links": "^7.4.2",
+    "@storybook/blocks": "^7.4.2",
+    "@storybook/testing-library": "^0.2.1",
+    "@storybook/vue3": "^7.4.2",
+    "@storybook/vue3-vite": "^7.4.2",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "autoprefixer": "^10.4.15",
-    "cypress": "^12.16.0",
+    "rollup": "^3.28.0",
+    "typescript": "^5.0.2",
     "vite": "^4.3.9",
     "vue-tsc": "^1.4.2"
   }

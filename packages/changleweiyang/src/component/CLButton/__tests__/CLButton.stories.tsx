@@ -13,7 +13,7 @@ export const Primary: Story = {
   render: (args, { argTypes }) => ({
     components: { CLButton },
     props: Object.keys(argTypes),
-    template: '<Button v-bind="$props" v-on="$props" />',
+    template: '<CLButton v-bind="$props" v-on="$props" />',
   }),
   args: {
     type: 'success',

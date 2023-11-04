@@ -8,8 +8,8 @@ import {
   reactive,
   ref,
 } from 'vue'
-import { type Locale, type ComponentLocaleName } from '@/component/locale'
-import defaultLocale from '@/component/locale/default'
+import { type Locale, type ComponentLocaleName } from '@gundam/component/locale'
+import defaultLocale from '@gundam/component/locale/default'
 
 export default defineComponent({
   name: 'CLLocaleConfig',

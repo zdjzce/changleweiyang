@@ -1,6 +1,6 @@
 import { defineComponent, computed } from 'vue'
 import style from '../style/index.scss'
-import { generateClasses, useClasses } from '@/hooks/classes'
+import { generateClasses, useClasses } from '@gundam/hooks/classes'
 import { props } from './button'
 
 const CLButton = defineComponent({

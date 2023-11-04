@@ -1,4 +1,4 @@
-import { config } from '@/config/index'
+import { config } from '@gundam/config/index'
 import { computed, ref, watch } from 'vue'
 const { defaultName, commonSeparator, commonAttrSeparator, statePrefix } =
   config

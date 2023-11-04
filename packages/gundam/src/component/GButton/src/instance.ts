@@ -1,4 +1,4 @@
-import { Status } from '@/instance/Status'
+import { Status } from '@gundam/instance/Status'
 
 export type ButtonType = Status
 

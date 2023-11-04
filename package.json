@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clwy": "pnpm run --filter changleweiyang storybook",
+    "story": "pnpm run --filter gundam-ui story",
     "prepare": "husky install",
     "lint:script": "eslint --ext .js,.jsx,.ts,.tsx --fix --quiet ./packages"
   },

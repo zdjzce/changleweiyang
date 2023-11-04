@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import CLButton from '../src/GButton'
+import GButton from '../src/GButton'
 
-const meta: Meta<typeof CLButton> = {
-  component: CLButton,
+const meta: Meta<typeof GButton> = {
+  component: GButton,
 }
 
 export default meta
 
-type Story = StoryObj<typeof CLButton>
+type Story = StoryObj<typeof GButton>
 
 export const Primary: Story = {
   render: (args, { argTypes }) => ({
-    components: { CLButton },
+    components: { GButton },
     props: Object.keys(argTypes),
-    template: '<CLButton v-bind="$props" v-on="$props" />',
+    template: '<GButton v-bind="$props" v-on="$props" />',
   }),
   args: {
     type: 'success',

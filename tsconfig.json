@@ -12,9 +12,14 @@
     "allowJs": true,
     "lib": ["esnext", "dom"],
     "types": [
-      "vite/client",
-      "vite-plugin-vue-component-preview/client"
-    ]
+      "vite/client"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@gundam/*": [
+        "packages/gundam/src/*"
+      ],
+    },
   },
   "vueCompilerOptions": {
     "plugins": ["vite-plugin-vue-component-preview/tooling"]

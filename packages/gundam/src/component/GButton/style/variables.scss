@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '@/style/base.scss' as *;
+@use '@gundam/style/base.scss' as *;
 
 $button: () !default;
 $button: map.merge(

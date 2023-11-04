@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import CLButton from '../src/CLButton'
+import CLButton from '../src/GButton'
 
 const meta: Meta<typeof CLButton> = {
   component: CLButton,

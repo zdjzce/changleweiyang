@@ -1,8 +1,8 @@
-import { CLButton } from './CLButton'
-import { CLConfig, CLLocaleConfig } from './CLConfig'
+import { GButton } from './GButton'
+import { GConfig, GLocaleConfig } from './GConfig'
 
 export default {
-  CLButton,
-  CLConfig,
-  CLLocaleConfig,
+  GButton,
+  GConfig,
+  GLocaleConfig,
 }

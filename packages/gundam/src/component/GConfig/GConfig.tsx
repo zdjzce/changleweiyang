@@ -1,27 +1,25 @@
 import { defineComponent, provide, reactive, PropType } from 'vue'
-import CLLocaleConfig from './CLLocaleConfig'
+import GLocaleConfig from './GLocaleConfig'
 import { type Locale } from '@/component/locale'
 
-const CLConfigProps = {
+const GConfigProps = {
   locale: {
     type: Object as PropType<Locale>,
   },
 }
 
-const CLConfig = defineComponent({
-  name: 'CLConfig',
-  props: CLConfigProps,
+const GConfig = defineComponent({
+  name: 'GConfig',
+  props: GConfigProps,
   setup(props, { slots }) {
     const configProvider = reactive({ ...props })
 
     provide('configProvider', configProvider)
 
     return () => (
-      <CLLocaleConfig locale={props.locale}>
-        {slots?.default?.()}
-      </CLLocaleConfig>
+      <GLocaleConfig locale={props.locale}>{slots?.default?.()}</GLocaleConfig>
     )
   },
 })
 
-export default CLConfig
+export default GConfig

@@ -3,6 +3,7 @@
 import type { StorybookConfig } from '@storybook/vue3-vite'
 import { mergeConfig } from 'vite';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import path from 'path';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -20,7 +21,9 @@ const config: StorybookConfig = {
       config.plugins?.push(vueJsx())
     }
 
-    return mergeConfig(config, {})
+    return mergeConfig(config, {
+      '@gundam': path.resolve(__dirname, '../src'),
+    })
 
   }
 }

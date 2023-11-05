@@ -1,5 +1,4 @@
 import { defineComponent, computed } from 'vue'
-import style from '../style/index.scss'
 import { generateClasses, useClasses } from '@gundam/hooks/classes'
 import { props } from './button'
 
@@ -18,9 +17,7 @@ const CLButton = defineComponent({
     ])
 
     return () => (
-      <Tag.value class={classes.value} style={style.CLButton}>
-        {slots?.default?.()}
-      </Tag.value>
+      <Tag.value class={classes.value}>{slots?.default?.()}</Tag.value>
     )
   },
 })

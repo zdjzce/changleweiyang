@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import GButton from '../src/GButton'
+import GButton from './src/GButton'
 
 const meta: Meta<typeof GButton> = {
   component: GButton,

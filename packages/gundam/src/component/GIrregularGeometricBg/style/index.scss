@@ -1,0 +1,13 @@
+
+@use '@gundam/style/base.scss' as *;
+@use 'sass:map';
+
+$button-name: joinComponentVarName('irregularGeometricBg');
+
+
+// .clwy-irregularGeometricBg
+.#{$button-name} {
+  stroke: #000;
+  stroke-width: 1px;
+  fill-rule: evenodd;
+}

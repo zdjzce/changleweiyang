@@ -10,6 +10,7 @@ export default defineConfig(() => {
     resolve: {
       alias: {
         '@gundam': path.resolve(__dirname, './src'),
+        'snapsvg': path.resolve(__dirname, './node_modules/snapsvg/dist/snap.svg.js'),
       },
     },
     css: {

@@ -1,13 +1,16 @@
 import { generateClasses } from '@gundam/hooks/classes'
-import { defineComponent, ref, onMounted } from 'vue'
+import { defineComponent, ref, onMounted, onBeforeMount } from 'vue'
+import { props } from './IrregularGeometric'
 const GIrregularGeometricBg = defineComponent({
   name: 'GIrregularGeometricBg',
+  props,
   setup(props, { slots }) {
-    const classes = generateClasses('irregularGeometricBg', props, [
-      'type',
-      'size',
-      'loading',
-    ])
+    // const classes = generateClasses('irregularGeometricBg', props)
+    const calculatePath = () => {}
+
+    onBeforeMount(() => {
+      calculatePath()
+    })
 
     return () => (
       <div>

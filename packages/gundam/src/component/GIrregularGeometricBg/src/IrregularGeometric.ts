@@ -1,9 +1,10 @@
 import { PropType, type ExtractPropTypes } from 'vue'
-import { IrregularStyles } from './instance'
+import { IrregularStyles, DefaultIrregularStyles } from './instance'
 
 export const props = {
   styles: {
     type: Object as PropType<IrregularStyles>,
+    default: DefaultIrregularStyles,
   },
 }
 

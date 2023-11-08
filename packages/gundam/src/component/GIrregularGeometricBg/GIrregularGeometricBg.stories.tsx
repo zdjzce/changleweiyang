@@ -15,4 +15,5 @@ export const Primary: Story = {
     props: Object.keys(argTypes),
     template: '<GIrregularGeometricBg />',
   }),
+  args: {},
 }

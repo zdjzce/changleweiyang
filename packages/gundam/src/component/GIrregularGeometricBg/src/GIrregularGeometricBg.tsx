@@ -1,15 +1,37 @@
 import { generateClasses } from '@gundam/hooks/classes'
 import { defineComponent, ref, onMounted, onBeforeMount } from 'vue'
 import { props } from './IrregularGeometric'
+import { IrregularStyles } from './instance'
 const GIrregularGeometricBg = defineComponent({
   name: 'GIrregularGeometricBg',
   props,
   setup(props, { slots }) {
     // const classes = generateClasses('irregularGeometricBg', props)
-    const calculatePath = () => {}
+    const calculatePath = (style: IrregularStyles) => {
+      const { width, height, randomEdge } = style
+      const rectangleEdges = [width, height, width, height]
+
+      // 需要保留每次遍历后的最后点位。用于下次遍历的起始点位
+      for (let i = 0; i < rectangleEdges.length; i++) {
+        // 每轮目前的边 到达的最大宽度
+        let maxLength = Math.floor((Math.random() * +rectangleEdges[i]) / 3)
+        console.log('maxLength:', maxLength)
+        // 每轮随机的最大个数来判断是否要生成梯形
+        let randomMax = 0
+        while (maxLength < +rectangleEdges[i]) {
+          if (randomMax < randomEdge) {
+            // 随机生成梯形
+            randomMax++
+          }
+          // maxLength+=这次绘画的最终距离
+          maxLength += 111
+        }
+      }
+      console.log('style:', style)
+    }
 
     onBeforeMount(() => {
-      calculatePath()
+      calculatePath(props.styles)
     })
 
     return () => (

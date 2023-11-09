@@ -12,15 +12,23 @@ const GIrregularGeometricBg = defineComponent({
       const rectangleEdges = [width, height, width, height]
 
       // 需要保留每次遍历后的最后点位。用于下次遍历的起始点位
+      let startPoint = { x: 0, y: 0 }
+
       for (let i = 0; i < rectangleEdges.length; i++) {
-        // 每轮目前的边 到达的最大宽度
-        let maxLength = Math.floor((Math.random() * +rectangleEdges[i]) / 3)
-        console.log('maxLength:', maxLength)
-        // 每轮随机的最大个数来判断是否要生成梯形
+        // 要绘制到的点位并且限制每次绘制的边的最大长度
+        let maxLength = 0
+
+        // 每轮随机的最大个数, 来判断是否要生成梯形
         let randomMax = 0
         while (maxLength < +rectangleEdges[i]) {
-          if (randomMax < randomEdge) {
-            // 随机生成梯形
+          maxLength = Math.floor(
+            (+rectangleEdges[i] - Math.random() * +rectangleEdges[i]) / 3,
+          )
+          // 随机生成线条或者随机生成梯形
+          const lineOrTrapezoid = Math.floor(Math.random() * 2)
+          // 只要开始绘制梯形就得循环把它绘制完...
+          if (lineOrTrapezoid <= 1 && randomMax < randomEdge) {
+            // 随机生成梯形，延展的梯形斜边的角度为 45°，即在绘制梯形时，下一个点位的坐标是：延展出来的长度为x, 高度也为x
             randomMax++
           }
           // maxLength+=这次绘画的最终距离
@@ -32,11 +40,12 @@ const GIrregularGeometricBg = defineComponent({
 
     onBeforeMount(() => {
       calculatePath(props.styles)
+      console.log('calculatePath(props.styles):', calculatePath(props.styles))
     })
 
     return () => (
       <div>
-        <svg
+        {/* <svg
           id='组_3'
           data-name='组 3'
           xmlns='http://www.w3.org/2000/svg'
@@ -56,7 +65,7 @@ const GIrregularGeometricBg = defineComponent({
 
             h292, v-128, l34,-31, v-627, l-12,-11, v-88, l12,-12, v-39, h-90, l-8,9, h-121, l-9,-9, h-111, l-9,9, h-173, l-8,-9, h-157z'
           />
-        </svg>
+        </svg> */}
       </div>
     )
   },

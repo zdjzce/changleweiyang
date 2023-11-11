@@ -13,27 +13,32 @@ const GIrregularGeometricBg = defineComponent({
 
       // 需要保留每次遍历后的最后点位。用于下次遍历的起始点位
       let startPoint = { x: 0, y: 0 }
+      let path = ''
 
       for (let i = 0; i < rectangleEdges.length; i++) {
-        // 要绘制到的点位并且限制每次绘制的边的最大长度
-        let maxLength = 0
-
-        // 每轮随机的最大个数, 来判断是否要生成梯形
+        // 当前需要绘制的线段与梯形数量，单条线段数量应是梯形个数 + 1
+        const maxCount = randomEdge * 2 + 1
+        // 当前已绘制梯形个数
         let randomMax = 0
-        while (maxLength < +rectangleEdges[i]) {
-          maxLength = Math.floor(
-            (+rectangleEdges[i] - Math.random() * +rectangleEdges[i]) / 3,
-          )
+        // 限制每次绘制图形的最大长度
+        const maxLength = Math.floor(+rectangleEdges[i] / maxCount)
+
+        for (let j = 0; j < maxCount; j++) {
           // 随机生成线条或者随机生成梯形
           const lineOrTrapezoid = Math.floor(Math.random() * 2)
           // 只要开始绘制梯形就得循环把它绘制完...
           if (lineOrTrapezoid <= 1 && randomMax < randomEdge) {
-            // 随机生成梯形，延展的梯形斜边的角度为 45°，即在绘制梯形时，下一个点位的坐标是：延展出来的长度为x, 高度也为x
+            // 随机生成梯形，延展的梯形斜边的角度为 45°
+            const topLine = 2 * maxLength * Math.cos(45)
+            const sqrtLine = Math.sqrt(
+              Math.pow(maxLength, 2) - Math.pow(topLine, 2),
+            )
+            const x = maxLength - topLine
             randomMax++
           }
-          // maxLength+=这次绘画的最终距离
-          maxLength += 111
         }
+
+        startPoint = { x: 0, y: 0 }
       }
       console.log('style:', style)
     }

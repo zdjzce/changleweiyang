@@ -13,8 +13,9 @@ const GIrregularGeometricBg = defineComponent({
 
       // 需要保留每次遍历后的最后点位。用于下次遍历的起始点位
       let startPoint = { x: 0, y: 0 }
-      let path = ''
+      let path = 'm0 0'
 
+      const maxY = 20
       for (let i = 0; i < rectangleEdges.length; i++) {
         // 当前需要绘制的线段与梯形数量，单条线段数量应是梯形个数 + 1
         const maxCount = randomEdge * 2 + 1
@@ -23,24 +24,29 @@ const GIrregularGeometricBg = defineComponent({
         // 限制每次绘制图形的最大长度
         const maxLength = Math.floor(+rectangleEdges[i] / maxCount)
 
-        for (let j = 0; j < maxCount; j++) {
+        for (let j = 0; j < 1; j++) {
           // 随机生成线条或者随机生成梯形
           const lineOrTrapezoid = Math.floor(Math.random() * 2)
           // 只要开始绘制梯形就得循环把它绘制完...
           if (lineOrTrapezoid <= 1 && randomMax < randomEdge) {
             // 随机生成梯形，延展的梯形斜边的角度为 45°
-            const topLine = 2 * maxLength * Math.cos(45)
+            const topLine = Math.floor(2 * maxLength * Math.cos(45))
+            console.log('topLine:', topLine)
             const sqrtLine = Math.sqrt(
               Math.pow(maxLength, 2) - Math.pow(topLine, 2),
             )
-            const x = maxLength - topLine
+            const x = Math.floor((maxLength - topLine) / 2)
+            path += ` l${x} ${maxY} l${topLine} 0 l0 ${-maxY}`
             randomMax++
+          } else {
+            // 随机生成线条
+            path += ` l${maxLength} 0`
           }
         }
 
         startPoint = { x: 0, y: 0 }
       }
-      console.log('style:', style)
+      console.log('path:', path)
     }
 
     onBeforeMount(() => {

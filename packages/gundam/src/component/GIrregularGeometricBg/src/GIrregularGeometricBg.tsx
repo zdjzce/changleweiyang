@@ -17,6 +17,7 @@ const GIrregularGeometricBg = defineComponent({
       let startPoint = { x: 0, y: 0 }
       let path = 'm0 0'
 
+      // 偶数顶边，奇数底边
       for (let i = 0; i < 1; i++) {
         // 当前需要绘制的线段与梯形数量，单条线段数量应是梯形个数 + 1
         const maxCount = randomEdge * 2 + 1
@@ -33,14 +34,21 @@ const GIrregularGeometricBg = defineComponent({
             console.log('topLine:', topLine)
             const x = Math.floor((maxLength - topLine) / 2)
             path += ` l${x} -${maxY} l${topLine} 0 l${x} ${maxY}`
+            // 右边的边 path += ` l${maxY} ${x}  l0 ${topLine} l${-maxY} ${x} `
 
             randomMax += 1
             isTrapezoid = true
           } else {
             // 线条
             path += ` l${maxLength} 0`
+            // 右边是 path += ` 0 l${maxLength}`
+            // 底边是 path += ` l${-maxLength} 0`
+            // 左边是 path += ` 0 l${-maxLength}`
+
             isTrapezoid = false
           }
+
+          // 转弯的逻辑
         }
 
         startPoint = { x: 0, y: 0 }

@@ -2,6 +2,7 @@ import { generateClasses } from '@gundam/hooks/classes'
 import { defineComponent, ref, onMounted, onBeforeMount } from 'vue'
 import { props } from './IrregularGeometric'
 import { IrregularStyles } from './instance'
+import { calculateTopLength } from '@gundam/utils/trapezoidCalculations'
 const GIrregularGeometricBg = defineComponent({
   name: 'GIrregularGeometricBg',
   props,
@@ -10,37 +11,35 @@ const GIrregularGeometricBg = defineComponent({
     const calculatePath = (style: IrregularStyles) => {
       const { width, height, randomEdge } = style
       const rectangleEdges = [width, height, width, height]
+      const maxY = 10
 
       // 需要保留每次遍历后的最后点位。用于下次遍历的起始点位
       let startPoint = { x: 0, y: 0 }
       let path = 'm0 0'
 
-      const maxY = 20
-      for (let i = 0; i < rectangleEdges.length; i++) {
+      for (let i = 0; i < 1; i++) {
         // 当前需要绘制的线段与梯形数量，单条线段数量应是梯形个数 + 1
         const maxCount = randomEdge * 2 + 1
+        // 限制每次绘制的最大长度
+        const maxLength = Math.floor(+rectangleEdges[i] / maxCount)
         // 当前已绘制梯形个数
         let randomMax = 0
-        // 限制每次绘制图形的最大长度
-        const maxLength = Math.floor(+rectangleEdges[i] / maxCount)
+        // 上一个绘制的是什么图形
+        let isTrapezoid = Math.random() < 0.5
 
-        for (let j = 0; j < 1; j++) {
-          // 随机生成线条或者随机生成梯形
-          const lineOrTrapezoid = Math.floor(Math.random() * 2)
-          // 只要开始绘制梯形就得循环把它绘制完...
-          if (lineOrTrapezoid <= 1 && randomMax < randomEdge) {
-            // 随机生成梯形，延展的梯形斜边的角度为 45°
-            const topLine = Math.floor(2 * maxLength * Math.cos(45))
+        for (let j = 0; j < maxCount; j++) {
+          if (!isTrapezoid && randomMax < randomEdge) {
+            const topLine = calculateTopLength(maxLength, 60)
             console.log('topLine:', topLine)
-            const sqrtLine = Math.sqrt(
-              Math.pow(maxLength, 2) - Math.pow(topLine, 2),
-            )
             const x = Math.floor((maxLength - topLine) / 2)
-            path += ` l${x} ${maxY} l${topLine} 0 l0 ${-maxY}`
-            randomMax++
+            path += ` l${x} -${maxY} l${topLine} 0 l${x} ${maxY}`
+
+            randomMax += 1
+            isTrapezoid = true
           } else {
-            // 随机生成线条
+            // 线条
             path += ` l${maxLength} 0`
+            isTrapezoid = false
           }
         }
 

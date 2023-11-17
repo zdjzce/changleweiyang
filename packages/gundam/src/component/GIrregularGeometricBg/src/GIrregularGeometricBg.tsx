@@ -15,8 +15,8 @@ const GIrregularGeometricBg = defineComponent({
     const pathMask = ref('')
     const path = ref('')
     onBeforeMount(() => {
-      // path.value = calculatePath(props.styles)
-      path.value = generateRandomTrapezoid(props.styles)
+      path.value = calculatePath(props.styles)
+      pathMask.value = generateRandomTrapezoid(props.styles)
     })
 
     const viewBox = ref('0 0 0 0')
@@ -30,16 +30,18 @@ const GIrregularGeometricBg = defineComponent({
 
     return () => (
       <div>
-        <svg viewBox={viewBox.value} xmlns='http://www.w3.org/2000/svg'>
+        {/* <svg viewBox={viewBox.value} xmlns='http://www.w3.org/2000/svg'> */}
+        <svg viewBox='-10 -10 320 520' xmlns='http://www.w3.org/2000/svg'>
           <defs>
             <mask id='one'>
               <rect width='100%' height='100%' fill='white' />
+              <path d={path.value} fill='blue' id='paths'></path>
               <path d={pathMask.value} fill='black'></path>
             </mask>
           </defs>
 
-          {/* <path d={path.value} fill='black' mask='url(#one)' id='paths'></path> */}
-          <path d={path.value} fill='none' stroke='black' id='paths'></path>
+          <path d={path.value} fill='black' mask='url(#one)' id='paths'></path>
+          {/* <path d={path.value} fill='none' stroke='black' id='paths'></path> */}
         </svg>
       </div>
     )

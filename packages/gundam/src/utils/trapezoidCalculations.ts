@@ -40,6 +40,8 @@ export const calculatePath = (style: AssignIrregularStyles) => {
         const topLine = calculateTopLength(maxLength, 60)
         const x = Math.floor((maxLength - topLine) / 2)
 
+        // 如果外部边与内部边都采用同样的顺序进行绘制，那么最终的 svg 图形不会取交集部分
+        // 一个长方形绘制方向无非就是 顺时针 或 逆时针
         const trapezoidEdges = [
           ` l${x} ${-trapeZoidalH} l${topLine} 0 l${x} ${trapeZoidalH}`, // top
           ` l${trapeZoidalH} ${x}  l0 ${topLine} l${-trapeZoidalH} ${x} `, // right
@@ -65,24 +67,22 @@ export const calculatePath = (style: AssignIrregularStyles) => {
         isTrapezoid = false
       }
     }
-
-    // i != 3 && (path += ' m0 0')
   }
 
   return path
 }
 
 export const generateRandomTrapezoid = (style: AssignIrregularStyles) => {
-  const outPath = calculatePath(style)
-  const { gap = (+style.width * 0.07) / 2 } = style
+  const { gap = Math.floor((+style.width * 0.07) / 2) } = style
 
   const insidePath = calculatePath({
     ...style,
     trapeZoidalH: style?.trapeZoidalH || -8,
-    path: `m ${gap} ${gap}`,
+    path: ` m ${gap} ${gap}`,
     width: +style.width - gap * 2,
     height: +style.height - gap * 2,
+    randomEdge: 2,
   })
 
-  return outPath + insidePath
+  return insidePath
 }

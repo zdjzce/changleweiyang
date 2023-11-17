@@ -20,6 +20,7 @@ export type AssignIrregularStyles = IrregularStyles & {
   // 控制梯形高度  且可以控制向外或向里
   trapeZoidalH?: number
   path?: `m ${string} ${string}`
+  gap?: number
 }
 
 export const calculatePath = (style: AssignIrregularStyles) => {
@@ -37,7 +38,6 @@ export const calculatePath = (style: AssignIrregularStyles) => {
     for (let j = 0; j < maxCount; j++) {
       if (!isTrapezoid && randomMax < randomEdge) {
         const topLine = calculateTopLength(maxLength, 60)
-        console.log('topLine:', topLine)
         const x = Math.floor((maxLength - topLine) / 2)
 
         const trapezoidEdges = [
@@ -66,7 +66,23 @@ export const calculatePath = (style: AssignIrregularStyles) => {
       }
     }
 
-    path += ' m0 0'
+    // i != 3 && (path += ' m0 0')
   }
-  console.log('path:', path)
+
+  return path
+}
+
+export const generateRandomTrapezoid = (style: AssignIrregularStyles) => {
+  const outPath = calculatePath(style)
+  const { gap = (+style.width * 0.07) / 2 } = style
+
+  const insidePath = calculatePath({
+    ...style,
+    trapeZoidalH: style?.trapeZoidalH || -8,
+    path: `m ${gap} ${gap}`,
+    width: +style.width - gap * 2,
+    height: +style.height - gap * 2,
+  })
+
+  return outPath + insidePath
 }

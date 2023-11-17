@@ -10,5 +10,5 @@ export const DefaultIrregularStyles: IrregularStyles = {
   width: 300,
   height: 500,
   background: 'black',
-  randomEdge: 3,
+  randomEdge: 2,
 }

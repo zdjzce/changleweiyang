@@ -2,86 +2,13 @@ import { generateClasses } from '@gundam/hooks/classes'
 import { defineComponent, ref, onMounted, onBeforeMount } from 'vue'
 import { props } from './IrregularGeometric'
 import { IrregularStyles } from './instance'
-import { calculateTopLength } from '@gundam/utils/trapezoidCalculations'
+import { calculatePath } from '@gundam/utils/trapezoidCalculations'
+
 const GIrregularGeometricBg = defineComponent({
   name: 'GIrregularGeometricBg',
   props,
   setup(props, { slots }) {
     // const classes = generateClasses('irregularGeometricBg', props)
-    const calculatePath = (style: IrregularStyles) => {
-      const { width, height, randomEdge } = style
-      const rectangleEdges = [width, height, width, height]
-      const trapeZoidalH = 10
-
-      const directions = [
-        { dx: 0, dy: -1 }, // 上
-        { dx: 1, dy: 0 }, // 右
-        { dx: 0, dy: 1 }, // 下
-        { dx: -1, dy: 0 }, // 左
-      ]
-
-      const trapezoidEdges = [
-        { dx: 0, dy: -trapeZoidalH }, // 顶部的边
-        { dx: 0, dy: trapeZoidalH }, // 底部的边
-        { dx: trapeZoidalH, dy: 0 }, // 右边的边
-        { dx: -trapeZoidalH, dy: 0 }, // 左边的边
-      ]
-
-      let path = 'm0 0'
-
-      // 偶数顶边，奇数底边
-      for (let i = 0; i < 1; i++) {
-        const edge = trapezoidEdges[i]
-        // 当前需要绘制的线段与梯形数量，单条线段数量应是梯形个数 1
-        const maxCount = randomEdge * 2 + 1
-        // 限制每次绘制的最大长度
-        const maxLength = Math.floor(+rectangleEdges[i] / maxCount)
-        // 当前已绘制梯形个数
-        let randomMax = 0
-        // 上一个绘制的是什么图形
-        let isTrapezoid = Math.random() < 0.5
-
-        for (let j = 0; j < maxCount; j++) {
-          if (!isTrapezoid && randomMax < randomEdge) {
-            const topLine = calculateTopLength(maxLength, 60)
-            console.log('topLine:', topLine)
-            const x = Math.floor((maxLength - topLine) / 2)
-
-            // path += ` l${edge.dx * x} ${edge.dy * x} l0 ${topLine} l${
-            //   -edge.dx * x
-            // } ${edge.dy * x}`
-
-            // 顶部的边
-            // path += ` l${x} -${trapeZoidalH} l${topLine} 0 l${x} ${trapeZoidalH}`
-            // 底部的边
-            // path += ` l${-x} ${trapeZoidalH} l${-topLine} 0 l${-x} ${-trapeZoidalH}`
-            // 右边的边
-            // path += ` l${trapeZoidalH} ${x}  l0 ${topLine} l${-trapeZoidalH} ${x} `
-            // 左边的边
-            path += ` l-${trapeZoidalH} -${x}  l0 -${topLine} l${trapeZoidalH} ${-x} `
-
-            randomMax += 1
-            isTrapezoid = true
-          } else {
-            // 线条
-            // path += ` l${maxLength} 0`
-            // 右边 path += ` l0 ${maxLength}`
-            // 底边
-            // path += ` l${-maxLength} 0`
-            // 左边
-            path += ` l0 ${-maxLength}`
-
-            // path += ` l${directions[i].dx * maxLength} ${
-            //   directions[i].dy * maxLength
-            // }`
-            isTrapezoid = false
-          }
-        }
-
-        path += ' m0 0'
-      }
-      console.log('path:', path)
-    }
 
     onBeforeMount(() => {
       calculatePath(props.styles)

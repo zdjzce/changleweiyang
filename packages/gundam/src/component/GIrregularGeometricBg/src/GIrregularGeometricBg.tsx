@@ -11,15 +11,28 @@ const GIrregularGeometricBg = defineComponent({
     const calculatePath = (style: IrregularStyles) => {
       const { width, height, randomEdge } = style
       const rectangleEdges = [width, height, width, height]
-      const maxY = 10
+      const trapeZoidalH = 10
 
-      // 需要保留每次遍历后的最后点位。用于下次遍历的起始点位
-      let startPoint = { x: 0, y: 0 }
+      const directions = [
+        { dx: 0, dy: -1 }, // 上
+        { dx: 1, dy: 0 }, // 右
+        { dx: 0, dy: 1 }, // 下
+        { dx: -1, dy: 0 }, // 左
+      ]
+
+      const trapezoidEdges = [
+        { dx: 0, dy: -trapeZoidalH }, // 顶部的边
+        { dx: 0, dy: trapeZoidalH }, // 底部的边
+        { dx: trapeZoidalH, dy: 0 }, // 右边的边
+        { dx: -trapeZoidalH, dy: 0 }, // 左边的边
+      ]
+
       let path = 'm0 0'
 
       // 偶数顶边，奇数底边
       for (let i = 0; i < 1; i++) {
-        // 当前需要绘制的线段与梯形数量，单条线段数量应是梯形个数 + 1
+        const edge = trapezoidEdges[i]
+        // 当前需要绘制的线段与梯形数量，单条线段数量应是梯形个数 1
         const maxCount = randomEdge * 2 + 1
         // 限制每次绘制的最大长度
         const maxLength = Math.floor(+rectangleEdges[i] / maxCount)
@@ -33,25 +46,39 @@ const GIrregularGeometricBg = defineComponent({
             const topLine = calculateTopLength(maxLength, 60)
             console.log('topLine:', topLine)
             const x = Math.floor((maxLength - topLine) / 2)
-            path += ` l${x} -${maxY} l${topLine} 0 l${x} ${maxY}`
-            // 右边的边 path += ` l${maxY} ${x}  l0 ${topLine} l${-maxY} ${x} `
+
+            // path += ` l${edge.dx * x} ${edge.dy * x} l0 ${topLine} l${
+            //   -edge.dx * x
+            // } ${edge.dy * x}`
+
+            // 顶部的边
+            // path += ` l${x} -${trapeZoidalH} l${topLine} 0 l${x} ${trapeZoidalH}`
+            // 底部的边
+            // path += ` l${-x} ${trapeZoidalH} l${-topLine} 0 l${-x} ${-trapeZoidalH}`
+            // 右边的边
+            // path += ` l${trapeZoidalH} ${x}  l0 ${topLine} l${-trapeZoidalH} ${x} `
+            // 左边的边
+            path += ` l-${trapeZoidalH} -${x}  l0 -${topLine} l${trapeZoidalH} ${-x} `
 
             randomMax += 1
             isTrapezoid = true
           } else {
             // 线条
-            path += ` l${maxLength} 0`
-            // 右边是 path += ` 0 l${maxLength}`
-            // 底边是 path += ` l${-maxLength} 0`
-            // 左边是 path += ` 0 l${-maxLength}`
+            // path += ` l${maxLength} 0`
+            // 右边 path += ` l0 ${maxLength}`
+            // 底边
+            // path += ` l${-maxLength} 0`
+            // 左边
+            path += ` l0 ${-maxLength}`
 
+            // path += ` l${directions[i].dx * maxLength} ${
+            //   directions[i].dy * maxLength
+            // }`
             isTrapezoid = false
           }
-
-          // 转弯的逻辑
         }
 
-        startPoint = { x: 0, y: 0 }
+        path += ' m0 0'
       }
       console.log('path:', path)
     }

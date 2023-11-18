@@ -1,10 +1,18 @@
 import { generateClasses } from '@gundam/hooks/classes'
-import { defineComponent, ref, onMounted, onBeforeMount, nextTick } from 'vue'
+import {
+  defineComponent,
+  ref,
+  onMounted,
+  onBeforeMount,
+  nextTick,
+  VNodeRef,
+} from 'vue'
 import { props } from './IrregularGeometric'
 import {
   calculatePath,
   generateRandomTrapezoid,
 } from '@gundam/utils/trapezoidCalculations'
+import anime from 'animejs/lib/anime.es.js'
 
 const GIrregularGeometricBg = defineComponent({
   name: 'GIrregularGeometricBg',
@@ -20,49 +28,54 @@ const GIrregularGeometricBg = defineComponent({
     })
 
     const viewBox = ref('0 0 0 0')
+    const svgContent = ref<SVGElement & VNodeRef>()
+    const regularSvgPath = ref<SVGPathElement & VNodeRef>()
     onMounted(() => {
-      nextTick(() => {
-        const paths = document.getElementById('paths')
-        const box = paths?.getBBox()
-        viewBox.value = `${box?.x} ${box?.y} ${box?.width} ${box?.height}`
+      console.log('svgContent:', svgContent.value)
+      const box = regularSvgPath.value?.getBBox()
+      viewBox.value = `${box?.x} ${box?.y} ${box?.width} ${box?.height}`
+      anime({
+        targets: svgContent.value,
+        translateX: 0,
+        height: '100%',
+        scale: 1,
+        // easing: 'easeOutQuad',
+        // easing: 'easeOutQuint',
+        easing: 'easeInOutQuad',
+        // keyframes: [
+        //   { scaleY: 0.11, opacity: 1, duration: 50 },
+        //   { opacity: 0, duration: 50 },
+        //   { scaleY: 1, opacity: 0, duration: 50 },
+        //   { scaleY: 1, opacity: 1, duration: 50 },
+        // ],
+        keyframes: [
+          { opacity: 1, scaleY: 0.05, duration: 50 },
+          { opacity: 0.5, scaleY: 0.35, duration: 50 },
+          { opacity: 1, scaleY: 0.55, duration: 50 },
+          { opacity: 0.5, scaleY: 0.6, duration: 50 },
+          { opacity: 1, scaleY: 1, duration: 50 },
+        ],
       })
     })
 
     return () => (
+      /* TODO 可以组合成很多方式 white black 对调、单独线条 可以有很多花样 */
       <div class={classes.value}>
-        <svg viewBox={viewBox.value} xmlns='http://www.w3.org/2000/svg'>
-          <defs>
-            <clipPath id='clip'>
-              <rect x='-10' y='-10' width='0' height='0'>
-                <animate
-                  attributeName='width'
-                  from='0'
-                  to='100%'
-                  dur='0.6s'
-                  fill='freeze'
-                />
-                <animate
-                  attributeName='height'
-                  from='0'
-                  to='100%'
-                  dur='0.7s'
-                  fill='freeze'
-                />
-              </rect>
-            </clipPath>
-          </defs>
-
+        <svg
+          height='0'
+          style='transform: scaleY(0.1);'
+          ref={svgContent}
+          viewBox={viewBox.value}
+          xmlns='http://www.w3.org/2000/svg'>
           <mask id='one'>
-            {/* TODO 可以组合成很多方式 white black 对调、单独线条 可以有很多花样 */}
-            <path d={path.value} fill='white' id='paths'></path>
+            <path d={path.value} fill='white'></path>
             <path d={pathMask.value} fill='black'></path>
           </mask>
 
           <path
+            ref={regularSvgPath}
             d={path.value}
-            clip-path='url(#clip)'
             mask='url(#one)'
-            id='paths'
             stroke='black'
             class='line'></path>
         </svg>
@@ -70,4 +83,5 @@ const GIrregularGeometricBg = defineComponent({
     )
   },
 })
+
 export default GIrregularGeometricBg

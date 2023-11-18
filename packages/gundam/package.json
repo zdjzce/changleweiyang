@@ -19,6 +19,8 @@
     "build-story": "storybook build"
   },
   "dependencies": {
+    "@types/animejs": "^3.1.11",
+    "animejs": "^3.2.1",
     "sass": "^1.63.6",
     "storybook": "^7.4.2",
     "vue": "^3.2.47"
@@ -26,7 +28,6 @@
   "devDependencies": {
     "@storybook/vue3": "^7.4.2",
     "@storybook/vue3-vite": "^7.4.2",
-    "@svgdotjs/svg.js": "^3.2.0",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "autoprefixer": "^10.4.15",

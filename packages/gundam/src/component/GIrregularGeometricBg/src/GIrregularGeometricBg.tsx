@@ -10,7 +10,7 @@ const GIrregularGeometricBg = defineComponent({
   name: 'GIrregularGeometricBg',
   props,
   setup(props, { slots }) {
-    // const classes = generateClasses('irregularGeometricBg', props)
+    const classes = generateClasses('irregularGeometricBg', props, [])
 
     const pathMask = ref('')
     const path = ref('')
@@ -29,19 +29,42 @@ const GIrregularGeometricBg = defineComponent({
     })
 
     return () => (
-      <div>
-        {/* <svg viewBox={viewBox.value} xmlns='http://www.w3.org/2000/svg'> */}
-        <svg viewBox='-10 -10 320 520' xmlns='http://www.w3.org/2000/svg'>
+      <div class={classes.value}>
+        <svg viewBox={viewBox.value} xmlns='http://www.w3.org/2000/svg'>
           <defs>
-            <mask id='one'>
-              <rect width='100%' height='100%' fill='white' />
-              <path d={path.value} fill='blue' id='paths'></path>
-              <path d={pathMask.value} fill='black'></path>
-            </mask>
+            <clipPath id='clip'>
+              <rect x='-10' y='-10' width='0' height='0'>
+                <animate
+                  attributeName='width'
+                  from='0'
+                  to='100%'
+                  dur='0.6s'
+                  fill='freeze'
+                />
+                <animate
+                  attributeName='height'
+                  from='0'
+                  to='100%'
+                  dur='0.7s'
+                  fill='freeze'
+                />
+              </rect>
+            </clipPath>
           </defs>
 
-          <path d={path.value} fill='black' mask='url(#one)' id='paths'></path>
-          {/* <path d={path.value} fill='none' stroke='black' id='paths'></path> */}
+          <mask id='one'>
+            {/* TODO 可以组合成很多方式 white black 对调、单独线条 可以有很多花样 */}
+            <path d={path.value} fill='white' id='paths'></path>
+            <path d={pathMask.value} fill='black'></path>
+          </mask>
+
+          <path
+            d={path.value}
+            clip-path='url(#clip)'
+            mask='url(#one)'
+            id='paths'
+            stroke='black'
+            class='line'></path>
         </svg>
       </div>
     )

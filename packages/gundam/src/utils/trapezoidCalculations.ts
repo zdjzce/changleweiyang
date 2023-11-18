@@ -73,13 +73,14 @@ export const calculatePath = (style: AssignIrregularStyles) => {
 }
 
 export const generateRandomTrapezoid = (style: AssignIrregularStyles) => {
-  const { gap = Math.floor((+style.width * 0.07) / 2) } = style
+  const { gap = Math.floor((+style.width * 0.05) / 2) } = style
+  // const { gap = 10 } = style
 
   const insidePath = calculatePath({
     ...style,
     trapeZoidalH: style?.trapeZoidalH || -8,
-    path: ` m ${gap} ${gap}`,
-    width: +style.width - gap * 2,
+    path: `m ${gap} ${gap}`,
+    width: +style.width - gap * 3,
     height: +style.height - gap * 2,
     randomEdge: 2,
   })

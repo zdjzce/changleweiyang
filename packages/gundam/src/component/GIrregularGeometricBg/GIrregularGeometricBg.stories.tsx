@@ -13,7 +13,8 @@ export const Primary: Story = {
   render: (args, { argTypes }) => ({
     components: { GIrregularGeometricBg },
     props: Object.keys(argTypes),
-    template: '<GIrregularGeometricBg />',
+    template:
+      '<GIrregularGeometricBg>asdkjaskdjkasjdkasjdkasdjksadjkasdkaasdkjaskdjkasjdkasjdkasdjksadjkasdkaasdkjaskdjkasjdkasjdkasdjksadjkasdkaasdkjaskdjkasjdkasjdkasdjksadjkasdkaasdkjaskdjkasjdkasjdkasdjksadjkasdkaasdkjaskdjkasjdkasjdkasdjksadjkasdkaasdkjaskdjkasjdkasjdkasdjksadjkasdka</GIrregularGeometricBg>',
   }),
   args: {},
 }

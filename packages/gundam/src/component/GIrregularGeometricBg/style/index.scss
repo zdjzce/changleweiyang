@@ -7,7 +7,14 @@ $irregularGeometricBg: joinComponentVarName('irregularGeometricBg');
 
 // .clwy-irregularGeometricBg
 .#{$irregularGeometricBg} {
-  // stroke: #000;
-  // stroke-width: 1px;
-  // fill-rule: evenodd;
+  position: relative;
+  // TODO change
+  > .test-svg {
+    position: absolute;
+  }
+
+  > section {
+    word-wrap:break-word;
+    padding: 24px;
+  }
 }

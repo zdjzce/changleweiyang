@@ -38,22 +38,16 @@ const GIrregularGeometricBg = defineComponent({
         targets: svgContent.value,
         translateX: 0,
         height: '100%',
-        scale: 1,
         // easing: 'easeOutQuad',
         // easing: 'easeOutQuint',
-        easing: 'easeInOutQuad',
-        // keyframes: [
-        //   { scaleY: 0.11, opacity: 1, duration: 50 },
-        //   { opacity: 0, duration: 50 },
-        //   { scaleY: 1, opacity: 0, duration: 50 },
-        //   { scaleY: 1, opacity: 1, duration: 50 },
-        // ],
+        // easing: 'easeInOutQuad',
+        easing: 'easeOutQuart',
         keyframes: [
           { opacity: 1, scaleY: 0.05, duration: 50 },
-          { opacity: 0.5, scaleY: 0.35, duration: 50 },
-          { opacity: 1, scaleY: 0.55, duration: 50 },
-          { opacity: 0.5, scaleY: 0.6, duration: 50 },
-          { opacity: 1, scaleY: 1, duration: 50 },
+          { opacity: 0.5, scaleY: 0.25, duration: 50 },
+          { opacity: 1, scaleY: 0.35, duration: 50 },
+          { opacity: 0.5, scaleY: 0.55, duration: 50 },
+          { opacity: 1, scaleY: 1, duration: 450 },
         ],
       })
     })

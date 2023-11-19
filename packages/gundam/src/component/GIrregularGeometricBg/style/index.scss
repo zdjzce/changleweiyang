@@ -9,7 +9,8 @@ $irregularGeometricBg: joinComponentVarName('irregularGeometricBg');
 .#{$irregularGeometricBg} {
   position: relative;
   // TODO change
-  > .test-svg {
+  & .#{$irregularGeometricBg}--svg {
+    transform: scaleY(0.1);
     position: absolute;
   }
 

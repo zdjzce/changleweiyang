@@ -15,6 +15,7 @@ import {
   generateRandomTrapezoid,
 } from '@gundam/utils/trapezoidCalculations'
 import anime from 'animejs/lib/anime.es.js'
+import { nextTick } from 'vue'
 
 const GIrregularGeometricBg = defineComponent({
   name: 'GIrregularGeometricBg',
@@ -22,21 +23,28 @@ const GIrregularGeometricBg = defineComponent({
   setup(props, { slots }) {
     const classes = generateClasses('irregularGeometricBg', props, [])
 
-    onBeforeMount(() => {
-      getSvgPath()
-    })
-
     const pathMask = ref('')
     const path = ref('')
-    const getSvgPath = () => {
-      if (props.styles.width && props.styles.height) {
-        path.value = calculatePath(props.styles)
-        pathMask.value = generateRandomTrapezoid(props.styles)
-      }
+    const getSvgPath = (styles?: typeof props.styles) => {
+      path.value = calculatePath(styles || props.styles)
+      pathMask.value = generateRandomTrapezoid(styles || props.styles)
     }
 
     onMounted(() => {
-      setBoxAnimation()
+      let contentHeight
+      if (!props.styles.height) {
+        contentHeight = getContentHeight()
+        console.log('contentHeight:', contentHeight)
+      }
+
+      getSvgPath({
+        ...props.styles,
+        height: contentHeight || props.styles.height,
+      })
+      nextTick(() => {
+        setBoxAnimation()
+        console.log('getContentHeight():', getContentHeight())
+      })
     })
 
     const svgContent = ref<SVGElement & VNodeRef>()
@@ -45,6 +53,13 @@ const GIrregularGeometricBg = defineComponent({
       viewBox: '0 0 0 0',
       box: undefined,
     })
+
+    const getContentHeight = () => {
+      const height = sectionContent.value?.offsetHeight
+      if (height) {
+        return height
+      }
+    }
 
     const setBoxAnimation = () => {
       viewBox.box = regularSvgPath.value?.getBBox()
@@ -60,15 +75,10 @@ const GIrregularGeometricBg = defineComponent({
           { opacity: 1, scaleY: 1, duration: 450 },
         ],
       })
-
-      console.log(
-        'getCurrentInstance()?.subTree.children',
-        getCurrentInstance()?.subTree.children,
-      )
     }
 
     const svgContainerStyle = computed(() => {
-      return `max-width: ${viewBox.box?.width}px; max-height: ${viewBox.box?.height}px`
+      return `max-width: ${viewBox.box?.width}px; min-height: ${viewBox.box?.height}px`
     })
 
     const sectionContent = ref<HTMLElement & VNodeRef>()
@@ -92,7 +102,9 @@ const GIrregularGeometricBg = defineComponent({
             mask='url(#irregular-child)'
             stroke='black'></path>
         </svg>
-        <section ref={sectionContent}>{slots.default?.()}</section>
+        <section ref={sectionContent} id='test-section'>
+          {slots.default?.()}
+        </section>
       </div>
     )
   },

@@ -8,7 +8,6 @@ $irregularGeometricBg: joinComponentVarName('irregularGeometricBg');
 // .clwy-irregularGeometricBg
 .#{$irregularGeometricBg} {
   position: relative;
-  // TODO change
   & .#{$irregularGeometricBg}--svg {
     transform: scaleY(0.1);
     position: absolute;

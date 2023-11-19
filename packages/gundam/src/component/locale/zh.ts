@@ -1,3 +1,3 @@
 import * as zh from './default'
 
-export default zh;
+export default zh

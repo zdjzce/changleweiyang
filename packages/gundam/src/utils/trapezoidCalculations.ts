@@ -29,6 +29,7 @@ export const calculatePath = (style: AssignIrregularStyles) => {
 
   const rectangleEdges = [width, height, width, height]
 
+  // TODO 现在是 n*2，可以考虑优化成一次绘制两条到2n，如果要优化到 n 就需要结合数学公式。
   for (let i = 0; i < 4; i++) {
     const maxCount = randomEdge * 2 + 1
     const maxLength = Math.floor(+rectangleEdges[i] / maxCount)

@@ -24,7 +24,7 @@ export const Primary: Story = {
   args: {
     styles: {
       width: 300,
-      height: 150,
+      // height: 400,
       background: '#FDAD05',
       randomEdge: 3,
     },

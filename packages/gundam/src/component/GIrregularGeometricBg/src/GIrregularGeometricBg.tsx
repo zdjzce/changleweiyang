@@ -63,10 +63,9 @@ const GIrregularGeometricBg = defineComponent({
     const setBoxAnimation = () => {
       viewBox.box = regularSvgPath.value?.getBBox()
       viewBox.viewBox = `${viewBox.box?.x} ${viewBox.box?.y} ${viewBox.box?.width} ${viewBox.box?.height}`
-      console.log('viewBox:', viewBox)
       anime({
-        // targets: [svgContent.value, sectionContent.value],
-        targets: [svgContent.value],
+        targets: [svgContent.value, sectionContent.value],
+        // targets: [svgContent.value],
         easing: 'easeOutQuart',
         keyframes: [
           { opacity: 1, scaleY: 0, duration: 50 },
@@ -79,9 +78,9 @@ const GIrregularGeometricBg = defineComponent({
     }
 
     const svgContainerStyle = computed(() => {
-      return `max-width: ${viewBox.box?.width}px; max-height: ${
-        props.styles?.height ?? viewBox.box?.height
-      }px}`
+      return `max-width: ${
+        props.styles?.width ?? viewBox.box?.width
+      }px; max-height: ${props.styles?.height ?? viewBox.box?.height}px`
     })
 
     const sectionContent = ref<HTMLElement & VNodeRef>()
@@ -108,10 +107,7 @@ const GIrregularGeometricBg = defineComponent({
         <section
           ref={sectionContent}
           id='test-section'
-          style={{
-            maxWidth: props.styles.width + 'px',
-            maxHeight: props.styles.height + 'px' || 'auto',
-          }}>
+          style={svgContainerStyle.value}>
           {slots.default?.()}
         </section>
       </div>

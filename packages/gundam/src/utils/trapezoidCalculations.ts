@@ -29,8 +29,8 @@ export const calculatePath = (style: AssignIrregularStyles) => {
     width,
     height,
     randomEdge,
-    // trapeZoidalH = +style.height! / 10,
-    trapeZoidalH = 10,
+    trapeZoidalH = +style.height! * 0.02,
+    // trapeZoidalH = 10,
   } = style
   let path: AssignIrregularStyles['path'] = style.path || 'm 0 0'
 

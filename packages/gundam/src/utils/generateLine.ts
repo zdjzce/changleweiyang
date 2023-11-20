@@ -1,1 +1,1 @@
-export const generateLine = () => {}
+export const generateLine = (rotate: number) => {}

@@ -10,11 +10,23 @@ export default meta
 type Story = StoryObj<typeof GIrregularGeometricBg>
 
 export const Primary: Story = {
-  render: (args, { argTypes }) => ({
+  render: (args) => ({
     components: { GIrregularGeometricBg },
-    props: Object.keys(argTypes),
-    template:
-      '<GIrregularGeometricBg>asdkjaskdjkasjdkasjdkasdjksadjkasdkaasdkjaskdjkasjdkasjdkasdjksadjkasdkaasdkjaskdjkasjdkasjdkasdjksadjkasdkaasdkjaskdjkasjdkasjdkasdjksadjkasdkaasdkjaskdjkasjdkasjdkasdjksadjkasdkaasdkjaskdjkasjdkasjdkasdjksadjkasdkaasdkjaskdjkasjdkasjdkasdjksadjkasdka</GIrregularGeometricBg>',
+    props: Object.keys(args),
+    render: () => {
+      return (
+        <GIrregularGeometricBg styles={args.styles}>
+          asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd
+        </GIrregularGeometricBg>
+      )
+    },
   }),
-  args: {},
+  args: {
+    styles: {
+      width: 300,
+      height: 150,
+      background: '#FDAD05',
+      randomEdge: 3,
+    },
+  },
 }

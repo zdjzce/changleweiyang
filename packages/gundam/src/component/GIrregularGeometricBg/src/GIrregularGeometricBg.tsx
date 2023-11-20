@@ -25,25 +25,24 @@ const GIrregularGeometricBg = defineComponent({
 
     const pathMask = ref('')
     const path = ref('')
-    const getSvgPath = (styles?: typeof props.styles) => {
-      path.value = calculatePath(styles || props.styles)
-      pathMask.value = generateRandomTrapezoid(styles || props.styles)
+    const getSvgPath = (styles: typeof props.styles) => {
+      path.value = calculatePath(styles)
+      pathMask.value = generateRandomTrapezoid(styles)
     }
 
     onMounted(() => {
       let contentHeight
       if (!props.styles.height) {
         contentHeight = getContentHeight()
-        console.log('contentHeight:', contentHeight)
       }
 
       getSvgPath({
         ...props.styles,
-        height: contentHeight || props.styles.height,
+        height: contentHeight || props.styles.height || 300,
       })
+
       nextTick(() => {
         setBoxAnimation()
-        console.log('getContentHeight():', getContentHeight())
       })
     })
 
@@ -64,8 +63,10 @@ const GIrregularGeometricBg = defineComponent({
     const setBoxAnimation = () => {
       viewBox.box = regularSvgPath.value?.getBBox()
       viewBox.viewBox = `${viewBox.box?.x} ${viewBox.box?.y} ${viewBox.box?.width} ${viewBox.box?.height}`
+      console.log('viewBox:', viewBox)
       anime({
-        targets: [svgContent.value, sectionContent.value],
+        // targets: [svgContent.value, sectionContent.value],
+        targets: [svgContent.value],
         easing: 'easeOutQuart',
         keyframes: [
           { opacity: 1, scaleY: 0, duration: 50 },
@@ -78,7 +79,9 @@ const GIrregularGeometricBg = defineComponent({
     }
 
     const svgContainerStyle = computed(() => {
-      return `max-width: ${viewBox.box?.width}px; min-height: ${viewBox.box?.height}px`
+      return `max-width: ${viewBox.box?.width}px; max-height: ${
+        props.styles?.height ?? viewBox.box?.height
+      }px}`
     })
 
     const sectionContent = ref<HTMLElement & VNodeRef>()
@@ -100,9 +103,15 @@ const GIrregularGeometricBg = defineComponent({
             ref={regularSvgPath}
             d={path.value}
             mask='url(#irregular-child)'
-            stroke='black'></path>
+            fill={props.styles.background || 'black'}></path>
         </svg>
-        <section ref={sectionContent} id='test-section'>
+        <section
+          ref={sectionContent}
+          id='test-section'
+          style={{
+            maxWidth: props.styles.width + 'px',
+            maxHeight: props.styles.height + 'px' || 'auto',
+          }}>
           {slots.default?.()}
         </section>
       </div>

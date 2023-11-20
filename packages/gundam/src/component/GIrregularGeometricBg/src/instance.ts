@@ -1,6 +1,6 @@
 export type IrregularStyles = {
-  width: string | number
-  height?: string | number
+  width: number
+  height?: number
   background: string
   randomEdge: number
 }

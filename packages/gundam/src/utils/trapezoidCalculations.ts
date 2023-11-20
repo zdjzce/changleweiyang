@@ -23,23 +23,29 @@ export type AssignIrregularStyles = IrregularStyles & {
   gap?: number
 }
 
+// TODO 现在计算的结果会值会超出参数传入的值，不知道什么情况
 export const calculatePath = (style: AssignIrregularStyles) => {
-  const { width, height, randomEdge, trapeZoidalH = 10 } = style
+  const {
+    width,
+    height,
+    randomEdge,
+    // trapeZoidalH = +style.height! / 10,
+    trapeZoidalH = 10,
+  } = style
   let path: AssignIrregularStyles['path'] = style.path || 'm 0 0'
 
   const rectangleEdges = [width, height, width, height]
 
-  // TODO 现在是 n*2，可以考虑优化成一次绘制两条到2n，如果要优化到 n 就需要结合数学公式。
   for (let i = 0; i < 4; i++) {
     const maxCount = randomEdge * 2 + 1
-    const maxLength = Math.floor(+rectangleEdges[i] / maxCount)
+    const maxLength = Math.round(+rectangleEdges[i]! / maxCount)
     let randomMax = 0
     let isTrapezoid = Math.random() < 0.5
 
     for (let j = 0; j < maxCount; j++) {
       if (!isTrapezoid && randomMax < randomEdge) {
         const topLine = calculateTopLength(maxLength, 60)
-        const x = Math.floor((maxLength - topLine) / 2)
+        const x = Math.round((maxLength - topLine) / 2)
 
         // 如果外部边与内部边都采用同样的顺序进行绘制，那么最终的 svg 图形不会取交集部分
         // 一个长方形绘制方向无非就是 顺时针 或 逆时针
@@ -74,15 +80,14 @@ export const calculatePath = (style: AssignIrregularStyles) => {
 }
 
 export const generateRandomTrapezoid = (style: AssignIrregularStyles) => {
-  const { gap = Math.floor((+style.width * 0.05) / 2) } = style
-  // const { gap = 10 } = style
+  const { gap = Math.round((+style.width * 0.025) / 2) } = style
 
   const insidePath = calculatePath({
     ...style,
     trapeZoidalH: style?.trapeZoidalH || -8,
     path: `m ${gap} ${gap}`,
     width: +style.width - gap * 3,
-    height: +style.height - gap * 2,
+    height: +style.height! - gap * 2,
     randomEdge: 2,
   })
 

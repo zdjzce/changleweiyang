@@ -14,7 +14,8 @@ $irregularGeometricBg: joinComponentVarName('irregularGeometricBg');
   }
 
   > section {
-    word-wrap:break-word;
+    word-wrap: break-word;
     padding: 24px;
+    box-sizing: border-box;
   }
 }

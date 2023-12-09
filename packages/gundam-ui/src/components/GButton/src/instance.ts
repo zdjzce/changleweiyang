@@ -1,4 +1,4 @@
-import { Status } from '@gundam/instance/Status'
+import { Status } from '@gundam-ui/instance/Status'
 
 export type ButtonType = Status
 

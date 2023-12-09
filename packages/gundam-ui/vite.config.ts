@@ -9,11 +9,9 @@ export default defineConfig(() => {
     plugins: [vue(), vueJsx()],
     resolve: {
       alias: {
-        '@gundam': path.resolve(__dirname, './src'),
-        snapsvg: path.resolve(
-          __dirname,
-          './node_modules/snapsvg/dist/snap.svg.js',
-        ),
+        '@gundam-ui': path.resolve(__dirname, './src'),
+        '@gundam/hud': path.resolve(__dirname, '../gundam-hud/src'),
+        '@gundam/style': path.resolve(__dirname, '../style'),
       },
     },
     css: {

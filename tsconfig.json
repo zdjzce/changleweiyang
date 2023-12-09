@@ -16,8 +16,14 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@gundam/*": [
-        "packages/gundam/src/*"
+      "@gundam-ui/*": [
+        "packages/gundam-ui/src/*"
+      ],
+      "@gundam/hud/*": [
+        "packages/gundam-hud/src/*"
+      ],
+      "@gundam/style/*": [
+        "packages/style/*"
       ],
     },
   },

@@ -104,9 +104,68 @@ importers:
       rollup:
         specifier: ^3.28.0
         version: 3.28.0
+      typescript:
+        specifier: ^5.0.2
+        version: 5.0.2
       vite:
         specifier: ^4.3.9
         version: 4.3.9(@types/node@20.5.1)(sass@1.63.6)
+
+  packages/gundam-hud:
+    dependencies:
+      '@types/animejs':
+        specifier: ^3.1.11
+        version: 3.1.11
+      animejs:
+        specifier: ^3.2.1
+        version: 3.2.1
+      sass:
+        specifier: ^1.63.6
+        version: 1.63.6
+      storybook:
+        specifier: ^7.4.2
+        version: 7.4.2
+      vue:
+        specifier: ^3.2.47
+        version: 3.2.47
+    devDependencies:
+      '@storybook/vue3':
+        specifier: ^7.4.2
+        version: 7.4.2(@vue/compiler-core@3.3.7)(vue@3.2.47)
+      '@storybook/vue3-vite':
+        specifier: ^7.4.2
+        version: 7.4.2(@vue/compiler-core@3.3.7)(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.2)(vite@4.3.9)(vue@3.2.47)
+      '@vitejs/plugin-vue':
+        specifier: ^4.1.0
+        version: 4.1.0(vite@4.3.9)(vue@3.2.47)
+      '@vitejs/plugin-vue-jsx':
+        specifier: ^3.0.1
+        version: 3.0.1(vite@4.3.9)(vue@3.2.47)
+      autoprefixer:
+        specifier: ^10.4.15
+        version: 10.4.15(postcss@8.4.31)
+      rollup:
+        specifier: ^3.28.0
+        version: 3.28.0
+      typescript:
+        specifier: ^5.0.2
+        version: 5.0.2
+      vite:
+        specifier: ^4.3.9
+        version: 4.3.9(@types/node@20.5.1)(sass@1.63.6)
+
+  packages/style:
+    dependencies:
+      sass:
+        specifier: ^1.63.6
+        version: 1.63.6
+    devDependencies:
+      autoprefixer:
+        specifier: ^10.4.15
+        version: 10.4.15(postcss@8.4.31)
+      typescript:
+        specifier: ^5.0.2
+        version: 5.0.2
 
 packages:
 
@@ -2483,7 +2542,7 @@ packages:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.2.47
-      vue-component-type-helpers: 1.8.22
+      vue-component-type-helpers: 1.8.25
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -2612,7 +2671,7 @@ packages:
   /@types/node-fetch@2.6.8:
     resolution: {integrity: sha512-nnH5lV9QCMPsbEVdTb5Y+F3GQxLSw1xQgIydrb2gSfEavRPs50FnMr+KUaa+LoPSqibm2N+ZZxH7lavZlAT4GA==}
     dependencies:
-      '@types/node': 16.18.60
+      '@types/node': 20.8.10
       form-data: 4.0.0
 
   /@types/node@16.18.60:
@@ -7753,8 +7812,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /vue-component-type-helpers@1.8.22:
-    resolution: {integrity: sha512-LK3wJHs3vJxHG292C8cnsRusgyC5SEZDCzDCD01mdE/AoREFMl2tzLRuzwyuEsOIz13tqgBcnvysN3Lxsa14Fw==}
+  /vue-component-type-helpers@1.8.25:
+    resolution: {integrity: sha512-NCA6sekiJIMnMs4DdORxATXD+/NRkQpS32UC+I1KQJUasx+Z7MZUb3Y+MsKsFmX+PgyTYSteb73JW77AibaCCw==}
     dev: true
 
   /vue-docgen-api@4.75.0(vue@3.2.47):

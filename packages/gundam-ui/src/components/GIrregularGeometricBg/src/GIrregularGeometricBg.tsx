@@ -1,4 +1,4 @@
-import { composeClass, generateClasses } from '@gundam/hooks/classes'
+import { composeClass, generateClasses } from '@gundam-ui/hooks/classes'
 import {
   defineComponent,
   ref,
@@ -13,7 +13,7 @@ import { props } from './IrregularGeometric'
 import {
   calculatePath,
   generateRandomTrapezoid,
-} from '@gundam/utils/trapezoidCalculations'
+} from '@gundam-ui/utils/trapezoidCalculations'
 import anime from 'animejs/lib/anime.es.js'
 import { nextTick } from 'vue'
 

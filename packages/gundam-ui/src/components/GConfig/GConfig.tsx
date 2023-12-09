@@ -1,6 +1,6 @@
 import { defineComponent, provide, reactive, PropType } from 'vue'
 import GLocaleConfig from './GLocaleConfig'
-import { type Locale } from '@gundam/component/locale'
+import { type Locale } from '@gundam-ui/componentss/locale'
 
 const GConfigProps = {
   locale: {

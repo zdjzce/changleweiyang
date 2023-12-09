@@ -1,5 +1,5 @@
 import { defineComponent, computed } from 'vue'
-import { generateClasses, useClasses } from '@gundam/hooks/classes'
+import { generateClasses, useClasses } from '@gundam-ui/hooks/classes'
 import { props } from './button'
 
 const CLButton = defineComponent({

@@ -1,5 +1,5 @@
 import { Component, VueElement } from 'vue'
-import components from './component'
+import components from './components'
 
 type ComponentsKey = keyof typeof components
 const plugin = {

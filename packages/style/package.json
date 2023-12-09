@@ -1,0 +1,29 @@
+{
+  "name": "@gundam/style",
+  "keywords": [
+    "gundam",
+    "vue3",
+    "vue",
+    "component"
+  ],
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup --config rollup.config.js",
+    "story": "storybook dev -p 6006",
+    "build-story": "storybook build"
+  },
+  "dependencies": {
+    "sass": "^1.63.6",
+    "@gundam/components": "workspace:*"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.15",
+    "typescript": "^5.0.2"
+  }
+}

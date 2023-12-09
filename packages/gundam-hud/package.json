@@ -1,12 +1,12 @@
 {
-  "name": "gundam-ui",
+  "name": "@gundam/hud",
   "keywords": [
     "gundam",
     "vue3",
     "vue",
-    "component"
+    "component",
+    "hud"
   ],
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "main": "src/index.ts",
@@ -32,6 +32,7 @@
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "autoprefixer": "^10.4.15",
     "rollup": "^3.28.0",
+    "typescript": "^5.0.2",
     "vite": "^4.3.9"
   }
 }

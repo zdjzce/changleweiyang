@@ -10,10 +10,26 @@ export default meta
 type Story = StoryObj<typeof GDecorLine>
 
 export const Primary: Story = {
-  render: () => ({
+  render: (args) => ({
+    props: Object.keys(args),
     components: { GDecorLine },
     render: () => {
-      return <GDecorLine></GDecorLine>
+      console.log('args', args)
+      return (
+        <GDecorLine type={args.type}>
+          {{
+            content: () => <div>test</div>,
+            underText: () => <div>test2</div>,
+          }}
+        </GDecorLine>
+      )
     },
   }),
+  args: {
+    type: 'straight',
+    properties: {
+      lineStyle: 'pin',
+      content: '',
+    },
+  },
 }

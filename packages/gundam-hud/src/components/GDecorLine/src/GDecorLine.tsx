@@ -1,20 +1,23 @@
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, watch, onMounted } from 'vue'
 import GDecorPolyLine from './GDecorPolyLine'
 import { props } from './DecorLine'
-import { DecorLine } from './instance'
+import GDecorStraight from './GDecorStraight'
+import { DecorLine, DecorLineType } from './instance'
 
 const lineStyleComponent: Record<'polyline' | 'straight', any> = {
   polyline: GDecorPolyLine,
-  straight: GDecorPolyLine,
+  straight: GDecorStraight,
 }
 
-const GDecorLine = defineComponent<typeof props>({
+const GDecorLine = defineComponent({
   name: 'GDecorLine',
+  props,
   setup(props, { slots }) {
-    const LineStyle = computed(() => lineStyleComponent[props.type])
+    console.log('slots:', slots)
+    const LineStyle = computed(() => lineStyleComponent[props.type!])
     return () => {
       const { type } = props
-      return <LineStyle.value {...props}>{slots.default?.()}</LineStyle.value>
+      return <LineStyle.value {...props} lineSlots={slots}></LineStyle.value>
     }
   },
 })

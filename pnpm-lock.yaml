@@ -68,8 +68,11 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1
 
-  packages/gundam:
+  packages/gundam-hud:
     dependencies:
+      '@gundam/style':
+        specifier: workspace:*
+        version: link:../style
       '@types/animejs':
         specifier: ^3.1.11
         version: 3.1.11
@@ -111,8 +114,11 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9(@types/node@20.5.1)(sass@1.63.6)
 
-  packages/gundam-hud:
+  packages/gundam-ui:
     dependencies:
+      '@gundam/style':
+        specifier: workspace:*
+        version: link:../style
       '@types/animejs':
         specifier: ^3.1.11
         version: 3.1.11
@@ -156,6 +162,9 @@ importers:
 
   packages/style:
     dependencies:
+      '@gundam-ui':
+        specifier: workspace:*
+        version: link:../gundam-ui
       sass:
         specifier: ^1.63.6
         version: 1.63.6

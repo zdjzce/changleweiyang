@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "sass": "^1.63.6",
-    "@gundam/components": "workspace:*"
+    "@gundam-ui": "workspace:*"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.15",

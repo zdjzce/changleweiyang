@@ -1,5 +1,5 @@
 import { defineComponent, computed } from 'vue'
-import GDecorPolyLine from './GdecorPolyLine'
+import GDecorPolyLine from './GDecorPolyLine'
 import { props } from './DecorLine'
 import { DecorLine } from './instance'
 

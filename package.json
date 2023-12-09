@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "story": "pnpm run --filter @gundam-ui story",
+    "ui-dev": "pnpm run --filter @gundam-ui story",
+    "hud-dev": "pnpm run --filter @gundam/hud story",
     "prepare": "husky install",
     "lint:script": "eslint --ext .js,.jsx,.ts,.tsx --fix --quiet ./packages"
   },

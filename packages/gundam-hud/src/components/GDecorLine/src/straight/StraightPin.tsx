@@ -4,6 +4,7 @@ import { DecorLineStyle } from '@gundam/hud/style/index'
 import { DecorLine, DecorLineHash } from '../instance'
 import anime from 'animejs/lib/anime.es.js'
 
+type StraightPinElement = HTMLElement | undefined | SVGElement | null
 const StraightPin = defineComponent({
   props: decorStraightProps,
   setup(props, { slots }) {
@@ -15,10 +16,12 @@ const StraightPin = defineComponent({
       setAnime()
     })
 
-    const circleOne: Ref<HTMLElement | undefined> = ref()
-    const circleContainer: Ref<HTMLElement | undefined> = ref()
-    const pathOne: Ref<HTMLElement | undefined> = ref()
-    const pathTwo: Ref<HTMLElement | undefined> = ref()
+    const circleOne: Ref<StraightPinElement> = ref()
+    const circleContainer: Ref<StraightPinElement> = ref()
+    const pathOne: Ref<StraightPinElement> = ref()
+    const pathTwo: Ref<StraightPinElement> = ref()
+    const content: Ref<StraightPinElement> = ref()
+    const underText: Ref<StraightPinElement> = ref()
 
     const setAnime = () => {
       anime
@@ -64,6 +67,22 @@ const StraightPin = defineComponent({
         delay: 400,
         duration: 700,
       })
+
+      anime({
+        targets: content.value,
+        easing: 'easeOutCubic',
+        translateY: [70, 0],
+        delay: 100,
+        duration: 400,
+      })
+
+      anime({
+        targets: underText.value,
+        easing: 'easeOutCubic',
+        translateY: [-70, 0],
+        delay: 150,
+        duration: 400,
+      })
     }
 
     return () => (
@@ -75,10 +94,11 @@ const StraightPin = defineComponent({
           style='max-width: 250px; max-height: 100px;'>
           <foreignObject x='0' y='0' width='100%' height='100%'>
             <div class={[DecorLineStyle.content]}>
-              {props.lineSlots?.content?.()}
+              <div ref={content}>{props.lineSlots?.content?.()}</div>
             </div>
+
             <div class={DecorLineStyle.underText}>
-              {props.lineSlots?.underText?.()}
+              <div ref={underText}>{props.lineSlots?.underText?.()}</div>
             </div>
           </foreignObject>
 
@@ -104,8 +124,7 @@ const StraightPin = defineComponent({
 
           <path
             ref={pathTwo}
-            class={DecorLineStyle.path}
-            stroke='red'
+            stroke='rgb(81, 104, 104)'
             stroke-width='1'
             stroke-dasharray='0, 100'
             d='m250 50, l-100 0'

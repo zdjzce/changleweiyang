@@ -22,12 +22,18 @@
   position: absolute;
   right: 0;
   bottom: 50%;
+  overflow: hidden;
 }
 
+.contentChildren {
+  position: static;
+  transform: translateY(70%);
+}
 
 .underText {
   font-size: 12px;
   position: absolute;
   right: 0;
   top: 50%;
+  overflow: hidden;
 }

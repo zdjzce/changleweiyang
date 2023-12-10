@@ -1,10 +1,18 @@
-import { defineComponent, ref, onMounted, watch, reactive, Ref } from 'vue'
+import {
+  defineComponent,
+  ref,
+  onMounted,
+  watch,
+  reactive,
+  Ref,
+  nextTick,
+} from 'vue'
 import { decorStraightProps, props } from '../DecorLine'
 import { DecorLineStyle } from '@gundam/hud/style/index'
 import { DecorLine, DecorLineHash } from '../instance'
 import anime from 'animejs/lib/anime.es.js'
 
-type StraightPinElement = HTMLElement | undefined | SVGElement | null
+type StraightPinElement = HTMLElement | undefined
 const StraightPin = defineComponent({
   props: decorStraightProps,
   setup(props, { slots }) {
@@ -14,6 +22,10 @@ const StraightPin = defineComponent({
 
     onMounted(() => {
       setAnime()
+      nextTick(() => {
+        typewriterEffect(content.value, content.value?.innerText || '')
+        typewriterEffect(underText.value, underText.value?.innerText || '')
+      })
     })
 
     const circleOne: Ref<StraightPinElement> = ref()
@@ -85,6 +97,38 @@ const StraightPin = defineComponent({
       })
     }
 
+    const typewriterEffect = (element: StraightPinElement, text: string) => {
+      const textArray = text.split('')
+      const possibleChars =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+      const animation = anime.timeline({
+        targets: element,
+      })
+
+      textArray.forEach((char, i) => {
+        for (let j = 0; j < 2; j++) {
+          // 2次随机字符变换
+          const randomChar =
+            possibleChars[Math.floor(Math.random() * possibleChars.length)]
+          animation.add({
+            targets: element,
+            update: () =>
+              (element!.innerText = text.substring(0, i) + randomChar || ''),
+            duration: 10, // 每次随机字符变换的持续时间
+            easing: 'linear',
+          })
+        }
+        animation.add({
+          targets: element,
+          update: () => (element!.innerText = text.substring(0, i + 1)),
+          duration: 50, // 原字符出现的持续时间
+          easing: 'easeOutQuad',
+        })
+      })
+
+      animation.play()
+    }
+
     return () => (
       <div
         style='max-width: 250px; max-height: 100px;'
@@ -124,6 +168,8 @@ const StraightPin = defineComponent({
 
           <path
             ref={pathTwo}
+            style='filter: drop-shadow(0px 0px 3px rgb(0 239 244 / 1)); 
+            '
             stroke='rgb(81, 104, 104)'
             stroke-width='1'
             stroke-dasharray='0, 100'

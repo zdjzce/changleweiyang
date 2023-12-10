@@ -14,9 +14,8 @@ export const Primary: Story = {
     props: Object.keys(args),
     components: { GDecorLine },
     render: () => {
-      console.log('args', args)
       return (
-        <GDecorLine type={args.type}>
+        <GDecorLine {...args}>
           {{
             content: () => (
               <span style='font-size: 14px; color: #3B6863;'>

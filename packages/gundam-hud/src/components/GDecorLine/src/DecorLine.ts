@@ -1,5 +1,5 @@
 import { type ExtractPropTypes, PropType, Slots } from 'vue'
-import { DecorLine, DecorLineType } from './instance'
+import { DecorLine, DecorLineHash, DecorLineType } from './instance'
 
 /* 单条线带文字 */
 /* 折线带多个 item */
@@ -16,7 +16,10 @@ export const props = {
 }
 
 export const decorStraightProps = {
-  ...props,
+  properties: {
+    type: Object as PropType<DecorLineHash['straight']>,
+    required: true,
+  },
   lineSlots: {
     type: Object as PropType<Slots>,
   },

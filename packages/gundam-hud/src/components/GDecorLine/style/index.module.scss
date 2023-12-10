@@ -16,3 +16,18 @@
   transform-box: fill-box;
   transform-origin: center center;
 }
+
+
+.content {
+  position: absolute;
+  right: 0;
+  bottom: 50%;
+}
+
+
+.underText {
+  font-size: 12px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+}

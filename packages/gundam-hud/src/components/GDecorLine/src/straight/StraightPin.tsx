@@ -74,8 +74,11 @@ const StraightPin = defineComponent({
           class={DecorLineStyle.WH100}
           style='max-width: 250px; max-height: 100px;'>
           <foreignObject x='0' y='0' width='100%' height='100%'>
-            <div class={[DecorLineStyle.absoluteRightBottomHalf]}>
+            <div class={[DecorLineStyle.content]}>
               {props.lineSlots?.content?.()}
+            </div>
+            <div class={DecorLineStyle.underText}>
+              {props.lineSlots?.underText?.()}
             </div>
           </foreignObject>
 
@@ -85,7 +88,7 @@ const StraightPin = defineComponent({
               class={DecorLineStyle.circleAnimate}
               d='m 31,50 m -30, 0, a 30,30 0 1,0 60,0, a 30,30 0 1,0 -60,0'
               fill='none'
-              stroke='red'
+              stroke='rgba(38, 38, 38, 0.3)'
               stroke-width='1.5'
               stroke-dasharray='35,20'
             />
@@ -108,9 +111,6 @@ const StraightPin = defineComponent({
             d='m250 50, l-100 0'
           />
         </svg>
-
-        {/* {props.lineSlots?.content?.()} */}
-        {props.lineSlots?.underText?.()}
       </div>
     )
   },

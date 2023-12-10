@@ -18,8 +18,12 @@ export const Primary: Story = {
       return (
         <GDecorLine type={args.type}>
           {{
-            content: () => <div>test</div>,
-            underText: () => <div>test2</div>,
+            content: () => (
+              <span style='font-size: 14px; color: #3B6863;'>
+                It's test title
+              </span>
+            ),
+            underText: () => <div>Under Text</div>,
           }}
         </GDecorLine>
       )

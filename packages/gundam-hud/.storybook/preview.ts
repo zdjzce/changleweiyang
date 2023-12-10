@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/vue3'
-import '@gundam/style/index.ts'
+import '@gundam/hud/style/index.ts'
 
 const preview: Preview = {
   parameters: {

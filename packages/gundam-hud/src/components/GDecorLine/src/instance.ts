@@ -37,6 +37,7 @@ export type StraightPin = {
   content: string
   underText?: string
   hightLightColor?: string
+  direction?: 'left' | 'right'
 }
 
 /* 刻度直线 */

@@ -6,7 +6,7 @@ export type DecorLineType = 'polyline' | 'straight'
 
 export type DecorLineHash = {
   polyline: DecorLinePolyline
-  straight: DecorLineShareProperties & DecorLineStraight<StraightLineStyle>
+  straight: DecorLineStraight<StraightLineStyle>
 }
 
 export type DecorLine<Type extends DecorLineType = DecorLineType> = {
@@ -32,14 +32,14 @@ type StraightLineHash = {
 
 export type DecorLineStraight<
   LineStyle extends StraightLineStyle = StraightLineStyle,
-> = {
+> = DecorLineShareProperties & {
   lineStyle: LineStyle
 } & StraightLineHash[LineStyle]
 
 /* pin 钗直线 */
 // height will be calculated by circleRadius
-export type StraightPin = Partial<{
-  width: number
+export type StraightPin = {
+  lineWidth: number
   direction: 'left' | 'right'
 
   /* associated text*/
@@ -53,7 +53,7 @@ export type StraightPin = Partial<{
   circleColor: string
   mainLineColor: string
   minorLineColor: string
-}>
+}
 
 /* calibration 刻度直线 */
 export type StraightCalibration = {

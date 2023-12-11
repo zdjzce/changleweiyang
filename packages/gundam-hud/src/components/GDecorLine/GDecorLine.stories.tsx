@@ -34,8 +34,8 @@ export const Primary: Story = {
     type: 'straight',
     properties: {
       lineStyle: 'pin',
-      content: 'Attribute content',
-      underText: 'Attribute underText',
+      content: 'Attribute content ',
+      underText: 'Attribute underText Attribute',
       typeWriter: true,
     },
   },

@@ -6,8 +6,9 @@ import {
   reactive,
   Ref,
   nextTick,
+  computed,
 } from 'vue'
-import { decorStraightProps, props } from '../DecorLine'
+import { decorStraightPinProps, props } from '../DecorLine'
 import { DecorLine, DecorLineHash } from '../instance'
 import anime from 'animejs/lib/anime.es.js'
 import { DecorLineStyle } from '@gundam/hud/style/index'
@@ -15,7 +16,7 @@ import { typewriterEffect } from '@gundam/hud/hooks/textEffect'
 
 type StraightPinElement = HTMLElement | undefined
 const StraightPin = defineComponent({
-  props: decorStraightProps,
+  props: decorStraightPinProps,
   setup(props, { slots }) {
     const property: Ref<DecorLineHash['straight'] | undefined> = ref(
       props.properties,
@@ -23,6 +24,16 @@ const StraightPin = defineComponent({
 
     onMounted(() => {
       setAnime()
+    })
+
+    /* TODO 优化魔法数字 */
+    const containerStyle = computed(() => {
+      const width = props.properties?.lineWidth || 250
+      const circleRadius = props.properties?.circleRadius || 30
+      console.log('props.properties:', props.properties)
+      return `max-width: ${width + circleRadius}px; max-height: ${
+        circleRadius * 2 + 40
+      }px;`
     })
 
     const setAnime = () => {
@@ -113,18 +124,16 @@ const StraightPin = defineComponent({
 
     return () => (
       <div class={DecorLineStyle.relative}>
-        <svg
-          class={DecorLineStyle.WH100}
-          style='max-width: 250px; max-height: 100px;'>
+        <svg class={DecorLineStyle.WH100} style={containerStyle.value}>
           <foreignObject x='0' y='0' width='100%' height='100%'>
             <div class={[DecorLineStyle.content]}>
-              <div ref={content}>
+              <div ref={content} style={props.properties?.contentStyle}>
                 {props.properties?.content || props.lineSlots?.content?.()}
               </div>
             </div>
 
             <div class={DecorLineStyle.underText}>
-              <div ref={underText}>
+              <div ref={underText} style={props.properties?.underTextStyle}>
                 {props.properties?.underText || props.lineSlots?.underText?.()}
               </div>
             </div>

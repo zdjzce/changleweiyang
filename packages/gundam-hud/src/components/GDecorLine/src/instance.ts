@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'vue'
+
 export type DecorLineTopBottomAlign = `${'top' | 'bottom'}-${'right' | 'left'}`
 
 export type DecorLineType = 'polyline' | 'straight'
@@ -16,6 +18,8 @@ export type DecorLineShareProperties = {
   offset?: number
   length?: number
   rotate?: number
+  typeWriter?: boolean
+  hightLightColor?: string
 }
 
 /* 单条直线的类型 */
@@ -32,19 +36,29 @@ export type DecorLineStraight<
   lineStyle: LineStyle
 } & StraightLineHash[LineStyle]
 
-/* 钗直线 */
-export type StraightPin = {
-  content: string
-  underText?: string
-  hightLightColor?: string
-  direction?: 'left' | 'right'
-}
+/* pin 钗直线 */
+// height will be calculated by circleRadius
+export type StraightPin = Partial<{
+  width: number
+  direction: 'left' | 'right'
 
-/* 刻度直线 */
+  /* associated text*/
+  content: string
+  contentStyle: string | CSSProperties
+  underText: string
+  underTextStyle: string | CSSProperties
+
+  /* associated svg*/
+  circleRadius: number
+  circleColor: string
+  mainLineColor: string
+  minorLineColor: string
+}>
+
+/* calibration 刻度直线 */
 export type StraightCalibration = {
   content: string
   underText?: string
-  hightLightColor?: string
 }
 
 export type DecorLinePolyline = DecorLineShareProperties & {

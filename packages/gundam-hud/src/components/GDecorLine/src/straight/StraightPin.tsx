@@ -8,9 +8,10 @@ import {
   nextTick,
 } from 'vue'
 import { decorStraightProps, props } from '../DecorLine'
-import { DecorLineStyle } from '@gundam/hud/style/index'
 import { DecorLine, DecorLineHash } from '../instance'
 import anime from 'animejs/lib/anime.es.js'
+import { DecorLineStyle } from '@gundam/hud/style/index'
+import { typewriterEffect } from '@gundam/hud/hooks/textEffect'
 
 type StraightPinElement = HTMLElement | undefined
 const StraightPin = defineComponent({
@@ -22,20 +23,17 @@ const StraightPin = defineComponent({
 
     onMounted(() => {
       setAnime()
-      nextTick(() => {
-        typewriterEffect(content.value, content.value?.innerText || '')
-        typewriterEffect(underText.value, underText.value?.innerText || '')
-      })
     })
+
+    const setAnime = () => {
+      setCircleAnime()
+      setPathAnime()
+      setSlotsAnime()
+    }
 
     const circleOne: Ref<StraightPinElement> = ref()
     const circleContainer: Ref<StraightPinElement> = ref()
-    const pathOne: Ref<StraightPinElement> = ref()
-    const pathTwo: Ref<StraightPinElement> = ref()
-    const content: Ref<StraightPinElement> = ref()
-    const underText: Ref<StraightPinElement> = ref()
-
-    const setAnime = () => {
+    const setCircleAnime = () => {
       anime
         .timeline({
           targets: circleContainer.value,
@@ -57,9 +55,11 @@ const StraightPin = defineComponent({
         duration: 3500,
         loop: true,
       })
+    }
 
-      const path = anime.path(pathOne.value || '')
-
+    const pathOne: Ref<StraightPinElement> = ref()
+    const pathTwo: Ref<StraightPinElement> = ref()
+    const setPathAnime = () => {
       anime({
         targets: pathOne.value,
         easing: 'easeOutCubic',
@@ -79,7 +79,11 @@ const StraightPin = defineComponent({
         delay: 400,
         duration: 700,
       })
+    }
 
+    const content: Ref<StraightPinElement> = ref()
+    const underText: Ref<StraightPinElement> = ref()
+    const setSlotsAnime = () => {
       anime({
         targets: content.value,
         easing: 'easeOutCubic',
@@ -95,54 +99,34 @@ const StraightPin = defineComponent({
         delay: 150,
         duration: 400,
       })
-    }
 
-    const typewriterEffect = (element: StraightPinElement, text: string) => {
-      const textArray = text.split('')
-      const possibleChars =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-      const animation = anime.timeline({
-        targets: element,
-      })
+      nextTick(() => {
+        if (props.properties?.typeWriter) {
+          props.properties?.content &&
+            typewriterEffect(content.value, content.value?.innerText || '')
 
-      textArray.forEach((char, i) => {
-        for (let j = 0; j < 2; j++) {
-          // 2次随机字符变换
-          const randomChar =
-            possibleChars[Math.floor(Math.random() * possibleChars.length)]
-          animation.add({
-            targets: element,
-            update: () =>
-              (element!.innerText = text.substring(0, i) + randomChar || ''),
-            duration: 10, // 每次随机字符变换的持续时间
-            easing: 'linear',
-          })
+          props.properties?.underText &&
+            typewriterEffect(underText.value, underText.value?.innerText || '')
         }
-        animation.add({
-          targets: element,
-          update: () => (element!.innerText = text.substring(0, i + 1)),
-          duration: 50, // 原字符出现的持续时间
-          easing: 'easeOutQuad',
-        })
       })
-
-      animation.play()
     }
 
     return () => (
-      <div
-        style='max-width: 250px; max-height: 100px;'
-        class={DecorLineStyle.relative}>
+      <div class={DecorLineStyle.relative}>
         <svg
           class={DecorLineStyle.WH100}
           style='max-width: 250px; max-height: 100px;'>
           <foreignObject x='0' y='0' width='100%' height='100%'>
             <div class={[DecorLineStyle.content]}>
-              <div ref={content}>{props.lineSlots?.content?.()}</div>
+              <div ref={content}>
+                {props.properties?.content || props.lineSlots?.content?.()}
+              </div>
             </div>
 
             <div class={DecorLineStyle.underText}>
-              <div ref={underText}>{props.lineSlots?.underText?.()}</div>
+              <div ref={underText}>
+                {props.properties?.underText || props.lineSlots?.underText?.()}
+              </div>
             </div>
           </foreignObject>
 

@@ -20,6 +20,7 @@ export const Primary: Story = {
             content: () => (
               <span style='font-size: 14px; color: #3B6863;'>
                 It's test title
+                <button>123</button>
               </span>
             ),
             underText: () => <div>Under Text</div>,
@@ -28,11 +29,14 @@ export const Primary: Story = {
       )
     },
   }),
+  // 打字机效果会与 attribute 配合，如果传入插槽则不会触发打字机。
   args: {
     type: 'straight',
     properties: {
       lineStyle: 'pin',
-      content: '',
+      content: 'Attribute content',
+      underText: 'Attribute underText',
+      typeWriter: true,
     },
   },
 }

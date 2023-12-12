@@ -11,6 +11,7 @@ export default defineConfig(() => {
       alias: {
         '@gundam-ui': path.resolve(__dirname, './src'),
         '@gundam/hud': path.resolve(__dirname, '../gundam-hud/src'),
+        '@gundam/util': path.resolve(__dirname, '../util/src'),
         '@gundam/style': path.resolve(__dirname, '../style'),
       },
     },

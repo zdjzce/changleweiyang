@@ -25,6 +25,9 @@
       "@gundam/style/*": [
         "packages/style/*"
       ],
+      "@gundam/util/*": [
+        "packages/util/src/*"
+      ],
     },
   },
   "vueCompilerOptions": {

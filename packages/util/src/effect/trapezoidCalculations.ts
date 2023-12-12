@@ -1,4 +1,4 @@
-import { IrregularStyles } from '@gundam-ui/components/GIrregularGeometricBg/src/instance'
+import type { IrregularStyles } from '../instance'
 
 export const toRadians = (degrees: number) => {
   return degrees * (Math.PI / 180)

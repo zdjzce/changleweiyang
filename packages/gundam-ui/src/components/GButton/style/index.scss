@@ -4,7 +4,7 @@
 
 $button-name: joinComponentVarName('button');
 
-// .clwy-button
+// .gundam-button
 .#{$button-name} {
   // mixins content
   @include set-variables() {
@@ -36,7 +36,7 @@ $button-name: joinComponentVarName('button');
 
 }
 
-// .clwy-button--error { background-color: var(--clwy-button-error); }
+// .gundam-button--error { background-color: var(--gundam-button-error); }
 @each $type in ('success', 'error', 'warning') {
   .#{$button-name}--#{$type} {
     background-color: getCssVar('button', $type);

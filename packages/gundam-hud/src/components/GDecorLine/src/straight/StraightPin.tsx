@@ -8,11 +8,11 @@ import {
   nextTick,
   computed,
 } from 'vue'
-import { decorStraightPinProps, props } from '../DecorLine'
-import { DecorLine, DecorLineHash, DecorLineStraight } from '../instance'
+import { decorStraightPinProps } from '../DecorLine'
+import { DecorLineStraight } from '../instance'
 import anime from 'animejs/lib/anime.es.js'
 import { DecorLineStyle } from '@gundam/hud/style/index'
-import { typewriterEffect } from '@gundam/hud/hooks/textEffect'
+import { typewriterEffect } from '@gundam/util/effect'
 
 type StraightPinElement = HTMLElement | undefined
 const defaultProperties: DecorLineStraight<'pin'> = {
@@ -21,8 +21,9 @@ const defaultProperties: DecorLineStraight<'pin'> = {
   lineWidth: 250,
   circleRadius: 30,
   padding: 20,
+  // TODO 获取主题色
   circleColor: 'rgba(38, 38, 38, 0.3)',
-  mainLineColor: 'rgb(81, 104, 104)',
+  mainLineColor: 'black',
   minorLineColor: 'rgb(81, 104, 104)',
 }
 
@@ -161,7 +162,7 @@ const StraightPin = defineComponent({
               cy={halfHeight.value}
               r={property.value.circleRadius}
               fill='none'
-              stroke='rgba(38, 38, 38, 0.3)'
+              stroke={property.value.circleColor}
               stroke-width='1.5'
               stroke-dasharray='35,20'
             />
@@ -169,7 +170,7 @@ const StraightPin = defineComponent({
 
           <path
             ref={pathOne}
-            stroke='black'
+            stroke={property.value.mainLineColor}
             stroke-width='0.3'
             stroke-dasharray='0, 220'
             d={`m${circleX.value} ${halfHeight.value}, l${property.value.lineWidth} 0`}
@@ -178,7 +179,7 @@ const StraightPin = defineComponent({
           <path
             ref={pathTwo}
             style='filter: drop-shadow(0px 0px 3px rgb(0 239 244 / 1));'
-            stroke='rgb(81, 104, 104)'
+            stroke={property.value.minorLineColor}
             stroke-width='1'
             stroke-dasharray={`0, ${Math.floor(property.value.lineWidth / 2)}`}
             d={`m${property.value.lineWidth} ${

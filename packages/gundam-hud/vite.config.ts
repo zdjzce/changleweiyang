@@ -9,7 +9,8 @@ export default defineConfig(() => {
     plugins: [vue(), vueJsx()],
     resolve: {
       alias: {
-        '@gundam-ui': path.resolve(__dirname, '../gundam-ui/src'),
+        // TODO 最好是每个 package 都一致
+        '@gundam/util': path.resolve(__dirname, '../util/src'),
         '@gundam/hud': path.resolve(__dirname, './src'),
         '@gundam/style': path.resolve(__dirname, '../style'),
       },

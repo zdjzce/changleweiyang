@@ -1,4 +1,4 @@
-import { config } from '@gundam-ui/config/index'
+import { config } from '../config/index'
 import { computed } from 'vue'
 const { defaultName, commonSeparator, commonAttrSeparator, statePrefix } =
   config
@@ -26,7 +26,7 @@ const useClasses = (componentName: string, props?: any) => {
   }
 }
 
-// ['button', 'default']  ->  clwy-button--default
+// ['button', 'default']  ->  gundam-button--default
 const composeClass = (names: string[]) => {
   names.unshift(defaultName + commonSeparator)
   return names.slice(0, 1) + names.slice(1).join(commonAttrSeparator)

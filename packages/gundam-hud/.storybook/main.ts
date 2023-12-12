@@ -22,7 +22,6 @@ const config: StorybookConfig = {
     }
 
     return mergeConfig(config, {
-      '@gundam': path.resolve(__dirname, '../src'),
     })
 
   }

@@ -1,4 +1,4 @@
-import { Locale } from './interface';
+import { Locale } from './interface'
 
 const defaultLocale: Locale = {
   locale: 'zh',
@@ -7,4 +7,4 @@ const defaultLocale: Locale = {
   },
 }
 
-export default defaultLocale;
+export default defaultLocale

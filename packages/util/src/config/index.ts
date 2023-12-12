@@ -1,7 +1,7 @@
 export const config = {
-  defaultName: 'clwy',
+  defaultName: 'gundam',
   commonSeparator: '-',
   commonAttrSeparator: '--',
-  clwySeparator: '__',
+  gundamSeparator: '__',
   statePrefix: 'is-',
 }

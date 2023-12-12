@@ -1,4 +1,4 @@
-import { Locale } from './index';
+import { Locale } from './index'
 
 const en: Locale = {
   locale: 'en',
@@ -7,4 +7,4 @@ const en: Locale = {
   },
 }
 
-export default en;
+export default en

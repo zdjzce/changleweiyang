@@ -34,7 +34,7 @@
 }
 
 // @include set-css-var-global(('button', 'text-color'), ('color', $type))
-// --clwy-button-text-color: var(--clwy-color-#{$type});
+// --gundam-button-text-color: var(--gundam-color-#{$type});
 @mixin set-css-var-global($var, $gVar) {
   $varName: joinVarName($var);
   $gVarName: joinVarName($gVar);

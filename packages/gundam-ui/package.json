@@ -23,7 +23,8 @@
     "sass": "^1.63.6",
     "storybook": "^7.4.2",
     "vue": "^3.2.47",
-    "@gundam/style": "workspace:*"
+    "@gundam/style": "workspace:*",
+    "@gundam/util": "workspace:*"
   },
   "devDependencies": {
     "@storybook/vue3": "^7.4.2",

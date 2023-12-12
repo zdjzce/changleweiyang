@@ -1,0 +1,12 @@
+@use 'sass:map';
+@use '@gundam/style/base.scss' as *;
+
+$button: () !default;
+$button: map.merge(
+  (
+    'background': getCssVar('background'),
+    'text-color': getCssVar('text-color'),
+    'border-radius': getCssVar('border-radius')
+  ), 
+  $button
+)

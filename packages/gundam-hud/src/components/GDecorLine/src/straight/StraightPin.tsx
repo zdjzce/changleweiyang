@@ -9,31 +9,43 @@ import {
   computed,
 } from 'vue'
 import { decorStraightPinProps, props } from '../DecorLine'
-import { DecorLine, DecorLineHash } from '../instance'
+import { DecorLine, DecorLineHash, DecorLineStraight } from '../instance'
 import anime from 'animejs/lib/anime.es.js'
 import { DecorLineStyle } from '@gundam/hud/style/index'
 import { typewriterEffect } from '@gundam/hud/hooks/textEffect'
 
 type StraightPinElement = HTMLElement | undefined
+const defaultProperties: DecorLineStraight<'pin'> = {
+  lineStyle: 'pin',
+  direction: 'left',
+  lineWidth: 250,
+  circleRadius: 30,
+  padding: 20,
+  circleColor: 'rgba(38, 38, 38, 0.3)',
+  mainLineColor: 'rgb(81, 104, 104)',
+  minorLineColor: 'rgb(81, 104, 104)',
+}
+
 const StraightPin = defineComponent({
   props: decorStraightPinProps,
   setup(props, { slots }) {
-    const property: Ref<DecorLineHash['straight'] | undefined> = ref(
-      props.properties,
-    )
+    const property = computed(() => {
+      return { ...defaultProperties, ...props.properties }
+    })
 
     onMounted(() => {
       setAnime()
     })
 
-    /* TODO 优化魔法数字 */
+    const circleX = computed(() => property.value.circleRadius + 1)
+    const halfHeight = computed(
+      () => property.value.circleRadius + property.value.padding!,
+    )
+
     const containerStyle = computed(() => {
-      const width = props.properties?.lineWidth || 250
-      const circleRadius = props.properties?.circleRadius || 30
-      console.log('props.properties:', props.properties)
-      return `max-width: ${width + circleRadius}px; max-height: ${
-        circleRadius * 2 + 40
-      }px;`
+      return `max-width: ${
+        property.value.lineWidth + property.value.circleRadius
+      }px; max-height: ${halfHeight.value * 2}px;`
     })
 
     const setAnime = () => {
@@ -140,10 +152,14 @@ const StraightPin = defineComponent({
           </foreignObject>
 
           <g ref={circleContainer} class={DecorLineStyle.circleAnimate}>
-            <path
+            <circle
               ref={circleOne}
               class={DecorLineStyle.circleAnimate}
-              d='m 31,50 m -30, 0, a 30,30 0 1,0 60,0, a 30,30 0 1,0 -60,0'
+              // 落笔点 x 应是半径 + 1
+              cx={circleX.value}
+              // 落笔点 y 应是高度的一半
+              cy={halfHeight.value}
+              r={property.value.circleRadius}
               fill='none'
               stroke='rgba(38, 38, 38, 0.3)'
               stroke-width='1.5'
@@ -156,17 +172,18 @@ const StraightPin = defineComponent({
             stroke='black'
             stroke-width='0.3'
             stroke-dasharray='0, 220'
-            d='m30 50, l220 0'
+            d={`m${circleX.value} ${halfHeight.value}, l${property.value.lineWidth} 0`}
           />
 
           <path
             ref={pathTwo}
-            style='filter: drop-shadow(0px 0px 3px rgb(0 239 244 / 1)); 
-            '
+            style='filter: drop-shadow(0px 0px 3px rgb(0 239 244 / 1));'
             stroke='rgb(81, 104, 104)'
             stroke-width='1'
-            stroke-dasharray='0, 100'
-            d='m250 50, l-100 0'
+            stroke-dasharray={`0, ${Math.floor(property.value.lineWidth / 2)}`}
+            d={`m${property.value.lineWidth} ${
+              halfHeight.value
+            }, l-${Math.floor(property.value.lineWidth / 2)} 0`}
           />
         </svg>
       </div>

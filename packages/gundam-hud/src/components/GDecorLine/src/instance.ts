@@ -40,13 +40,14 @@ export type DecorLineStraight<
 // height will be calculated by circleRadius
 export type StraightPin = {
   lineWidth: number
+  padding?: number
   direction: 'left' | 'right'
 
   /* associated text*/
-  content: string
-  contentStyle: string | CSSProperties
-  underText: string
-  underTextStyle: string | CSSProperties
+  content?: string
+  contentStyle?: string | CSSProperties
+  underText?: string
+  underTextStyle?: string | CSSProperties
 
   /* associated svg*/
   circleRadius: number

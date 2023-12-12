@@ -94,10 +94,10 @@ const StraightPin = defineComponent({
 
       anime({
         targets: pathTwo.value,
-        strokeDasharray: '100, 0',
+        strokeDasharray: `${Math.floor(property.value.lineWidth / 2)}, 0`,
         strokeDashoffset: (el: HTMLElement | SVGElement | null) => {
           anime.setDashoffset(el)
-          return [-50, 0]
+          return [-Math.floor(property.value.lineWidth / 2), 0]
         },
         easing: 'easeOutCubic',
         delay: 400,
@@ -172,7 +172,7 @@ const StraightPin = defineComponent({
             ref={pathOne}
             stroke={property.value.mainLineColor}
             stroke-width='0.3'
-            stroke-dasharray='0, 220'
+            stroke-dasharray={`0, ${property.value.lineWidth}`}
             d={`m${circleX.value} ${halfHeight.value}, l${property.value.lineWidth} 0`}
           />
 
@@ -182,7 +182,7 @@ const StraightPin = defineComponent({
             stroke={property.value.minorLineColor}
             stroke-width='1'
             stroke-dasharray={`0, ${Math.floor(property.value.lineWidth / 2)}`}
-            d={`m${property.value.lineWidth} ${
+            d={`m${property.value.lineWidth + circleX.value} ${
               halfHeight.value
             }, l-${Math.floor(property.value.lineWidth / 2)} 0`}
           />

@@ -1,4 +1,5 @@
 {
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
@@ -11,9 +12,6 @@
     "skipLibCheck": true,
     "allowJs": true,
     "lib": ["esnext", "dom"],
-    "types": [
-      "vite/client"
-    ],
     "baseUrl": ".",
     "paths": {
       "@gundam-ui/*": [

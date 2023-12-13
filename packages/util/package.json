@@ -22,8 +22,5 @@
     "storybook": "^7.4.2",
     "vue": "^3.2.47",
     "@gundam/style": "workspace:*"
-  },
-  "devDependencies": {
-    "typescript": "^5.0.2"
   }
 }

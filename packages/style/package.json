@@ -21,9 +21,5 @@
   "dependencies": {
     "sass": "^1.63.6",
     "@gundam-ui": "workspace:*"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.15",
-    "typescript": "^5.0.2"
   }
 }

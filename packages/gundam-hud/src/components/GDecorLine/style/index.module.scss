@@ -1,4 +1,18 @@
 @use '@gundam/style/base.scss' as *;
+@use 'variables.scss' as *;
+@use 'sass:map';
+
+$line-name: joinComponentVarName('line');
+$straight-line-name: joinComponentVarName('line_straight');
+$straight-line-pin-name: joinComponentVarName('line_straight_pin');
+
+
+.#{$line-name} {
+  @include set-variables() {
+    @include set-map-css-var('straight-line-length', $straight-line-length);
+    @include set-map-css-var('line-padding', $padding);
+  }
+}
 
 .circleAnimate {
   transform-box: fill-box;

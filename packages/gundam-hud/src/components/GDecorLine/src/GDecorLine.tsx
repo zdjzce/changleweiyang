@@ -1,8 +1,8 @@
-import { defineComponent, computed, watch, onMounted, Component } from 'vue'
+import { defineComponent, computed } from 'vue'
 import GDecorPolyLine from './GDecorPolyLine'
 import { props } from './DecorLine'
 import GDecorStraight from './GDecorStraight'
-import { DecorLine, DecorLineType } from './instance'
+import type { DecorLine, DecorLineType } from './instance'
 
 const lineStyleComponent: Record<DecorLineType, any> = {
   polyline: GDecorPolyLine,

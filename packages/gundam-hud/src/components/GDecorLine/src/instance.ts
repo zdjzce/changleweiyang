@@ -15,7 +15,6 @@ export type DecorLine<Type extends DecorLineType = DecorLineType> = {
 }
 
 export type DecorLineShareProperties = {
-  offset?: number
   length?: number
   rotate?: number
   typeWriter?: boolean

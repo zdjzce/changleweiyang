@@ -9,5 +9,6 @@
   @include set-map-css-var('text-color', $text-color);
   @include set-map-css-var('padding', $padding);
   @include set-map-css-var('border-radius', $border-radius);
+  @include set-map-css-var('straight-line-length', $straight-line-length);
   // background-color: $color-warning;
 }

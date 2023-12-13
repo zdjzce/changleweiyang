@@ -11,6 +11,7 @@ $colors: map.deep-merge(
     'success': #767966,
     'warning': #682516,
     'error': #a92f1d,
+    'highlight': #f5f5f5,
   ),
   $colors
   
@@ -21,6 +22,7 @@ $color-default: map.get($colors, 'default');
 $color-success: map.get($colors, 'success');
 $color-warning: map.get($colors, 'warning');
 $color-error: map.get($colors, 'error');
+$color-highlight: map.get($colors, 'highlight');
 
 
 $background: () !default;
@@ -94,3 +96,14 @@ $padding: map.merge(
 
 $font-weight: () !default;
 $border-color:() !default;
+
+
+$straight-line-length: () !default;
+$straight-line-length: map.merge(
+  (
+    'large': 400px,
+    'default': 300px,
+    'small': 200px,
+  ),
+  $straight-line-length
+);

@@ -1,6 +1,6 @@
 import { defineComponent, computed } from 'vue'
 import { decorStraightProps, props } from './DecorLine'
-import { StraightLineStyle } from './instance'
+import type { StraightLineStyle } from './instance'
 import StraightPin from './straight/StraightPin'
 
 const decorLineStraight: Record<StraightLineStyle, any> = {

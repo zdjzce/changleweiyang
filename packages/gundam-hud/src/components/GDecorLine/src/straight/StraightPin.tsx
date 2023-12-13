@@ -2,17 +2,17 @@ import {
   defineComponent,
   ref,
   onMounted,
-  watch,
-  reactive,
-  Ref,
+  type Ref,
   nextTick,
   computed,
+  watch,
 } from 'vue'
 import { decorStraightPinProps } from '../DecorLine'
-import { DecorLineStraight } from '../instance'
+import type { DecorLineStraight } from '../instance'
 import anime from 'animejs/lib/anime.es.js'
 import { DecorLineStyle } from '@gundam/hud/style/index'
 import { typewriterEffect } from '@gundam/util/effect'
+import { generateClasses, useClasses } from '@gundam/util/hooks/classes'
 
 type StraightPinElement = HTMLElement | undefined
 const defaultProperties: DecorLineStraight<'pin'> = {
@@ -30,6 +30,7 @@ const defaultProperties: DecorLineStraight<'pin'> = {
 const StraightPin = defineComponent({
   props: decorStraightPinProps,
   setup(props, { slots }) {
+    const { defaultClass } = useClasses('line')
     const property = computed(() => {
       return { ...defaultProperties, ...props.properties }
     })
@@ -97,7 +98,8 @@ const StraightPin = defineComponent({
         strokeDasharray: `${Math.floor(property.value.lineWidth / 2)}, 0`,
         strokeDashoffset: (el: HTMLElement | SVGElement | null) => {
           anime.setDashoffset(el)
-          return [-Math.floor(property.value.lineWidth / 2), 0]
+          // 从中间开始绘制 所以得 / 2，由于使用的是参照的线条 所以 / 4
+          return [-Math.floor(property.value.lineWidth / 4), 0]
         },
         easing: 'easeOutCubic',
         delay: 400,
@@ -136,7 +138,8 @@ const StraightPin = defineComponent({
     }
 
     return () => (
-      <div class={DecorLineStyle.relative}>
+      <div
+        class={[DecorLineStyle.relative, DecorLineStyle[defaultClass('line')]]}>
         <svg class={DecorLineStyle.WH100} style={containerStyle.value}>
           <foreignObject x='0' y='0' width='100%' height='100%'>
             <div class={[DecorLineStyle.content]}>

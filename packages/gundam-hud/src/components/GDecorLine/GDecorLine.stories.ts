@@ -48,3 +48,14 @@ export const StraightPin: Story = {
     },
   },
 }
+
+export const PolylineRifleI: Story = {
+  args: {
+    type: 'polyline',
+    properties: {
+      lineStyle: 'rifle-I',
+      lineWidth: 250,
+      padding: 20,
+    },
+  },
+}

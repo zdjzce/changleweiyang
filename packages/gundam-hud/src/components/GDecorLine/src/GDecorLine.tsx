@@ -1,11 +1,11 @@
 import { defineComponent, computed } from 'vue'
-import GDecorPolyLine from './GDecorPolyLine'
 import { props } from './DecorLine'
-import GDecorStraight from './GDecorStraight'
-import type { DecorLine, DecorLineType } from './instance'
+import GDecorPolyline from './polyline/GDecorPolyline'
+import GDecorStraight from './straight/GDecorStraight'
+import type { DecorLineType } from './instance'
 
 const lineStyleComponent: Record<DecorLineType, any> = {
-  polyline: GDecorPolyLine,
+  polyline: GDecorPolyline,
   straight: GDecorStraight,
 }
 

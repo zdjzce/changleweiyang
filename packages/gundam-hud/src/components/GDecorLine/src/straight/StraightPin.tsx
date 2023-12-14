@@ -13,12 +13,19 @@ import anime from 'animejs/lib/anime.es.js'
 import { DecorLineStyle } from '@gundam/hud/style/index'
 import { typewriterEffect } from '@gundam/util/effect'
 import { generateClasses, useClasses } from '@gundam/util/hooks/classes'
+import {
+  setCenterPathAnime,
+  setMaskAnime,
+  setPathOffsetAnime,
+  setRotateAnime,
+  setScaleAnime,
+} from '../anime'
 
 type StraightPinElement = HTMLElement | undefined
 const defaultProperties: DecorLineStraight<'pin'> = {
   lineStyle: 'pin',
   direction: 'left',
-  lineWidth: 250,
+  lineWidth: 280,
   circleRadius: 30,
   padding: 20,
   // TODO 获取主题色
@@ -59,72 +66,24 @@ const StraightPin = defineComponent({
     const circleOne: Ref<StraightPinElement> = ref()
     const circleContainer: Ref<StraightPinElement> = ref()
     const setCircleAnime = () => {
-      anime
-        .timeline({
-          targets: circleContainer.value,
-          easing: 'easeInOutQuad',
-        })
-        .add({
-          scale: 0,
-          duration: 0,
-        })
-        .add({
-          scale: 1,
-          duration: 300,
-        })
-
-      anime({
-        targets: circleOne.value,
-        easing: 'linear',
-        rotate: 360,
-        duration: 3500,
-        loop: true,
-      })
+      setScaleAnime(circleContainer.value)
+      setRotateAnime(circleOne.value)
     }
 
     const pathOne: Ref<StraightPinElement> = ref()
     const pathTwo: Ref<StraightPinElement> = ref()
     const setPathAnime = () => {
-      anime({
-        targets: pathOne.value,
-        easing: 'easeOutCubic',
-        delay: 150,
-        duration: 400,
-        strokeDashoffset: [anime.setDashoffset, 0],
-      })
-
-      anime({
-        targets: pathTwo.value,
-        strokeDasharray: `${Math.floor(property.value.lineWidth / 2)}, 0`,
-        strokeDashoffset: (el: HTMLElement | SVGElement | null) => {
-          anime.setDashoffset(el)
-          // 从中间开始绘制 所以得 / 2，由于使用的是参照的线条 所以 / 4
-          return [-Math.floor(property.value.lineWidth / 4), 0]
-        },
-        easing: 'easeOutCubic',
-        delay: 400,
-        duration: 700,
-      })
+      setPathOffsetAnime(pathOne.value)
+      setCenterPathAnime(
+        pathTwo.value,
+        Math.floor(property.value.lineWidth! / 2),
+      )
     }
 
     const content: Ref<StraightPinElement> = ref()
     const underText: Ref<StraightPinElement> = ref()
     const setSlotsAnime = () => {
-      anime({
-        targets: content.value,
-        easing: 'easeOutCubic',
-        translateY: [70, 0],
-        delay: 100,
-        duration: 400,
-      })
-
-      anime({
-        targets: underText.value,
-        easing: 'easeOutCubic',
-        translateY: [-70, 0],
-        delay: 150,
-        duration: 400,
-      })
+      setMaskAnime(content.value, underText.value, halfHeight.value)
 
       nextTick(() => {
         if (props.properties?.typeWriter) {

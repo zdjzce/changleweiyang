@@ -1,7 +1,8 @@
-import { type ExtractPropTypes, PropType, Slots } from 'vue'
-import {
+import type { ExtractPropTypes, PropType, Slots } from 'vue'
+import type {
   DecorLine,
   DecorLineHash,
+  DecorLinePolyline,
   DecorLineStraight,
   DecorLineType,
 } from './instance'
@@ -21,6 +22,7 @@ export const props = {
 }
 
 export const decorStraightProps = {
+  type: props['type'],
   properties: {
     type: Object as PropType<DecorLineHash['straight']>,
     required: true,
@@ -31,8 +33,29 @@ export const decorStraightProps = {
 }
 
 export const decorStraightPinProps = {
+  type: props['type'],
   properties: {
     type: Object as PropType<DecorLineStraight<'pin'>>,
+  },
+  lineSlots: {
+    type: Object as PropType<Slots>,
+  },
+}
+
+export const decorPolylineProps = {
+  type: props['type'],
+  properties: {
+    type: Object as PropType<DecorLineHash['polyline']>,
+  },
+  lineSlots: {
+    type: Object as PropType<Slots>,
+  },
+}
+
+export const decorPolylineRifleIProps = {
+  type: props['type'],
+  properties: {
+    type: Object as PropType<DecorLinePolyline<'rifle-I'>>,
   },
   lineSlots: {
     type: Object as PropType<Slots>,

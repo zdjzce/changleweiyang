@@ -53,11 +53,11 @@ export const setMaskAnime = (
   })
 }
 
-export const setPathOffsetAnime = (el: StraightPinElement) => {
+export const setPathOffsetAnime = (el: StraightPinElement, delay = 150) => {
   anime({
     targets: el,
     easing: 'easeOutCubic',
-    delay: 150,
+    delay,
     duration: 400,
     strokeDashoffset: [anime.setDashoffset, 0],
   })

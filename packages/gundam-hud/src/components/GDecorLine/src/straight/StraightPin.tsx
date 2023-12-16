@@ -53,7 +53,7 @@ const StraightPin = defineComponent({
 
     const containerStyle = computed(() => {
       return `max-width: ${
-        property.value.lineWidth + property.value.circleRadius
+        property.value.lineWidth! + property.value.circleRadius
       }px; max-height: ${halfHeight.value * 2}px;`
     })
 
@@ -143,10 +143,10 @@ const StraightPin = defineComponent({
             style='filter: drop-shadow(0px 0px 3px rgb(0 239 244 / 1));'
             stroke={property.value.minorLineColor}
             stroke-width='1'
-            stroke-dasharray={`0, ${Math.floor(property.value.lineWidth / 2)}`}
-            d={`m${property.value.lineWidth + circleX.value} ${
+            stroke-dasharray={`0, ${Math.floor(property.value.lineWidth! / 2)}`}
+            d={`m${property.value.lineWidth! + circleX.value} ${
               halfHeight.value
-            }, l-${Math.floor(property.value.lineWidth / 2)} 0`}
+            }, l-${Math.floor(property.value.lineWidth! / 2)} 0`}
           />
         </svg>
       </div>

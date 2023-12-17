@@ -2,7 +2,7 @@ import { defineComponent, computed, watch, ref, onMounted } from 'vue'
 import { decorPolylineRifleIProps } from '../DecorLine'
 import { setPathOffsetAnime } from '../anime'
 import type { LineElement } from '../instance'
-import { slashAnime } from '../anime/polyline'
+import { slashAnime, slashRunner } from '../anime/polyline'
 
 const PolylineRifleI = defineComponent({
   name: 'PolylineRifleI',
@@ -18,11 +18,17 @@ const PolylineRifleI = defineComponent({
 
     onMounted(() => {
       setCircleAnime()
+
       slashAnime([
         belowSlashLine.value,
-        belowSlashLineSecond.value,
         belowSlashLineThird.value,
+        belowSlashLineFourth.value,
+        belowSlashLineFifth.value,
+        line.value,
+        lineSecond.value,
       ])
+
+      slashRunner([belowSlashLineSecond.value, lineThird.value])
     })
 
     const circleOne = ref<LineElement>()
@@ -35,7 +41,12 @@ const PolylineRifleI = defineComponent({
     const belowSlashLine = ref<LineElement>()
     const belowSlashLineSecond = ref<LineElement>()
     const belowSlashLineThird = ref<LineElement>()
+    const belowSlashLineFourth = ref<LineElement>()
+    const belowSlashLineFifth = ref<LineElement>()
 
+    const line = ref<LineElement>()
+    const lineSecond = ref<LineElement>()
+    const lineThird = ref<LineElement>()
     return () => (
       <div>
         <svg>
@@ -57,33 +68,60 @@ const PolylineRifleI = defineComponent({
               ref={circleTwo}
             />
           </g>
-          <path
-            ref={belowSlashLine}
-            fill='none'
-            stroke='rgba(128, 142, 151, 0.5)'
-            d='m5 80 l80 -80'
-          />
-          <path
-            ref={belowSlashLineSecond}
-            stroke-dasharray='0, 65'
-            fill='none'
-            stroke='rgba(128, 142, 151, 0.8)'
-            d='m15 70 l80 -80'
-          />
 
-          <path
-            ref={belowSlashLineThird}
-            // stroke-dasharray='0, 65'
-            fill='none'
-            stroke='rgb(131, 187, 186)'
-            stroke-width='3'
-            d='m25 60 l30 -30'
-          />
+          <g>
+            <path
+              ref={belowSlashLine}
+              fill='none'
+              stroke='rgba(128, 142, 151, 0.5)'
+              d='m5 80 l80 -80'
+            />
+            <path
+              ref={belowSlashLineSecond}
+              stroke-dasharray='0, 65'
+              fill='none'
+              stroke='rgba(128, 142, 151, 0.8)'
+              d='m15 70 l80 -80'
+            />
+            <path
+              ref={belowSlashLineThird}
+              fill='none'
+              stroke='rgb(131, 187, 186)'
+              stroke-width='3'
+              d='m25 60 l30 -30'
+            />
 
-          {/* <path fill='none' stroke='black' d='m85 0 l250 0'></path>
-          <path fill='none' stroke='black' d='m69 15 l20 0'></path>
-          <path fill='none' stroke='black' d='m49 35 l20 0'></path>
-          <path fill='none' stroke='red' d='m300 0 l-60 0'></path> */}
+            <path
+              ref={belowSlashLineFourth}
+              fill='none'
+              stroke='black'
+              d='m80 5 l10 0'
+            />
+            <path
+              ref={belowSlashLineFifth}
+              fill='none'
+              stroke='black'
+              d='m60 25 l30 0'
+            />
+          </g>
+          <g>
+            <path ref={line} fill='none' stroke='black' d='m85 0 l250 0' />
+            <path
+              ref={lineSecond}
+              fill='none'
+              stroke='red'
+              stroke-width='2'
+              d='m85 0 l230 0'
+            />
+            <path
+              stroke-dasharray='0, 230'
+              ref={lineThird}
+              fill='none'
+              stroke='green'
+              stroke-width='3'
+              d='m85 0 l230 0'
+            />
+          </g>
         </svg>
       </div>
     )

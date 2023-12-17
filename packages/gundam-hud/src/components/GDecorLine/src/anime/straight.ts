@@ -1,7 +1,7 @@
 import anime from 'animejs'
+import type { LineElement } from '../instance'
 
-type StraightPinElement = HTMLElement | undefined
-export const setScaleAnime = (el: StraightPinElement) => {
+export const setScaleAnime = (el: LineElement) => {
   el!.style['transformBox'] = 'fill-box'
 
   anime
@@ -19,7 +19,7 @@ export const setScaleAnime = (el: StraightPinElement) => {
     })
 }
 
-export const setRotateAnime = (el: StraightPinElement) => {
+export const setRotateAnime = (el: LineElement) => {
   el!.style['transformOrigin'] = 'center center'
   anime({
     targets: el,
@@ -31,8 +31,8 @@ export const setRotateAnime = (el: StraightPinElement) => {
 }
 
 export const setMaskAnime = (
-  elTop: StraightPinElement,
-  elBottom: StraightPinElement,
+  elTop: LineElement,
+  elBottom: LineElement,
   height: number,
 ) => {
   // 这个动画需要父容器被子元素撑开  然后设置子元素的 translateY
@@ -53,7 +53,7 @@ export const setMaskAnime = (
   })
 }
 
-export const setPathOffsetAnime = (el: StraightPinElement, delay = 150) => {
+export const setPathOffsetAnime = (el: LineElement, delay = 150) => {
   anime({
     targets: el,
     easing: 'easeOutCubic',
@@ -63,7 +63,7 @@ export const setPathOffsetAnime = (el: StraightPinElement, delay = 150) => {
   })
 }
 
-export const setCenterPathAnime = (el: StraightPinElement, width: number) => {
+export const setCenterPathAnime = (el: LineElement, width: number) => {
   anime({
     targets: el,
     strokeDasharray: `${width}, 0`,

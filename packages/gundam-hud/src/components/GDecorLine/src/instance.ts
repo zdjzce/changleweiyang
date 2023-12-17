@@ -1,5 +1,7 @@
 import type { CSSProperties } from 'vue'
 
+export type LineElement = HTMLElement | undefined
+
 export type DecorLineType = 'polyline' | 'straight'
 
 export type DecorLineHash = {

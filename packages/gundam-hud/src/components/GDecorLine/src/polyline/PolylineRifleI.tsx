@@ -1,6 +1,8 @@
 import { defineComponent, computed, watch, ref, onMounted } from 'vue'
 import { decorPolylineRifleIProps } from '../DecorLine'
 import { setPathOffsetAnime } from '../anime'
+import type { LineElement } from '../instance'
+import { slashAnime } from '../anime/polyline'
 
 const PolylineRifleI = defineComponent({
   name: 'PolylineRifleI',
@@ -14,45 +16,74 @@ const PolylineRifleI = defineComponent({
       { deep: true, immediate: true },
     )
 
-    const circleOne = ref<HTMLElement | undefined>()
-    const circleTwo = ref<HTMLElement | undefined>()
     onMounted(() => {
+      setCircleAnime()
+      slashAnime([
+        belowSlashLine.value,
+        belowSlashLineSecond.value,
+        belowSlashLineThird.value,
+      ])
+    })
+
+    const circleOne = ref<LineElement>()
+    const circleTwo = ref<LineElement>()
+    const setCircleAnime = () => {
       setPathOffsetAnime(circleOne.value)
       setPathOffsetAnime(circleTwo.value, 500)
-    })
+    }
+
+    const belowSlashLine = ref<LineElement>()
+    const belowSlashLineSecond = ref<LineElement>()
+    const belowSlashLineThird = ref<LineElement>()
 
     return () => (
       <div>
         <svg>
-          <circle
-            ref={circleOne}
-            cx='5'
-            cy='90'
+          <g>
+            <circle
+              ref={circleOne}
+              cx='5'
+              cy='80'
+              fill='none'
+              r='2'
+              stroke='black'
+            />
+            <circle
+              cx='5'
+              cy='80'
+              fill='none'
+              r='4'
+              stroke='black'
+              ref={circleTwo}
+            />
+          </g>
+          <path
+            ref={belowSlashLine}
             fill='none'
-            r='2'
-            stroke='black'
+            stroke='rgba(128, 142, 151, 0.5)'
+            d='m5 80 l80 -80'
           />
-          <circle
-            cx='5'
-            cy='90'
+          <path
+            ref={belowSlashLineSecond}
+            stroke-dasharray='0, 65'
             fill='none'
-            r='4'
-            stroke='black'
-            ref={circleTwo}
+            stroke='rgba(128, 142, 151, 0.8)'
+            d='m15 70 l80 -80'
           />
-          <path fill='none' stroke='black' d='m5 90 l80 -80'></path>
-          {/* 第二条线流动后消失 */}
-          {/* <path fill='none' stroke='red' d='m5 90 l80 -80'></path> */}
-          {/* 第三条线流动后存在 只长一半 TODO 但d先这么写 还是可以使用一样的 d，只不过 dash 修改一下*/}
-          <path fill='none' stroke='red' d='m5 90 l40 -40'></path>
 
-          <path fill='none' stroke='black' d='m85 10 l250 0'></path>
-          {/* TODO 跟前面一样有很多条重叠的线 */}
-          {/* <path fill='none' stroke='black' d='m85 10 l250 0'></path> */}
+          <path
+            ref={belowSlashLineThird}
+            // stroke-dasharray='0, 65'
+            fill='none'
+            stroke='rgb(131, 187, 186)'
+            stroke-width='3'
+            d='m25 60 l30 -30'
+          />
 
-          {/* TODO 第四条先始终存在 */}
-          <path fill='none' stroke='black' d='m79 15 l20 0'></path>
-          <path fill='none' stroke='black' d='m79 15 l20 0'></path>
+          {/* <path fill='none' stroke='black' d='m85 0 l250 0'></path>
+          <path fill='none' stroke='black' d='m69 15 l20 0'></path>
+          <path fill='none' stroke='black' d='m49 35 l20 0'></path>
+          <path fill='none' stroke='red' d='m300 0 l-60 0'></path> */}
         </svg>
       </div>
     )

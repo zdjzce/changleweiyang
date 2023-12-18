@@ -3,6 +3,7 @@ import { decorPolylineRifleIProps } from '../DecorLine'
 import { setPathOffsetAnime } from '../anime'
 import type { LineElement } from '../instance'
 import { slashAnime, slashRunner } from '../anime/polyline'
+import { DecorLineStyle } from '@gundam/hud/style'
 
 const PolylineRifleI = defineComponent({
   name: 'PolylineRifleI',
@@ -17,6 +18,7 @@ const PolylineRifleI = defineComponent({
     )
 
     onMounted(() => {
+      containerWidth.value = svg.value?.getBoundingClientRect().width || 0
       setCircleAnime()
 
       slashAnime([
@@ -30,6 +32,9 @@ const PolylineRifleI = defineComponent({
 
       slashRunner([belowSlashLineSecond.value, lineThird.value])
     })
+
+    const svg = ref<LineElement>()
+    const containerWidth = ref()
 
     const circleOne = ref<LineElement>()
     const circleTwo = ref<LineElement>()
@@ -47,9 +52,26 @@ const PolylineRifleI = defineComponent({
     const line = ref<LineElement>()
     const lineSecond = ref<LineElement>()
     const lineThird = ref<LineElement>()
+
+    const content = ref<LineElement>()
+    const underText = ref<LineElement>()
     return () => (
-      <div>
-        <svg>
+      <div style={`max-width: ${containerWidth.value}px`}>
+        <div style='position: relative'>
+          <div
+            ref={content}
+            style='max-width: 50%; word-break: break-all; margin-left: auto;'>
+            contentcontentcontentcontentcontent
+            {/* {props.properties?.content || props.lineSlots?.content?.()} */}
+          </div>
+          <div style='position: absolute; right: 0; max-width: 50%; word-break: break-all; '>
+            <div ref={underText}>
+              contentcontentcontentcontent
+              {/* {props.properties?.underText || props.lineSlots?.underText?.()} */}
+            </div>
+          </div>
+        </div>
+        <svg height='85' ref={svg}>
           <g>
             <circle
               ref={circleOne}
@@ -68,7 +90,6 @@ const PolylineRifleI = defineComponent({
               ref={circleTwo}
             />
           </g>
-
           <g>
             <path
               ref={belowSlashLine}

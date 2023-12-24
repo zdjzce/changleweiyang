@@ -77,6 +77,8 @@ export type DecorLinePolyline<Type extends PolylineStyle = PolylineStyle> =
 export type PolylineRifleI = {
   underText?: string
   underTextStyle?: string | CSSProperties
+  belowLineLength?: number
+  topLineLength?: number
 }
 
 export type PolylineRifleII = {

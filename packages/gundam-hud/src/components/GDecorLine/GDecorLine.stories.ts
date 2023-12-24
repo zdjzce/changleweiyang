@@ -54,8 +54,11 @@ export const PolylineRifleI: Story = {
     type: 'polyline',
     properties: {
       lineStyle: 'rifle-I',
-      lineWidth: 250,
       padding: 20,
+      content: 'contentTest contentTest contentTest contentTest',
+      underText: 'underText underText underText',
+      typeWriter: true,
+      belowLineLength: 100,
     },
   },
 }

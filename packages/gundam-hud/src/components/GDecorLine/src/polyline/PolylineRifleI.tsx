@@ -1,9 +1,10 @@
-import { defineComponent, computed, watch, ref, onMounted } from 'vue'
+import { defineComponent, computed, watch, ref, onMounted, nextTick } from 'vue'
 import { decorPolylineRifleIProps } from '../DecorLine'
 import { setPathOffsetAnime } from '../anime'
 import type { LineElement } from '../instance'
 import { slashAnime, slashRunner } from '../anime/polyline'
 import { DecorLineStyle } from '@gundam/hud/style'
+import { typewriterEffect } from '@gundam/util/effect'
 
 const PolylineRifleI = defineComponent({
   name: 'PolylineRifleI',
@@ -31,6 +32,15 @@ const PolylineRifleI = defineComponent({
       ])
 
       slashRunner([belowSlashLineSecond.value, lineThird.value])
+      nextTick(() => {
+        if (props.properties?.typeWriter) {
+          props.properties?.content &&
+            typewriterEffect(content.value, content.value?.innerText || '')
+
+          props.properties?.underText &&
+            typewriterEffect(underText.value, underText.value?.innerText || '')
+        }
+      })
     })
 
     const svg = ref<LineElement>()
@@ -55,35 +65,43 @@ const PolylineRifleI = defineComponent({
 
     const content = ref<LineElement>()
     const underText = ref<LineElement>()
+
+    const belowSlashLength = computed(() => {
+      return props.properties?.belowLineLength || 80
+    })
+
     return () => (
       <div style={`max-width: ${containerWidth.value}px`}>
         <div style='position: relative'>
           <div
             ref={content}
-            style='max-width: 50%; word-break: break-all; margin-left: auto;'>
-            contentcontentcontentcontentcontent
-            {/* {props.properties?.content || props.lineSlots?.content?.()} */}
+            class={DecorLineStyle.hiddenScroll}
+            style='max-width: 50%; word-break: break-all; margin-left: auto; display: -webkit-box;
+            -webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: scroll;'>
+            {props.properties?.content || props.lineSlots?.content?.()}
           </div>
-          <div style='position: absolute; right: 0; max-width: 50%; word-break: break-all; '>
+          <div
+            style='position: absolute; right: 0; max-width: 50%; word-break: break-all; margin-left: auto; display: -webkit-box;
+            -webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: scroll;'
+            class={DecorLineStyle.hiddenScroll}>
             <div ref={underText}>
-              contentcontentcontentcontent
-              {/* {props.properties?.underText || props.lineSlots?.underText?.()} */}
+              {props.properties?.underText || props.lineSlots?.underText?.()}
             </div>
           </div>
         </div>
-        <svg height='85' ref={svg}>
+        <svg height={belowSlashLength.value + 5} ref={svg}>
           <g>
             <circle
               ref={circleOne}
               cx='5'
-              cy='80'
+              cy={belowSlashLength.value}
               fill='none'
               r='2'
               stroke='black'
             />
             <circle
               cx='5'
-              cy='80'
+              cy={belowSlashLength.value}
               fill='none'
               r='4'
               stroke='black'
@@ -95,28 +113,31 @@ const PolylineRifleI = defineComponent({
               ref={belowSlashLine}
               fill='none'
               stroke='rgba(128, 142, 151, 0.5)'
-              d='m5 80 l80 -80'
+              d={`m5 ${belowSlashLength.value} l80 -${belowSlashLength.value}`}
             />
             <path
               ref={belowSlashLineSecond}
               stroke-dasharray='0, 65'
               fill='none'
               stroke='rgba(128, 142, 151, 0.8)'
-              d='m15 70 l80 -80'
+              d={`m15 ${belowSlashLength.value - 10} l80 -${
+                belowSlashLength.value
+              }`}
             />
             <path
               ref={belowSlashLineThird}
               fill='none'
               stroke='rgb(131, 187, 186)'
               stroke-width='3'
-              d='m25 60 l30 -30'
+              // TODO 计算长度
+              d={'m25 60 l30 -30'}
             />
 
             <path
               ref={belowSlashLineFourth}
               fill='none'
               stroke='black'
-              d='m80 5 l10 0'
+              d={'m80 5 l10 0'}
             />
             <path
               ref={belowSlashLineFifth}

@@ -57,3 +57,23 @@ $straight-line-pin-name: joinComponentVarName('line_straight_pin');
     background: black;
   }
 }
+
+
+.hiddenScroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: black;
+  }
+}

@@ -5,6 +5,11 @@ import type { LineElement } from '../instance'
 import { slashAnime, slashRunner } from '../anime/polyline'
 import { DecorLineStyle } from '@gundam/hud/style'
 import { typewriterEffect } from '@gundam/util/effect'
+import {
+  convertRealWorldPointToSVGPoint,
+  convertSVGPointToRealWorldPoint,
+  getPointsOnLineSegment,
+} from '@gundam/util/calculate/lineSegment'
 
 const PolylineRifleI = defineComponent({
   name: 'PolylineRifleI',
@@ -41,6 +46,7 @@ const PolylineRifleI = defineComponent({
             typewriterEffect(underText.value, underText.value?.innerText || '')
         }
       })
+      getPoint()
     })
 
     const svg = ref<LineElement>()
@@ -69,6 +75,30 @@ const PolylineRifleI = defineComponent({
     const belowSlashLength = computed(() => {
       return props.properties?.belowLineLength || 80
     })
+
+    const getPoint = () => {
+      nextTick(() => {
+        const svgElement = belowSlashLine.value as unknown as SVGPathElement
+        const start = svgElement.getPointAtLength(0)
+        const end = svgElement.getPointAtLength(svgElement.getTotalLength())
+
+        const realWorldStart = convertSVGPointToRealWorldPoint(
+          start,
+          svgElement,
+        )
+        const realWorldEnd = convertSVGPointToRealWorldPoint(end, svgElement)
+        const linePaths = getPointsOnLineSegment(
+          realWorldStart,
+          realWorldEnd,
+          10,
+        )
+
+        const line2 = convertRealWorldPointToSVGPoint(linePaths[0], svgElement)
+        const line3 = convertRealWorldPointToSVGPoint(linePaths[1], svgElement)
+        console.log('line3:', line3)
+        console.log('line2:', line2)
+      })
+    }
 
     return () => (
       <div style={`max-width: ${containerWidth.value}px`}>
@@ -120,9 +150,7 @@ const PolylineRifleI = defineComponent({
               stroke-dasharray='0, 65'
               fill='none'
               stroke='rgba(128, 142, 151, 0.8)'
-              d={`m15 ${belowSlashLength.value - 10} l80 -${
-                belowSlashLength.value
-              }`}
+              d={`m6 ${belowSlashLength.value} l80 -${belowSlashLength.value}`}
             />
             <path
               ref={belowSlashLineThird}
@@ -130,7 +158,7 @@ const PolylineRifleI = defineComponent({
               stroke='rgb(131, 187, 186)'
               stroke-width='3'
               // TODO 计算长度
-              d={'m25 60 l30 -30'}
+              d={'m5 60 l30 -30'}
             />
 
             <path

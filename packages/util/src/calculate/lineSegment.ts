@@ -53,5 +53,5 @@ export function convertRealWorldPointToSVGPoint(
   svg: SVGGraphicsElement,
 ) {
   const matrix = svg.getScreenCTM()
-  return matrix ? realWorldPoint.matrixTransform(matrix) : ''
+  return matrix ? realWorldPoint.matrixTransform(matrix) : ({} as DOMPoint)
 }

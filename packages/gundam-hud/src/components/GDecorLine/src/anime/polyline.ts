@@ -3,12 +3,11 @@ import type { LineElement } from '../instance'
 import { setPathOffsetAnime } from './straight'
 
 export const slashAnime = (slashList: LineElement[]) => {
-  setPathOffsetAnime(slashList[0])
-  setPathOffsetAnime(slashList[1], 350)
-  setPathOffsetAnime(slashList[2], 600)
-  setPathOffsetAnime(slashList[3], 600)
-  setPathOffsetAnime(slashList[4], 450)
-  setPathOffsetAnime(slashList[5], 650)
+  let delay = 0
+  slashList.forEach((slash, index) => {
+    index % 2 === 0 ? (delay += 200) : (delay -= 200)
+    setPathOffsetAnime(slash, delay)
+  })
 }
 
 export const slashRunner = (slashList: LineElement[]) => {

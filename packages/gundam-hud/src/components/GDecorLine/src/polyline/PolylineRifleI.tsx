@@ -26,15 +26,9 @@ const PolylineRifleI = defineComponent({
     onMounted(() => {
       containerWidth.value = svg.value?.getBoundingClientRect().width || 0
       setCircleAnime()
+      getPoint()
 
-      slashAnime([
-        belowSlashLine.value,
-        belowSlashLineThird.value,
-        belowSlashLineFourth.value,
-        belowSlashLineFifth.value,
-        line.value,
-        lineSecond.value,
-      ])
+      slashAnime([belowSlashLine.value, line.value, lineSecond.value])
 
       slashRunner([belowSlashLineSecond.value, lineThird.value])
       nextTick(() => {
@@ -46,7 +40,6 @@ const PolylineRifleI = defineComponent({
             typewriterEffect(underText.value, underText.value?.innerText || '')
         }
       })
-      getPoint()
     })
 
     const svg = ref<LineElement>()
@@ -76,27 +69,47 @@ const PolylineRifleI = defineComponent({
       return props.properties?.belowLineLength || 80
     })
 
+    const thirdLinePointStart = ref()
+    const thirdLinePointEnd = ref()
+    const fourthLinePointStart = ref()
+    const fifthLinePointStart = ref()
     const getPoint = () => {
+      const svgElement = belowSlashLine.value as unknown as SVGPathElement
+      const start = svgElement.getPointAtLength(0)
+      const end = svgElement.getPointAtLength(svgElement.getTotalLength())
+
+      const realWorldStart = convertSVGPointToRealWorldPoint(start, svgElement)
+      const realWorldEnd = convertSVGPointToRealWorldPoint(end, svgElement)
+      const linePaths = getPointsOnLineSegment(realWorldStart, realWorldEnd, 10)
+      thirdLinePointStart.value = convertRealWorldPointToSVGPoint(
+        linePaths[Math.floor(linePaths.length / 3)],
+        svgElement,
+      )
+
+      const thirdLinePointEndDom = convertRealWorldPointToSVGPoint(
+        linePaths[7],
+        svgElement,
+      )
+
+      thirdLinePointEnd.value = {
+        x: thirdLinePointEndDom.x - thirdLinePointStart.value.x,
+        y: thirdLinePointEndDom.y - thirdLinePointStart.value.y,
+      }
+
+      fourthLinePointStart.value = convertRealWorldPointToSVGPoint(
+        linePaths[7],
+        svgElement,
+      )
+
+      fifthLinePointStart.value = convertRealWorldPointToSVGPoint(
+        linePaths[9],
+        svgElement,
+      )
+
       nextTick(() => {
-        const svgElement = belowSlashLine.value as unknown as SVGPathElement
-        const start = svgElement.getPointAtLength(0)
-        const end = svgElement.getPointAtLength(svgElement.getTotalLength())
-
-        const realWorldStart = convertSVGPointToRealWorldPoint(
-          start,
-          svgElement,
-        )
-        const realWorldEnd = convertSVGPointToRealWorldPoint(end, svgElement)
-        const linePaths = getPointsOnLineSegment(
-          realWorldStart,
-          realWorldEnd,
-          10,
-        )
-
-        const line2 = convertRealWorldPointToSVGPoint(linePaths[0], svgElement)
-        const line3 = convertRealWorldPointToSVGPoint(linePaths[1], svgElement)
-        console.log('line3:', line3)
-        console.log('line2:', line2)
+        setPathOffsetAnime(belowSlashLineThird.value, 300)
+        setPathOffsetAnime(belowSlashLineFourth.value, 100)
+        setPathOffsetAnime(belowSlashLineFifth.value, 150)
       })
     }
 
@@ -157,21 +170,20 @@ const PolylineRifleI = defineComponent({
               fill='none'
               stroke='rgb(131, 187, 186)'
               stroke-width='3'
-              // TODO 计算长度
-              d={'m5 60 l30 -30'}
+              d={`m${thirdLinePointStart.value?.x} ${thirdLinePointStart.value?.y} l${thirdLinePointEnd.value?.x} ${thirdLinePointEnd.value?.y}`}
             />
 
             <path
               ref={belowSlashLineFourth}
               fill='none'
               stroke='black'
-              d={'m80 5 l10 0'}
+              d={`m${fourthLinePointStart.value?.x} ${fourthLinePointStart.value?.y} l10 0`}
             />
             <path
               ref={belowSlashLineFifth}
               fill='none'
               stroke='black'
-              d='m60 25 l30 0'
+              d={`m${fifthLinePointStart.value?.x} ${fifthLinePointStart.value?.y} l30 0`}
             />
           </g>
           <g>

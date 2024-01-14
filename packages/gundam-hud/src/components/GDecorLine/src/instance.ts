@@ -56,6 +56,11 @@ export type StraightPin = {
 export type StraightCalibration = {
   content: string
   underText?: string
+  underTextStyle?: string | CSSProperties
+  /* associated svg*/
+  circleColor: string
+  mainLineColor: string
+  minorLineColor: string
 }
 
 export type PolylineStyle = 'rifle-I' | 'rifle-II'

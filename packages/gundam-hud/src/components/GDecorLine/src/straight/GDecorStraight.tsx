@@ -2,10 +2,11 @@ import { defineComponent, computed } from 'vue'
 import { decorStraightProps, props } from '../DecorLine'
 import type { StraightLineStyle } from '../instance'
 import StraightPin from './StraightPin'
+import StraightCalibration from './StraightCalibration'
 
 const decorLineStraight: Record<StraightLineStyle, any> = {
   pin: StraightPin,
-  calibration: null,
+  calibration: StraightCalibration,
 }
 
 const GDecorStraight = defineComponent({

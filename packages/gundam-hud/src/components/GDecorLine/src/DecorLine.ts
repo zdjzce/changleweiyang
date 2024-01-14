@@ -42,6 +42,16 @@ export const decorStraightPinProps = {
   },
 }
 
+export const decorStraightCalibrationProps = {
+  type: props['type'],
+  properties: {
+    type: Object as PropType<DecorLineStraight<'calibration'>>,
+  },
+  lineSlots: {
+    type: Object as PropType<Slots>,
+  },
+}
+
 export const decorPolylineProps = {
   type: props['type'],
   properties: {

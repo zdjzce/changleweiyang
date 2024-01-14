@@ -62,3 +62,22 @@ export const PolylineRifleI: Story = {
     },
   },
 }
+
+export const StraightCalibration: Story = {
+  args: {
+    type: 'straight',
+    properties: {
+      lineStyle: 'calibration',
+      content: 'Attribute content ',
+      underText: 'Attribute underText Attribute',
+      // 打字机效果会与 attribute 配合，如果传入插槽则不会触发打字机。
+      typeWriter: true,
+      lineWidth: 200,
+      padding: 20,
+      // TODO 获取主题色
+      circleColor: 'rgba(38, 38, 38, 0.3)',
+      mainLineColor: 'black',
+      minorLineColor: 'rgb(81, 104, 104)',
+    },
+  },
+}
